@@ -1,6 +1,5 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,35 +10,84 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'Namer App',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        ),
-        home: MyHomePage(),
+    return ShadApp.material(
+      debugShowCheckedModeBanner: false,
+      theme: ShadThemeData(
+        brightness: Brightness.light,
+        colorScheme: const ShadZincColorScheme.light(),
       ),
+      darkTheme: ShadThemeData(
+        brightness: Brightness.dark,
+        colorScheme: const ShadZincColorScheme.dark(),
+        // Example of custom font family
+        // textTheme: ShadTextTheme(family: 'UbuntuMono'),
+      ),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-}
+const frameworks = {
+  'next': 'Next.js',
+  'react': 'React',
+  'astro': 'Astro',
+  'nuxt': 'Nuxt.js',
+};
 
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-
-    return Scaffold(
-      body: Column(
+    return ShadCard(
+      width: 350,
+      title: Text(
+        'Create project',
+      ),
+      description: const Text('Deploy your new project in one-click.'),
+      footer: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('A random idea:'),
-          Text(appState.current.asLowerCase),
+          ShadButton.outline(
+            child: const Text('Cancel'),
+            onPressed: () {},
+          ),
+          ShadButton(
+            child: const Text('Deploy'),
+            onPressed: () {},
+          ),
         ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ShadInputFormField(
+              id: 'username',
+              label: const Text('Username'),
+              placeholder: const Text('Enter your username'),
+              description: const Text('This is your public display name.'),
+              validator: (v) {
+                if (v.length < 2) {
+                  return 'Username must be at least 2 characters.';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 6),
+            const Text('Framework'),
+            ShadSelect<String>(
+              placeholder: const Text('Select'),
+              options: frameworks.entries
+                  .map((e) => ShadOption(value: e.key, child: Text(e.value)))
+                  .toList(),
+              selectedOptionBuilder: (context, value) {
+                return Text(frameworks[value]!);
+              },
+              onChanged: (value) {},
+            ),
+          ],
+        ),
       ),
     );
   }
