@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:keeley/config/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,9 +16,8 @@ class KeeleyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ShadApp(
-      title: 'Keeley',
-      debugShowCheckedModeBanner: false,
+    return MaterialApp.router(
+      routerConfig: router,
     );
   }
 }
