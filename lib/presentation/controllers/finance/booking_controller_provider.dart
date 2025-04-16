@@ -1,6 +1,6 @@
 import 'package:keeley/application/services/service_providers.dart';
 import 'package:keeley/presentation/controllers/finance/booking_controller.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final bookingControllerProvider =
     StateNotifierProvider.family<BookingController, BookingState, String>(

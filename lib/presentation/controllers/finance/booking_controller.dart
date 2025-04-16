@@ -1,7 +1,7 @@
 import 'package:keeley/application/services/finance/booking_service.dart';
 import 'package:keeley/domain/finance/model/booking.dart';
 import 'package:keeley/domain/finance/objects/booking_type.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BookingState {
   final List<Booking> bookings;
