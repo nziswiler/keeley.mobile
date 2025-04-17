@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'app/router/app_router.dart';
+import 'config/app_router.dart';
 
 void main() {
   runApp(const MyApp());

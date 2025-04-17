@@ -1,10 +1,10 @@
 // lib/app/router/app_router.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../features/dashboard/dashboard_page.dart';
-import '../../features/bookings/bookings_page.dart';
-import '../../features/profile/profile_page.dart';
-import '../widgets/app_scaffold.dart';
+import '../presentation/pages/dashboard/dashboard_page.dart';
+import '../presentation/pages/bookings/bookings_page.dart';
+import '../presentation/pages/profile/profile_page.dart';
+import '../presentation/widgets/app_scaffold.dart';
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey();
 
