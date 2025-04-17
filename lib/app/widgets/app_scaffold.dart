@@ -15,7 +15,8 @@ class AppScaffold extends StatelessWidget {
   ];
 
   int _currentIndex(BuildContext context) {
-    final location = GoRouter.of(context).location;
+    final location =
+        GoRouter.of(context).routerDelegate.currentConfiguration.fullPath;
     return _tabs.indexWhere((tab) => location.startsWith(tab.$1));
   }
 
