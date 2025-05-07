@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "78531065035",
+    "project_id": "keeley-mobile",
+    "storage_bucket": "keeley-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78531065035:android:96d86bc20ef78ab6d1974e",
+        "android_client_info": {
+          "package_name": "com.example.keeley"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwKWZi0zAhfbx1W2jvXtD6mqEUGfU1FzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78531065035:android:27f30e16b7dfb6f0d1974e",
+        "android_client_info": {
+          "package_name": "com.ffhs.keeley_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwKWZi0zAhfbx1W2jvXtD6mqEUGfU1FzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

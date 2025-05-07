@@ -1,7 +1,5 @@
-// lib/app/widgets/app_scaffold.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
@@ -17,7 +15,8 @@ class AppScaffold extends StatelessWidget {
   int _currentIndex(BuildContext context) {
     final location =
         GoRouter.of(context).routerDelegate.currentConfiguration.fullPath;
-    return _tabs.indexWhere((tab) => location.startsWith(tab.$1));
+    final index = _tabs.indexWhere((tab) => location.startsWith(tab.$1));
+    return index >= 0 ? index : 0; // Fallback auf Tab 0 bei ungültiger Route
   }
 
   @override
