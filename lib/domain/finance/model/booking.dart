@@ -2,16 +2,22 @@ import 'package:keeley/domain/workspace_entity_base.dart';
 import 'package:keeley/domain/finance/objects/booking_type.dart';
 
 class Booking extends WorkspaceEntityBase {
-  late DateTime date;
-  String? description;
-  late double amount;
-  late BookingType type;
+  final DateTime date;
+  final String? description;
+  final double amount;
+  final BookingType type;
 
-  String? customerId;
+  final String? customerId;
+  final String? orderId;
+  final String? accountId;
 
-  String? orderId;
-
-  String? accountId;
-
-  // TODO: Implement BookingCategories
+  Booking({
+    required this.date,
+    required this.amount,
+    required this.type,
+    this.description,
+    this.customerId,
+    this.orderId,
+    this.accountId,
+  });
 }
