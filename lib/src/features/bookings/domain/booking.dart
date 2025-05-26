@@ -1,5 +1,5 @@
 import 'package:keeley/src/features/workspace_entity_base.dart';
-import 'package:keeley/src/features/finance/domain/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/booking_type.dart';
 
 class Booking extends WorkspaceEntityBase {
   final DateTime date;

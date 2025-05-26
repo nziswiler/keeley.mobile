@@ -14,10 +14,6 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   void _goBranch(int index) {
     navigationShell.goBranch(
       index,
-      // A common pattern when using bottom navigation bars is to support
-      // navigating to the initial location when tapping the item that is
-      // already active. This example demonstrates how to support this behavior,
-      // using the initialLocation parameter of goBranch.
       initialLocation: index == navigationShell.currentIndex,
     );
   }
@@ -60,6 +56,16 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
         selectedIndex: currentIndex,
         destinations: [
           NavigationDestination(
+            icon: const Icon(Icons.house_outlined),
+            selectedIcon: const Icon(Icons.house),
+            label: 'Dashboard',
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.list_outlined),
+            selectedIcon: const Icon(Icons.list),
+            label: 'Buchungen',
+          ),
+          NavigationDestination(
             icon: const Icon(Icons.person_outline),
             selectedIcon: const Icon(Icons.person),
             label: 'Profil',
@@ -92,6 +98,16 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
             onDestinationSelected: onDestinationSelected,
             labelType: NavigationRailLabelType.all,
             destinations: <NavigationRailDestination>[
+              NavigationRailDestination(
+                icon: const Icon(Icons.house_outlined),
+                selectedIcon: const Icon(Icons.house),
+                label: Text('Dashboard'),
+              ),
+              NavigationRailDestination(
+                icon: const Icon(Icons.list_outlined),
+                selectedIcon: const Icon(Icons.list),
+                label: Text('Buchungen'),
+              ),
               NavigationRailDestination(
                 icon: const Icon(Icons.person_outline),
                 selectedIcon: const Icon(Icons.person),

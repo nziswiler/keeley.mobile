@@ -62,7 +62,7 @@ class AppStartupErrorWidget extends StatelessWidget {
             gapH16,
             ElevatedButton(
               onPressed: onRetry,
-              child: const Text('Retry'),
+              child: const Text('Erneut versuchen'),
             ),
           ],
         ),

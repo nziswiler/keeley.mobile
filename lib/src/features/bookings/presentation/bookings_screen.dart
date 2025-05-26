@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:keeley/src/features/finance/domain/booking.dart';
-import 'package:keeley/src/features/finance/domain/booking_type.dart';
-import 'new_booking_page.dart'; // Stelle sicher, dass dieser Importpfad korrekt ist
+import 'package:keeley/src/features/bookings/domain/booking.dart';
+import 'package:keeley/src/features/bookings/domain/booking_type.dart';
 
-class BookingsPage extends StatelessWidget {
-  const BookingsPage({super.key});
+class BookingsScreen extends StatelessWidget {
+  const BookingsScreen({super.key});
 
   List<Booking> get mockBookings => [
         Booking(
@@ -92,13 +91,7 @@ class BookingsPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            context: context,
-            builder: (_) => const NewBookingPage(),
-          );
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
     );

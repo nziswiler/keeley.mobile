@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
+import 'package:keeley/src/features/bookings/presentation/bookings_screen.dart';
 import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';
 import 'package:keeley/src/routing/not_fount_screen.dart';
@@ -16,12 +17,13 @@ part 'app_router.g.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _dashboardNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'dashboard');
-final _accountNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'account');
+final _bookingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'bookings');
+final _profileNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
 enum AppRoute {
-  onboarding,
-  dashboard,
   signIn,
+  dashboard,
+  bookings,
   profile,
 }
 
@@ -63,7 +65,7 @@ GoRouter goRouter(Ref ref) {
         ),
         branches: [
           StatefulShellBranch(
-            navigatorKey: _accountNavigatorKey,
+            navigatorKey: _dashboardNavigatorKey,
             routes: [
               GoRoute(
                 path: '/dashboard',
@@ -72,8 +74,25 @@ GoRouter goRouter(Ref ref) {
                   child: DashboardScreen(),
                 ),
               ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _bookingsNavigatorKey,
+            routes: [
               GoRoute(
-                path: '/account',
+                path: '/bookings',
+                name: AppRoute.bookings.name,
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: BookingsScreen(),
+                ),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _profileNavigatorKey,
+            routes: [
+              GoRoute(
+                path: '/profile',
                 name: AppRoute.profile.name,
                 pageBuilder: (context, state) => const NoTransitionPage(
                   child: CustomProfileScreen(),
