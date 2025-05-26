@@ -26,7 +26,12 @@ class BookingService {
     String? accountId,
     String? categoryId,
   }) {
-    final booking = Booking();
+    final booking = Booking(
+      date: DateTime.now(),
+      amount: 100,
+      type: BookingType.income,
+      description: 'Test',
+    );
 
     return _bookingRepository.saveBooking(booking);
   }
