@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
+import 'package:keeley/src/features/auth/presentation/custom_sign_up_screen.dart';
 import 'package:keeley/src/features/bookings/presentation/bookings_screen.dart';
 import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';
@@ -21,7 +22,7 @@ final _dashboardNavigatorKey = GlobalKey<NavigatorState>(
 final _bookingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'bookings');
 final _profileNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
-enum AppRoute { signIn, dashboard, bookings, profile }
+enum AppRoute { signIn, signUp, dashboard, bookings, profile }
 
 @riverpod
 GoRouter goRouter(Ref ref) {
@@ -34,11 +35,11 @@ GoRouter goRouter(Ref ref) {
 
       final isLoggedIn = authRepository.currentUser != null;
       if (isLoggedIn) {
-        if (path.startsWith('/signIn')) {
+        if (path.startsWith('/signIn') || path.startsWith('/signUp')) {
           return '/dashboard';
         }
       } else {
-        if (!path.startsWith('/signIn')) {
+        if (!path.startsWith('/signIn') && !path.startsWith('/signUp')) {
           return '/signIn';
         }
       }
@@ -51,6 +52,12 @@ GoRouter goRouter(Ref ref) {
         name: AppRoute.signIn.name,
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: CustomSignInScreen()),
+      ),
+      GoRoute(
+        path: '/signUp',
+        name: AppRoute.signUp.name,
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: CustomSignUpScreen()),
       ),
       // Stateful navigation based on:
       // https://github.com/flutter/packages/blob/main/packages/go_router/example/lib/stateful_shell_route.dart

@@ -9,10 +9,16 @@ class Keys {
   // Form field IDs
   static const String email = 'email';
   static const String password = 'password';
+  static const String confirmPassword = 'confirmPassword';
 
   // Sign in screen
   static const String signInForm = 'signInForm';
   static const String signInButton = 'signInButton';
   static const String emailField = 'emailField';
   static const String passwordField = 'passwordField';
+
+  // Sign up screen
+  static const String signUpForm = 'signUpForm';
+  static const String signUpButton = 'signUpButton';
+  static const String confirmPasswordField = 'confirmPasswordField';
 }

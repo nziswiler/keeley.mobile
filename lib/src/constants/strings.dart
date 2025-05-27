@@ -18,10 +18,22 @@ class Strings {
   static const String signInLoading = 'Anmelden...';
   static const String validationFailedMessage = 'Validierung fehlgeschlagen';
 
+  // Sign Up Page
+  static const String signUp = 'Registrieren';
+  static const String signUpWithEmailPassword =
+      'Registrieren mit E-Mail und Passwort';
+  static const String signUpFailed = 'Registrierung fehlgeschlagen';
+  static const String signUpLoading = 'Registrieren...';
+  static const String confirmPassword = 'Passwort bestätigen';
+  static const String confirmPasswordPlaceholder = 'Passwort erneut eingeben';
+  static const String passwordsDoNotMatch = 'Passwörter stimmen nicht überein';
+  static const String passwordTooShort =
+      'Passwort muss mindestens 6 Zeichen haben';
+
   // Form fields
   static const String email = 'E-Mail';
   static const String password = 'Passwort';
-  static const String emailPlaceholder = 'neil@nasa.space';
+  static const String emailPlaceholder = 'neil@nasa.com';
   static const String passwordPlaceholder = 'Passwort eingeben';
 
   // Validation errors

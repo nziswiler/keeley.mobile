@@ -6,9 +6,9 @@ import 'package:keeley/src/app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // * Initialize Firebase
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // * Entry point of the app
+
   runApp(const ProviderScope(
     child: MyApp(),
   ));
