@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
-import 'package:keeley/src/features/bookings/presentation/bookings_screen.dart';
 import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';
 import 'package:keeley/src/routing/not_fount_screen.dart';
@@ -15,17 +14,13 @@ part 'app_router.g.dart';
 
 // private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-final _dashboardNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'dashboard');
+final _dashboardNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: 'dashboard',
+);
 final _bookingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'bookings');
 final _profileNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
-enum AppRoute {
-  signIn,
-  dashboard,
-  bookings,
-  profile,
-}
+enum AppRoute { signIn, dashboard, bookings, profile }
 
 @riverpod
 GoRouter goRouter(Ref ref) {
@@ -53,9 +48,8 @@ GoRouter goRouter(Ref ref) {
       GoRoute(
         path: '/signIn',
         name: AppRoute.signIn.name,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: CustomSignInScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: CustomSignInScreen()),
       ),
       // Stateful navigation based on:
       // https://github.com/flutter/packages/blob/main/packages/go_router/example/lib/stateful_shell_route.dart
@@ -70,9 +64,8 @@ GoRouter goRouter(Ref ref) {
               GoRoute(
                 path: '/dashboard',
                 name: AppRoute.dashboard.name,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: DashboardScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: DashboardScreen()),
               ),
             ],
           ),
@@ -82,9 +75,8 @@ GoRouter goRouter(Ref ref) {
               GoRoute(
                 path: '/bookings',
                 name: AppRoute.bookings.name,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: BookingsScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: CustomProfileScreen()),
               ),
             ],
           ),
@@ -94,17 +86,15 @@ GoRouter goRouter(Ref ref) {
               GoRoute(
                 path: '/profile',
                 name: AppRoute.profile.name,
-                pageBuilder: (context, state) => const NoTransitionPage(
-                  child: CustomProfileScreen(),
-                ),
+                pageBuilder: (context, state) =>
+                    const NoTransitionPage(child: CustomProfileScreen()),
               ),
             ],
           ),
         ],
       ),
     ],
-    errorPageBuilder: (context, state) => const NoTransitionPage(
-      child: NotFoundScreen(),
-    ),
+    errorPageBuilder: (context, state) =>
+        const NoTransitionPage(child: NotFoundScreen()),
   );
 }

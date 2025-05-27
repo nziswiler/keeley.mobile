@@ -15,8 +15,11 @@ class Strings {
       'Anmelden mit E-Mail und Passwort';
   static const String signInFailed = 'Anmelden fehlgeschlagen';
 
-  // Home page
-  static const String homePage = 'Startseite';
+  // Dashboard
+  static const String dashboard = 'Dashboard';
+
+  // Bookings
+  static const String bookings = 'Buchungen';
 
   // Account page
   static const String account = 'Profil';
