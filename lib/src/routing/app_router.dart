@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
+import 'package:keeley/src/features/bookings/presentation/bookings_screen.dart';
 import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';
 import 'package:keeley/src/routing/not_fount_screen.dart';
@@ -76,7 +77,7 @@ GoRouter goRouter(Ref ref) {
                 path: '/bookings',
                 name: AppRoute.bookings.name,
                 pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: CustomProfileScreen()),
+                    const NoTransitionPage(child: BookingsScreen()),
               ),
             ],
           ),
