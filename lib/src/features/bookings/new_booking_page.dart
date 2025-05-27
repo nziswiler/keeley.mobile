@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 class NewBookingPage extends StatefulWidget {
   const NewBookingPage({super.key});

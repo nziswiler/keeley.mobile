@@ -10,6 +10,7 @@ Future<void> showExceptionAlertDialog({
       title: title,
       content: _message(exception),
       defaultActionText: 'OK',
+      isDestructive: true,
     );
 
 String _message(dynamic exception) {

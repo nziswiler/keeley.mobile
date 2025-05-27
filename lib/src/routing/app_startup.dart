@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/constants/app_sizes.dart';
+import 'package:keeley/src/features/onboarding/data/onboarding_repository.dart';
+import 'package:keeley/src/routing/go_router_delegate_listener.dart';
+import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 part 'app_startup.g.dart';
 
-// https://codewithandrea.com/articles/robust-app-initialization-riverpod/
 @Riverpod(keepAlive: true)
-Future<void> appStartup(Ref ref) async {}
+Future<void> appStartup(Ref ref) async {
+  ref.onDispose(() {
+    ref.invalidate(onboardingRepositoryProvider);
+  });
+  Future.delayed(const Duration(milliseconds: 3000), () async {
+    await ref.watch(onboardingRepositoryProvider.future);
+  });
+}
 
-/// Widget class to manage asynchronous app initialization
 class AppStartupWidget extends ConsumerWidget {
-  const AppStartupWidget({super.key, required this.onLoaded});
+  const AppStartupWidget(
+      {super.key,
+      required this.onLoaded,
+      required GoRouterDelegateListener child});
   final WidgetBuilder onLoaded;
 
   @override
@@ -28,7 +39,6 @@ class AppStartupWidget extends ConsumerWidget {
   }
 }
 
-/// Widget to show while initialization is in progress
 class AppStartupLoadingWidget extends StatelessWidget {
   const AppStartupLoadingWidget({super.key});
 
@@ -43,7 +53,6 @@ class AppStartupLoadingWidget extends StatelessWidget {
   }
 }
 
-/// Widget to show if initialization fails
 class AppStartupErrorWidget extends StatelessWidget {
   const AppStartupErrorWidget(
       {super.key, required this.message, required this.onRetry});
@@ -58,9 +67,9 @@ class AppStartupErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(message, style: Theme.of(context).textTheme.headlineSmall),
+            Text(message, style: ShadTheme.of(context).textTheme.h1),
             gapH16,
-            ElevatedButton(
+            ShadButton(
               onPressed: onRetry,
               child: const Text('Erneut versuchen'),
             ),

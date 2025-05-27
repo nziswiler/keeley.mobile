@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:keeley/src/constants/app_sizes.dart';
 import 'package:keeley/src/routing/app_router.dart';
+import 'package:keeley/src/theme/keeley_theme.dart';
 
 /// Placeholder widget showing a message and CTA to go back to the home screen.
 class EmptyPlaceholderWidget extends ConsumerWidget {

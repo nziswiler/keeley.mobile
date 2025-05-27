@@ -6,42 +6,28 @@ Future<bool?> showAlertDialog({
   String? content,
   String? cancelActionText,
   required String defaultActionText,
+  bool isDestructive = false,
 }) async {
-  if (kIsWeb || !Platform.isIOS) {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: content != null ? Text(content) : null,
-        actions: <Widget>[
-          if (cancelActionText != null)
-            TextButton(
-              child: Text(cancelActionText),
-              onPressed: () => Navigator.of(context).pop(false),
-            ),
-          TextButton(
-            child: Text(defaultActionText),
-            onPressed: () => Navigator.of(context).pop(true),
-          ),
-        ],
-      ),
-    );
-  }
-  return showCupertinoDialog(
+  return showShadDialog<bool>(
     context: context,
-    builder: (context) => CupertinoAlertDialog(
+    builder: (context) => ShadDialog(
       title: Text(title),
-      content: content != null ? Text(content) : null,
-      actions: <Widget>[
+      description: content != null ? Text(content) : null,
+      actions: [
         if (cancelActionText != null)
-          CupertinoDialogAction(
+          ShadButton.outline(
             child: Text(cancelActionText),
             onPressed: () => Navigator.of(context).pop(false),
           ),
-        CupertinoDialogAction(
-          child: Text(defaultActionText),
-          onPressed: () => Navigator.of(context).pop(true),
-        ),
+        isDestructive
+            ? ShadButton.destructive(
+                child: Text(defaultActionText),
+                onPressed: () => Navigator.of(context).pop(true),
+              )
+            : ShadButton(
+                child: Text(defaultActionText),
+                onPressed: () => Navigator.of(context).pop(true),
+              ),
       ],
     ),
   );

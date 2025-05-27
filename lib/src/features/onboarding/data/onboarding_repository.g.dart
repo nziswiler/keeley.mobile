@@ -1,26 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_startup.dart';
+part of 'onboarding_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appStartupHash() => r'c238328483a21f1c98002ad8f436ba1a0c306640';
+String _$onboardingRepositoryHash() =>
+    r'445c529dd1ac7515d8be0abd6159af6958ff3c5c';
 
-/// See also [appStartup].
-@ProviderFor(appStartup)
-final appStartupProvider = FutureProvider<void>.internal(
-  appStartup,
-  name: r'appStartupProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appStartupHash,
+/// See also [onboardingRepository].
+@ProviderFor(onboardingRepository)
+final onboardingRepositoryProvider =
+    FutureProvider<OnboardingRepository>.internal(
+  onboardingRepository,
+  name: r'onboardingRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$onboardingRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef AppStartupRef = FutureProviderRef<void>;
+typedef OnboardingRepositoryRef = FutureProviderRef<OnboardingRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
