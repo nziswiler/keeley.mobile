@@ -5,10 +5,10 @@ import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/booking.dart';
 import 'package:keeley/src/features/bookings/domain/booking_type.dart';
-
 import 'package:keeley/src/features/bookings/presentation/bookings_screen/bookings_screen_controller.dart';
 import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/edit_booking_screen.dart';
 import 'package:keeley/src/utils/async_value_ui.dart';
+import 'package:keeley/src/common_widgets/shad_floating_action_button.dart';
 
 class BookingsScreen extends StatelessWidget {
   const BookingsScreen({super.key});
@@ -65,7 +65,7 @@ class BookingsScreen extends StatelessWidget {
       ),
       floatingActionButton: Consumer(
         builder: (context, ref, child) {
-          return FloatingActionButton(
+          return ShadFloatingActionButton.add(
             onPressed: () {
               showModalBottomSheet(
                 isScrollControlled: true,
@@ -73,7 +73,7 @@ class BookingsScreen extends StatelessWidget {
                 builder: (_) => const EditBookingScreen(),
               );
             },
-            child: const Icon(Icons.add),
+            tooltip: Strings.newBooking,
           );
         },
       ),
