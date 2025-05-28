@@ -5,8 +5,9 @@ import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_up_screen.dart';
-import 'package:keeley/src/features/bookings/presentation/bookings_screen.dart';
+import 'package:keeley/src/features/bookings/presentation/bookings_screen/bookings_screen.dart';
 import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
+import 'package:keeley/src/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';
 import 'package:keeley/src/routing/not_fount_screen.dart';
 import 'package:keeley/src/routing/scaffold_with_nested_navigation.dart';
@@ -22,7 +23,7 @@ final _dashboardNavigatorKey = GlobalKey<NavigatorState>(
 final _bookingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'bookings');
 final _profileNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
-enum AppRoute { signIn, signUp, dashboard, bookings, profile }
+enum AppRoute { onboarding, signIn, signUp, dashboard, bookings, profile }
 
 @riverpod
 GoRouter goRouter(Ref ref) {
@@ -47,6 +48,12 @@ GoRouter goRouter(Ref ref) {
     },
     refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges()),
     routes: [
+      GoRoute(
+        path: '/onboarding',
+        name: AppRoute.onboarding.name,
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: OnboardingScreen()),
+      ),
       GoRoute(
         path: '/signIn',
         name: AppRoute.signIn.name,
@@ -81,11 +88,10 @@ GoRouter goRouter(Ref ref) {
             navigatorKey: _bookingsNavigatorKey,
             routes: [
               GoRoute(
-                path: '/bookings',
-                name: AppRoute.bookings.name,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: BookingsScreen()),
-              ),
+                  path: '/bookings',
+                  name: AppRoute.bookings.name,
+                  pageBuilder: (context, state) =>
+                      const NoTransitionPage(child: BookingsScreen())),
             ],
           ),
           StatefulShellBranch(

@@ -50,6 +50,33 @@ class Strings {
   static const String account = 'Profil';
   static const String accountPage = 'Profil Seite';
 
+  // Edit booking screen
+  static const String newBooking = 'Neue Buchung';
+  static const String saveBooking = 'Speichern';
+  static const String savingBooking = 'Speichern...';
+  static const String amount = 'Betrag';
+  static const String amountPlaceholder = '100.50';
+  static const String description = 'Beschreibung';
+  static const String descriptionPlaceholder = 'Beschreibung der Buchung';
+  static const String date = 'Datum';
+  static const String selectDate = 'Datum auswählen';
+  static const String category = 'Kategorie';
+  static const String selectCategory = 'Kategorie wählen';
+  static const String bookingType = 'Buchungstyp';
+  static const String income = 'Einnahme';
+  static const String expense = 'Ausgabe';
+  static const String invalidAmount = 'Ungültiger Betrag';
+  static const String saveBookingFailed = 'Speichern fehlgeschlagen';
+  static const String saveBookingSuccess =
+      'Buchung wurde erfolgreich gespeichert.';
+
+  // Categories
+  static const String categoryRent = 'Miete';
+  static const String categoryFood = 'Essen';
+  static const String categoryTransport = 'Transport';
+  static const String categoryLeisure = 'Freizeit';
+  static const String categoryOther = 'Sonstiges';
+
   // Loading states
   static const String loading = 'Laden...';
 }

@@ -7,7 +7,7 @@ extension AsyncValueUI on AsyncValue {
     debugPrint('isLoading: $isLoading, hasError: $hasError');
     if (!isLoading && hasError) {
       final message = error.toString();
-      showExceptionAlertDialog(
+      showExceptionToast(
         context: context,
         title: 'Fehler',
         exception: message,

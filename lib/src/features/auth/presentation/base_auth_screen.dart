@@ -243,7 +243,6 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
             await handleSubmit();
           },
           isLoading: authState.isLoading,
-          loadingText: submitLoadingText,
           child: Text(submitButtonText),
         );
       },

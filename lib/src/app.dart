@@ -16,10 +16,16 @@ class MyApp extends ConsumerWidget {
       theme: ShadThemeData(
         brightness: Brightness.light,
         colorScheme: const KeeleyColorScheme.light(),
+        sonnerTheme: const ShadSonnerTheme(
+          alignment: Alignment.topCenter,
+        ),
       ),
       darkTheme: ShadThemeData(
         brightness: Brightness.dark,
         colorScheme: const KeeleyColorScheme.dark(),
+        sonnerTheme: const ShadSonnerTheme(
+          alignment: Alignment.topCenter,
+        ),
       ),
       themeMode: ThemeMode.light,
       appBuilder: (context) {

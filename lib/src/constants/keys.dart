@@ -21,4 +21,13 @@ class Keys {
   static const String signUpForm = 'signUpForm';
   static const String signUpButton = 'signUpButton';
   static const String confirmPasswordField = 'confirmPasswordField';
+
+  // Edit booking screen
+  static const String editBookingForm = 'editBookingForm';
+  static const String saveBookingButton = 'saveBookingButton';
+  static const String amountField = 'amountField';
+  static const String descriptionField = 'descriptionField';
+  static const String dateField = 'dateField';
+  static const String bookingTypeField = 'bookingTypeField';
+  static const String categoryField = 'categoryField';
 }

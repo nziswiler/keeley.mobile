@@ -1,10 +1,7 @@
-// lib/src/common_widgets/loading_button.dart
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-/// A reusable button widget that shows a loading state with spinner
 class LoadingButton extends StatelessWidget {
-  /// Creates a loading button
   const LoadingButton({
     super.key,
     required this.onPressed,
@@ -17,28 +14,20 @@ class LoadingButton extends StatelessWidget {
     this.loadingWidget,
   });
 
-  /// Callback when button is pressed (only called when not loading/disabled)
   final VoidCallback? onPressed;
 
-  /// Child widget to display when not loading
   final Widget child;
 
-  /// Whether the button is in loading state
   final bool isLoading;
 
-  /// Text to show when loading (optional)
   final String? loadingText;
 
-  /// Whether the button is disabled
   final bool disabled;
 
-  /// Button variant/style
   final LoadingButtonVariant variant;
 
-  /// Button size
   final ShadButtonSize size;
 
-  /// Custom loading widget (optional)
   final Widget? loadingWidget;
 
   @override
@@ -51,7 +40,6 @@ class LoadingButton extends StatelessWidget {
     );
   }
 
-  /// Builds the appropriate button based on variant
   Widget _buildButton(
       {required VoidCallback? onPressed, required Widget child}) {
     switch (variant) {
@@ -88,7 +76,6 @@ class LoadingButton extends StatelessWidget {
     }
   }
 
-  /// Builds the loading content with spinner and optional text
   Widget _buildLoadingContent(BuildContext context) {
     if (loadingWidget != null) {
       return loadingWidget!;
@@ -120,7 +107,6 @@ class LoadingButton extends StatelessWidget {
     );
   }
 
-  /// Gets the appropriate spinner size based on button size
   double _getSpinnerSize() {
     switch (size) {
       case ShadButtonSize.sm:
@@ -132,7 +118,6 @@ class LoadingButton extends StatelessWidget {
     }
   }
 
-  /// Gets the appropriate spinner color based on variant
   Color _getSpinnerColor(BuildContext context) {
     final theme = ShadTheme.of(context);
 
@@ -149,7 +134,6 @@ class LoadingButton extends StatelessWidget {
   }
 }
 
-/// Available button variants for the loading button
 enum LoadingButtonVariant {
   primary,
   secondary,
@@ -158,9 +142,7 @@ enum LoadingButtonVariant {
   ghost,
 }
 
-/// Extension methods for easier usage
-extension LoadingButtonX on LoadingButton {
-  /// Creates a primary loading button
+extension LoadingButtonFactory on LoadingButton {
   static LoadingButton primary({
     Key? key,
     required VoidCallback? onPressed,
@@ -174,16 +156,15 @@ extension LoadingButtonX on LoadingButton {
       LoadingButton(
         key: key,
         onPressed: onPressed,
-        child: child,
         isLoading: isLoading,
         loadingText: loadingText,
         disabled: disabled,
         variant: LoadingButtonVariant.primary,
         size: size,
         loadingWidget: loadingWidget,
+        child: child,
       );
 
-  /// Creates a destructive loading button
   static LoadingButton destructive({
     Key? key,
     required VoidCallback? onPressed,
@@ -197,16 +178,15 @@ extension LoadingButtonX on LoadingButton {
       LoadingButton(
         key: key,
         onPressed: onPressed,
-        child: child,
         isLoading: isLoading,
         loadingText: loadingText,
         disabled: disabled,
         variant: LoadingButtonVariant.destructive,
         size: size,
         loadingWidget: loadingWidget,
+        child: child,
       );
 
-  /// Creates an outline loading button
   static LoadingButton outline({
     Key? key,
     required VoidCallback? onPressed,
@@ -220,12 +200,12 @@ extension LoadingButtonX on LoadingButton {
       LoadingButton(
         key: key,
         onPressed: onPressed,
-        child: child,
         isLoading: isLoading,
         loadingText: loadingText,
         disabled: disabled,
         variant: LoadingButtonVariant.outline,
         size: size,
         loadingWidget: loadingWidget,
+        child: child,
       );
 }

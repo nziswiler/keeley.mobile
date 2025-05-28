@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:keeley/src/routing/app_router.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
-/// Placeholder widget showing a message and CTA to go back to the home screen.
 class EmptyPlaceholderWidget extends ConsumerWidget {
   const EmptyPlaceholderWidget({super.key, required this.message});
   final String message;
