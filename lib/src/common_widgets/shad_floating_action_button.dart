@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:keeley/src/constants/strings.dart';
 
 class ShadFloatingActionButton extends StatelessWidget {
   const ShadFloatingActionButton({
@@ -32,7 +33,7 @@ class ShadFloatingActionButton extends StatelessWidget {
     return ShadFloatingActionButton(
       key: key,
       onPressed: onPressed,
-      tooltip: tooltip ?? 'Add',
+      tooltip: tooltip ?? Strings.add,
       size: size,
       heroTag: heroTag,
       child: const Icon(Icons.add),

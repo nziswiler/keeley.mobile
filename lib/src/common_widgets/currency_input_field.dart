@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:keeley/src/constants/strings.dart';
 
 class CurrencyInputField extends StatelessWidget {
   const CurrencyInputField({
@@ -80,24 +81,24 @@ class CurrencyInputField extends StatelessWidget {
 
   String? _defaultValidator(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Betrag ist erforderlich';
+      return Strings.requiredField;
     }
 
     final amount = double.tryParse(value);
     if (amount == null) {
-      return 'Ungültiger Betrag';
+      return Strings.invalidAmount;
     }
 
     if (!allowNegative && amount < 0) {
-      return 'Negative Werte sind nicht erlaubt';
+      return Strings.negativeValuesNotAllowed;
     }
 
     if (minValue != null && amount < minValue!) {
-      return 'Betrag muss mindestens ${_formatCurrency(minValue!)} sein';
+      return '${Strings.amountMustBeAtLeast} ${_formatCurrency(minValue!)} sein';
     }
 
     if (maxValue != null && amount > maxValue!) {
-      return 'Betrag darf höchstens ${_formatCurrency(maxValue!)} sein';
+      return '${Strings.amountMustBeAtMost} ${_formatCurrency(maxValue!)} sein';
     }
 
     return null;

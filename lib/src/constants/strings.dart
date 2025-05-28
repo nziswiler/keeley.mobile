@@ -65,7 +65,6 @@ class Strings {
   static const String bookingType = 'Buchungstyp';
   static const String income = 'Einnahme';
   static const String expense = 'Ausgabe';
-  static const String invalidAmount = 'Ungültiger Betrag';
   static const String saveBookingFailed = 'Speichern fehlgeschlagen';
   static const String saveBookingSuccess =
       'Buchung wurde erfolgreich gespeichert.';
@@ -79,4 +78,14 @@ class Strings {
 
   // Loading states
   static const String loading = 'Laden...';
+
+  // Currency input validation
+  static const String invalidAmount = 'Ungültiger Betrag';
+  static const String negativeValuesNotAllowed =
+      'Negative Werte sind nicht erlaubt';
+  static const String amountMustBeAtLeast = 'Betrag muss mindestens';
+  static const String amountMustBeAtMost = 'Betrag darf höchstens';
+
+  // Empty placeholder
+  static const String add = 'Hinzufügen';
 }

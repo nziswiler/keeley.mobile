@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keeley/src/routing/app_router.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/constants/strings.dart';
 
 class EmptyPlaceholderWidget extends ConsumerWidget {
   const EmptyPlaceholderWidget({super.key, required this.message});
@@ -27,6 +28,7 @@ class EmptyPlaceholderWidget extends ConsumerWidget {
               onPressed: () {
                 context.goNamed(AppRoute.signIn.name);
               },
+              child: Text(Strings.add),
             )
           ],
         ),
