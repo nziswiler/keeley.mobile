@@ -1,5 +1,5 @@
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
-import 'package:keeley/src/common_widgets/loading_state.dart';
+import 'package:keeley/src/common/widgets/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controller.g.dart';

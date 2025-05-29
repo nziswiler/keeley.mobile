@@ -54,8 +54,8 @@ class Booking extends UserEntityBase {
   Map<String, dynamic> toMap() {
     return {
       'amount': amount,
-      'date': date.toTimestamp(), // Clean conversion
-      'type': BookingType.fromValue(type.value).displayName,
+      'date': date.toTimestamp(),
+      'type': type.value,
       'category': category?.displayName,
       'description': description,
       if (modifiedOn != null) 'updatedOn': modifiedOn!.toTimestamp(),

@@ -8,11 +8,18 @@ Future<bool?> showAlertDialog({
   required String defaultActionText,
   bool isDestructive = false,
 }) async {
-  return showShadDialog<bool>(
+  return showDialog<bool>(
     context: context,
-    builder: (context) => ShadDialog(
-      title: Text(title),
-      description: content != null ? Text(content) : null,
+    builder: (context) => AlertDialog(
+      backgroundColor: ShadTheme.of(context).alertDialogTheme.backgroundColor,
+      shape: RoundedRectangleBorder(
+          borderRadius: ShadTheme.of(context).alertDialogTheme.radius!),
+      title:
+          Text(title, style: ShadTheme.of(context).alertDialogTheme.titleStyle),
+      content: content != null
+          ? Text(content,
+              style: ShadTheme.of(context).alertDialogTheme.descriptionStyle)
+          : null,
       actions: [
         if (cancelActionText != null)
           ShadButton.outline(

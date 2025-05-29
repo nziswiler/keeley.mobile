@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/features/bookings/presentation/controllers/edit_booking_controller.dart';
-import 'package:keeley/src/common_widgets/loading_button.dart';
+import 'package:keeley/src/common/widgets/loading_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';

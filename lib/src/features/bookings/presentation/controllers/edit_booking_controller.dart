@@ -2,7 +2,7 @@ import 'package:keeley/src/features/bookings/application/booking_service.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
-import 'package:keeley/src/common_widgets/loading_state.dart';
+import 'package:keeley/src/common/widgets/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'edit_booking_controller.g.dart';

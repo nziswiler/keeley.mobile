@@ -16,3 +16,7 @@ class TimestampConverter {
     return Timestamp.fromDate(dateTime);
   }
 }
+
+extension DateTimeExtension on DateTime {
+  Timestamp toTimestamp() => TimestampConverter.toTimestamp(this);
+}

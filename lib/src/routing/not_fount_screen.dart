@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:keeley/src/common_widgets/empty_placeholder_widget.dart';
+import 'package:keeley/src/common/widgets/empty_placeholder_widget.dart';
 
 /// Simple not found screen used for 404 errors (page not found on web)
 class NotFoundScreen extends StatelessWidget {

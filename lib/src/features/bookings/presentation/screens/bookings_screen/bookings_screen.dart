@@ -1,7 +1,7 @@
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/common_widgets/app_bar.dart';
+import 'package:keeley/src/common/widgets/app_bar.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
@@ -10,7 +10,8 @@ import 'package:keeley/src/features/bookings/presentation/controllers/bookings_c
 import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/edit_booking_screen.dart';
 import 'package:keeley/src/utils/async_value_ui.dart';
-import 'package:keeley/src/common_widgets/shad_floating_action_button.dart';
+import 'package:keeley/src/utils/alert_dialogs.dart';
+import 'package:keeley/src/common/widgets/shad_floating_action_button.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -191,25 +192,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
   }
 
   Future<bool?> _confirmDelete(BuildContext context, ShadThemeData theme) {
-    return showDialog<bool>(
+    return showAlertDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(Strings.confirmDelete),
-        content: Text(Strings.deleteBookingMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(Strings.cancel),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            style: TextButton.styleFrom(
-              foregroundColor: theme.colorScheme.destructive,
-            ),
-            child: Text(Strings.deleteBooking),
-          ),
-        ],
-      ),
+      title: Strings.confirmDelete,
+      content: Strings.deleteBookingMessage,
+      cancelActionText: Strings.cancel,
+      defaultActionText: Strings.deleteBooking,
+      isDestructive: true,
     );
   }
 
