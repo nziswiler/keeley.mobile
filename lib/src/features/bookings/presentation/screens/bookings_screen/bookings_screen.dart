@@ -108,13 +108,13 @@ class _BookingsScreenState extends State<BookingsScreen> {
           Icon(
             Icons.error_outline,
             size: 64,
-            color: theme.colorScheme.destructive,
+            color: theme.colorScheme.primary,
           ),
           gapH16,
           Text(
             error.toString(),
             style: theme.textTheme.large.copyWith(
-              color: theme.colorScheme.destructive,
+              color: theme.colorScheme.primary,
             ),
             textAlign: TextAlign.center,
           ),
@@ -179,7 +179,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
     return Container(
       key: const Key(Keys.editBackground),
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary,
+        color: theme.colorScheme.secondary,
         borderRadius: BorderRadius.circular(Sizes.p12),
       ),
       alignment: Alignment.centerLeft,
@@ -189,14 +189,14 @@ class _BookingsScreenState extends State<BookingsScreen> {
         children: [
           Icon(
             Icons.edit_outlined,
-            color: theme.colorScheme.primaryForeground,
+            color: theme.colorScheme.secondaryForeground,
             size: 24,
           ),
           gapH4,
           Text(
             Strings.editBooking,
             style: theme.textTheme.muted.copyWith(
-              color: theme.colorScheme.primaryForeground,
+              color: theme.colorScheme.secondaryForeground,
               fontSize: 12,
             ),
           ),
@@ -209,7 +209,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
     return Container(
       key: const Key(Keys.deleteBackground),
       decoration: BoxDecoration(
-        color: theme.colorScheme.destructive,
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(Sizes.p12),
       ),
       alignment: Alignment.centerRight,
@@ -219,7 +219,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
         children: [
           Icon(
             Icons.delete_outline,
-            color: theme.colorScheme.destructiveForeground,
+            color: theme.colorScheme.primaryForeground,
             size: 24,
           ),
           gapH4,

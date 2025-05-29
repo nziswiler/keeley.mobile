@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
+import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BookingIcon extends StatelessWidget {
@@ -55,23 +56,11 @@ class BookingIcon extends StatelessWidget {
   }
 
   Color _getBackgroundColor(ShadThemeData theme) {
-    // Use theme colors with category-specific tints
-    switch (category) {
-      case BookingCategory.housing:
-        return const Color(0xFF16A34A); // Green-600
-      case BookingCategory.groceries:
-        return const Color(0xFFEA580C); // Orange-600
-      case BookingCategory.transport:
-        return const Color(0xFF2563EB); // Blue-600
-      case BookingCategory.leisure:
-        return const Color(0xFF9333EA); // Purple-600
-      case BookingCategory.salary:
-        return const Color(0xFF059669); // Emerald-600
-      case BookingCategory.other:
-      case null:
-        return isIncome
-            ? const Color(0xFF16A34A) // Green-600 for income
-            : theme.colorScheme.muted; // Theme muted for other expenses
+    // Verwende Theme-Farben für konsistente Darstellung
+    if (isIncome) {
+      return (theme.colorScheme as KeeleyColorScheme).income;
+    } else {
+      return theme.colorScheme.primary;
     }
   }
 }

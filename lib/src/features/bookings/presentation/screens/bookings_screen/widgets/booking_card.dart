@@ -70,9 +70,10 @@ class BookingCard extends StatelessWidget {
 
   Widget _buildAmountDisplay(
       BuildContext context, ShadThemeData theme, bool isIncome) {
+    final keeleyTheme = theme.colorScheme as KeeleyColorScheme;
     final amountColor = isIncome
-        ? const Color(0xFF16A34A) // Green-600 for income
-        : const Color(0xFFDC2626); // Red-600 for expenses
+        ? keeleyTheme.income // Theme-Grün für Einnahmen
+        : theme.colorScheme.primary; // Primary-Farbe für Ausgaben
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
