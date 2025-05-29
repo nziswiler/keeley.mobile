@@ -10,9 +10,9 @@ import 'package:keeley/src/features/bookings/presentation/controllers/bookings_c
 import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/edit_booking_screen.dart';
 import 'package:keeley/src/utils/async_value_ui.dart';
-import 'package:keeley/src/utils/alert_dialogs.dart';
 import 'package:keeley/src/common/widgets/shad_floating_action_button.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/utils/dialogs.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BookingsScreen extends StatefulWidget {
@@ -46,7 +46,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
         builder: (context, ref, child) {
           ref.listen<AsyncValue>(
             bookingsControllerProvider,
-            (_, state) => state.showAlertDialogOnError(context),
+            (_, state) => state.showExceptionToastOnError(context),
           );
           final bookingsQuery = ref.watch(bookingsQueryProvider);
           return FirestoreListView<Booking>(

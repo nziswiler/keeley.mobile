@@ -15,7 +15,7 @@ import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_s
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
-import 'package:keeley/src/utils/alert_dialogs.dart';
+import 'package:keeley/src/utils/toasts.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BookingForm extends ConsumerStatefulWidget {
