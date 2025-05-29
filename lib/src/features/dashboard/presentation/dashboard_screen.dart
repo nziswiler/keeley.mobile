@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:keeley/src/constants/strings.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -8,7 +9,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hey, Neil!'),
+        title: Text(Strings.dashboardGreeting),
         actions: const [Icon(Icons.more_vert)],
       ),
       body: SingleChildScrollView(
@@ -16,7 +17,7 @@ class DashboardScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Lass uns den Nachmittag rocken!',
+            Text(Strings.dashboardSubtitle,
                 style: TextStyle(fontSize: 16, color: Colors.grey)),
             const SizedBox(height: 24),
             Container(
@@ -28,11 +29,11 @@ class DashboardScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Einnahmen & Ausgaben',
+                  Text(Strings.incomeExpenseTitle,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 4),
-                  const Text('1000 CHF',
+                  Text(Strings.totalAmount,
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w300)),
                   const SizedBox(height: 12),
@@ -68,7 +69,7 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            const Text('Letzte Buchungen',
+            Text(Strings.recentBookingsTitle,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16),
           ],

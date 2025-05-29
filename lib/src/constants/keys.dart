@@ -1,60 +1,69 @@
 class Keys {
-  static const String emailPassword = 'email-password';
-  static const String tabBar = 'tabBar';
-  static const String accountTab = 'accountTab';
-  static const String logout = 'logout';
-  static const String alertDefault = 'alertDefault';
-  static const String alertCancel = 'alertCancel';
+  // ===================================
+  // AUTHENTICATION KEYS
+  // ===================================
+  static const String emailField = 'emailField';
+  static const String passwordField = 'passwordField';
+  static const String confirmPasswordField = 'confirmPasswordField';
+  static const String signInButton = 'signInButton';
+  static const String signUpButton = 'signUpButton';
+  static const String signOutButton = 'signOutButton';
 
-  // Form field IDs
+  // ===================================
+  // PROFILE KEYS
+  // ===================================
+  static const String displayNameField = 'displayNameField';
+  static const String updateDisplayNameButton = 'updateDisplayNameButton';
+  static const String deleteAccountButton = 'deleteAccountButton';
+
+  // ===================================
+  // BOOKING KEYS
+  // ===================================
+  static const String bookingsScreen = 'bookingsScreen';
+  static const String bookingsListView = 'bookingsListView';
+  static const String bookingCard = 'bookingCard';
+  static const String bookingIcon = 'bookingIcon';
+
+  // Booking Actions
+  static const String dismissibleBooking = 'dismissibleBooking';
+  static const String editBackground = 'editBackground';
+  static const String deleteBackground = 'deleteBackground';
+  static const String editBackgroundIcon = 'edit_background_icon';
+  static const String editBackgroundText = 'edit_background_text';
+  static const String deleteBackgroundIcon = 'delete_background_icon';
+  static const String deleteBackgroundText = 'delete_background_text';
+
+  // ===================================
+  // FORM KEYS
+  // ===================================
+  static const String headerSection = 'headerSection';
+  static const String closeButton = 'closeButton';
+  static const String saveBookingButton = 'saveBookingButton';
+
+  // Form Field IDs
   static const String email = 'email';
   static const String password = 'password';
   static const String confirmPassword = 'confirmPassword';
-
-  // Sign in screen
-  static const String signInForm = 'signInForm';
-  static const String signInButton = 'signInButton';
-  static const String emailField = 'emailField';
-  static const String passwordField = 'passwordField';
-
-  // Sign up screen
-  static const String signUpForm = 'signUpForm';
-  static const String signUpButton = 'signUpButton';
-  static const String confirmPasswordField = 'confirmPasswordField';
-
-  // Edit booking screen
-  static const String editBookingForm = 'editBookingForm';
-  static const String saveBookingButton = 'saveBookingButton';
   static const String amountField = 'amountField';
   static const String descriptionField = 'descriptionField';
   static const String dateField = 'dateField';
   static const String bookingTypeField = 'bookingTypeField';
   static const String categoryField = 'categoryField';
 
-  // Booking screen
-  static const String bookingsScreen = 'bookingsScreen';
-  static const String bookingCard = 'bookingCard';
-  static const String bookingIcon = 'bookingIcon';
-  static const String bookingSummaryCard = 'bookingSummaryCard';
-  static const String dismissibleBooking = 'dismissibleBooking';
-  static const String deleteBackground = 'deleteBackground';
-  static const String editBackground = 'editBackground';
-  static const String floatingActionButton = 'floatingActionButton';
-  static const String bookingsListView = 'bookingsListView';
-
-  // Booking category selector
-  static const String categorySelector = 'categorySelector';
+  // ===================================
+  // CATEGORY KEYS
+  // ===================================
   static const String categoryOption = 'categoryOption';
 
-  // Modal and dialogs
-  static const String modalBottomSheet = 'modalBottomSheet';
-  static const String formModal = 'formModal';
-  static const String headerSection = 'headerSection';
-  static const String closeButton = 'closeButton';
+  // ===================================
+  // GENERAL UI KEYS
+  // ===================================
+  static const String floatingActionButton = 'floatingActionButton';
 
-  // Profile screen
-  static const String displayNameField = 'displayNameField';
-  static const String updateDisplayNameButton = 'updateDisplayNameButton';
-  static const String signOutButton = 'signOutButton';
-  static const String deleteAccountButton = 'deleteAccountButton';
+  // Navigation Keys
+  static const String scaffoldWithNestedNavigation =
+      'ScaffoldWithNestedNavigation';
+
+  // Modal Keys
+  static const String editBookingModal = 'edit_booking_modal';
 }

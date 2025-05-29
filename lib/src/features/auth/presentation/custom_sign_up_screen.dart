@@ -84,7 +84,7 @@ class _CustomSignUpScreenState extends BaseAuthScreenState<CustomSignUpScreen> {
   Widget buildNavigationLink() {
     return Center(
         child: ShadButton.link(
-      child: const Text('Hast du bereits ein Konto? Hier anmeldn'),
+      child: Text(Strings.alreadyHaveAccount),
       onPressed: () {
         context.go('/signIn');
       },

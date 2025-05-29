@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/onboarding/data/onboarding_repository.dart';
 import 'package:keeley/src/routing/go_router_delegate_listener.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
@@ -71,7 +72,7 @@ class AppStartupErrorWidget extends StatelessWidget {
             gapH16,
             ShadButton(
               onPressed: onRetry,
-              child: const Text('Erneut versuchen'),
+              child: Text(Strings.retryAction),
             ),
           ],
         ),

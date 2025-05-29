@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/onboarding/presentation/onboarding_controller.dart';
 import 'package:keeley/src/routing/app_router.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
@@ -20,7 +21,7 @@ class OnboardingScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Track your time.\nBecause time counts.',
+              Strings.onboardingTitle,
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),
@@ -29,7 +30,7 @@ class OnboardingScreen extends ConsumerWidget {
               'assets/time-tracking.svg',
               width: 200,
               height: 200,
-              semanticsLabel: 'Time tracking logo',
+              semanticsLabel: Strings.timeTrackingLogo,
             ),
             gapH16,
             state.isLoading
@@ -48,7 +49,7 @@ class OnboardingScreen extends ConsumerWidget {
                         context.goNamed(AppRoute.signIn.name);
                       }
                     },
-                    child: const Text('Primary'),
+                    child: Text(Strings.startTracking),
                   ),
           ],
         ),

@@ -50,7 +50,7 @@ class _CustomSignInScreenState extends BaseAuthScreenState<CustomSignInScreen> {
   Widget buildNavigationLink() {
     return Center(
         child: ShadButton.link(
-      child: const Text('Noch kein Konto? Jetzt registrieren'),
+      child: Text(Strings.noAccountYet),
       onPressed: () {
         context.go('/signUp');
       },
