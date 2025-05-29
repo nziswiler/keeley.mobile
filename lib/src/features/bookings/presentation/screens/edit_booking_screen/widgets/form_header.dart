@@ -7,9 +7,11 @@ class FormHeader extends StatelessWidget {
   const FormHeader({
     super.key,
     required this.onClose,
+    this.isEditing = false,
   });
 
   final VoidCallback onClose;
+  final bool isEditing;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,10 @@ class FormHeader extends StatelessWidget {
       key: const Key(Keys.headerSection),
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(Strings.newBooking, style: theme.textTheme.h4),
+        Text(
+          isEditing ? Strings.editBooking : Strings.newBooking,
+          style: theme.textTheme.h4,
+        ),
         IconButton(
           key: const Key(Keys.closeButton),
           icon: Icon(

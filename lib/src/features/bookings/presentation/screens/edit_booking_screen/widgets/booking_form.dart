@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/presentation/controllers/edit_booking_controller.dart';
@@ -18,7 +19,9 @@ import 'package:keeley/src/utils/alert_dialogs.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BookingForm extends ConsumerStatefulWidget {
-  const BookingForm({super.key});
+  const BookingForm({super.key, this.booking});
+
+  final Booking? booking;
 
   @override
   ConsumerState<BookingForm> createState() => _BookingFormState();
@@ -39,6 +42,16 @@ class _BookingFormState extends ConsumerState<BookingForm> {
     amountController = TextEditingController();
     descriptionController = TextEditingController();
     formKey = GlobalKey<ShadFormState>();
+
+    // Initialize with existing booking data if provided
+    if (widget.booking != null) {
+      final booking = widget.booking!;
+      amountController.text = booking.amount.toString();
+      descriptionController.text = booking.description ?? '';
+      selectedType = booking.type;
+      selectedDate = booking.date;
+      selectedCategory = booking.category;
+    }
   }
 
   @override
@@ -111,6 +124,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
           type: selectedType,
           description: description,
           category: selectedCategory,
+          existingBooking: widget.booking,
         );
   }
 
@@ -155,7 +169,10 @@ class _BookingFormState extends ConsumerState<BookingForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            FormHeader(onClose: _handleClose),
+            FormHeader(
+              onClose: _handleClose,
+              isEditing: widget.booking != null,
+            ),
             gapH24,
             BookingTypeSelectorField(
               selectedType: selectedType,

@@ -38,6 +38,7 @@ class Keys {
   static const String bookingSummaryCard = 'bookingSummaryCard';
   static const String dismissibleBooking = 'dismissibleBooking';
   static const String deleteBackground = 'deleteBackground';
+  static const String editBackground = 'editBackground';
   static const String floatingActionButton = 'floatingActionButton';
   static const String bookingsListView = 'bookingsListView';
 

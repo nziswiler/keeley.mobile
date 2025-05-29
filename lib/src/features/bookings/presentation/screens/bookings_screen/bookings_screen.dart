@@ -152,12 +152,56 @@ class _BookingsScreenState extends State<BookingsScreen> {
       Booking booking, ShadThemeData theme) {
     return Dismissible(
       key: Key('${Keys.dismissibleBooking}-${booking.id}'),
-      background: _buildDeleteBackground(theme),
-      direction: DismissDirection.endToStart,
-      confirmDismiss: (direction) => _confirmDelete(context, theme),
-      onDismissed: (direction) =>
-          ref.read(bookingsControllerProvider.notifier).deleteBooking(booking),
+      background: _buildEditBackground(theme),
+      secondaryBackground: _buildDeleteBackground(theme),
+      direction: DismissDirection.horizontal,
+      confirmDismiss: (direction) async {
+        if (direction == DismissDirection.endToStart) {
+          // Right to left swipe - delete
+          return await _confirmDelete(context, theme);
+        } else if (direction == DismissDirection.startToEnd) {
+          // Left to right swipe - edit
+          _showEditBookingModal(context, booking);
+          return false; // Don't dismiss for edit
+        }
+        return false;
+      },
+      onDismissed: (direction) {
+        if (direction == DismissDirection.endToStart) {
+          ref.read(bookingsControllerProvider.notifier).deleteBooking(booking);
+        }
+      },
       child: BookingCard(booking: booking),
+    );
+  }
+
+  Widget _buildEditBackground(ShadThemeData theme) {
+    return Container(
+      key: const Key(Keys.editBackground),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primary,
+        borderRadius: BorderRadius.circular(Sizes.p12),
+      ),
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.only(left: Sizes.p20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.edit_outlined,
+            color: theme.colorScheme.primaryForeground,
+            size: 24,
+          ),
+          gapH4,
+          Text(
+            Strings.editBooking,
+            style: theme.textTheme.muted.copyWith(
+              color: theme.colorScheme.primaryForeground,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -214,11 +258,11 @@ class _BookingsScreenState extends State<BookingsScreen> {
     );
   }
 
-  void _showEditBookingModal(BuildContext context) {
+  void _showEditBookingModal(BuildContext context, [Booking? booking]) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,
-      builder: (_) => const EditBookingScreen(),
+      builder: (_) => EditBookingScreen(booking: booking),
     );
   }
 }

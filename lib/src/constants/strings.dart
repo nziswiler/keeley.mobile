@@ -53,6 +53,7 @@ class Strings {
 
   // Edit booking screen
   static const String newBooking = 'Neue Buchung';
+  static const String editBooking = 'Buchung bearbeiten';
   static const String saveBooking = 'Speichern';
   static const String savingBooking = 'Speichern...';
   static const String amount = 'Betrag';
