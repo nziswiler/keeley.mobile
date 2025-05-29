@@ -16,12 +16,3 @@ class TimestampConverter {
     return Timestamp.fromDate(dateTime);
   }
 }
-
-// Optional: Extension methods für cleaner syntax (nur für konkrete Typen)
-extension DateTimeX on DateTime {
-  Timestamp toTimestamp() => TimestampConverter.toTimestamp(this);
-}
-
-extension TimestampX on Timestamp {
-  DateTime toDateTime() => toDate();
-}
