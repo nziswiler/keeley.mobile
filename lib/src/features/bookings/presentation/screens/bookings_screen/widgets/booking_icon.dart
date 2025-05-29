@@ -1,7 +1,7 @@
 // widgets/booking_icon.dart
 import 'package:flutter/material.dart';
-import 'package:keeley/src/features/bookings/domain/booking_category.dart';
 import 'package:keeley/src/constants/keys.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BookingIcon extends StatelessWidget {

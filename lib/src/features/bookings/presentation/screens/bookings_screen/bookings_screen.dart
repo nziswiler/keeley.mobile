@@ -5,10 +5,10 @@ import 'package:keeley/src/common_widgets/app_bar.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
-import 'package:keeley/src/features/bookings/domain/booking.dart';
-import 'package:keeley/src/features/bookings/presentation/bookings_screen/bookings_screen_controller.dart';
-import 'package:keeley/src/features/bookings/presentation/bookings_screen/widgets/booking_card.dart';
-import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/edit_booking_screen.dart';
+import 'package:keeley/src/features/bookings/domain/model/booking.dart';
+import 'package:keeley/src/features/bookings/presentation/controllers/bookings_controller.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/edit_booking_screen.dart';
 import 'package:keeley/src/utils/async_value_ui.dart';
 import 'package:keeley/src/common_widgets/shad_floating_action_button.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
@@ -44,7 +44,7 @@ class _BookingsScreenState extends State<BookingsScreen> {
       body: Consumer(
         builder: (context, ref, child) {
           ref.listen<AsyncValue>(
-            bookingsScreenControllerProvider,
+            bookingsControllerProvider,
             (_, state) => state.showAlertDialogOnError(context),
           );
           final bookingsQuery = ref.watch(bookingsQueryProvider);
@@ -154,9 +154,8 @@ class _BookingsScreenState extends State<BookingsScreen> {
       background: _buildDeleteBackground(theme),
       direction: DismissDirection.endToStart,
       confirmDismiss: (direction) => _confirmDelete(context, theme),
-      onDismissed: (direction) => ref
-          .read(bookingsScreenControllerProvider.notifier)
-          .deleteBooking(booking),
+      onDismissed: (direction) =>
+          ref.read(bookingsControllerProvider.notifier).deleteBooking(booking),
       child: BookingCard(booking: booking),
     );
   }

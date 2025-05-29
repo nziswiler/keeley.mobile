@@ -5,7 +5,7 @@ import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
 import 'package:keeley/src/features/auth/presentation/custom_sign_up_screen.dart';
-import 'package:keeley/src/features/bookings/presentation/bookings_screen/bookings_screen.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/bookings_screen.dart';
 import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
 import 'package:keeley/src/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';

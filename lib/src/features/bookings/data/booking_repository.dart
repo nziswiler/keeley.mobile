@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
-import 'package:keeley/src/features/bookings/domain/booking.dart';
-import 'package:keeley/src/features/bookings/domain/booking_type.dart';
-import 'package:keeley/src/features/bookings/domain/booking_category.dart';
+import 'package:keeley/src/features/bookings/domain/model/booking.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
+import 'package:keeley/src/features/bookings/domain/repositories/i_booking_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'booking_repository.g.dart';
 
-class BookingRepository {
+class BookingRepository implements IBookingRepository {
   const BookingRepository(this._firestore);
   final FirebaseFirestore _firestore;
 
@@ -16,6 +17,7 @@ class BookingRepository {
       'users/$userId/bookings/$bookingId';
   static String bookingsPath(String userId) => 'users/$userId/bookings';
 
+  @override
   Future<void> addBooking({
     required String userId,
     required DateTime date,
@@ -34,6 +36,7 @@ class BookingRepository {
         'createdBy': userId,
       });
 
+  @override
   Future<void> updateBooking({
     required String userId,
     required Booking booking,
@@ -44,9 +47,11 @@ class BookingRepository {
         'updatedBy': userId,
       });
 
+  @override
   Future<void> deleteBooking({required String userId, required String id}) =>
       _firestore.doc(bookingPath(userId, id)).delete();
 
+  @override
   Query<Booking> queryBookings({required String userId}) =>
       _firestore.collection(bookingsPath(userId)).withConverter(
             fromFirestore: (snapshot, _) =>
@@ -54,9 +59,22 @@ class BookingRepository {
             toFirestore: (booking, _) => booking.toMap(),
           );
 
+  @override
   Future<List<Booking>> fetchBookings({required String userId}) async {
     final bookings = await queryBookings(userId: userId).get();
     return bookings.docs.map((doc) => doc.data()).toList();
+  }
+
+  @override
+  Future<Booking?> getBooking({
+    required String userId,
+    required String bookingId,
+  }) async {
+    final doc = await _firestore.doc(bookingPath(userId, bookingId)).get();
+    if (!doc.exists || doc.data() == null) {
+      return null;
+    }
+    return Booking.fromMap(doc.data()!, doc.id);
   }
 }
 

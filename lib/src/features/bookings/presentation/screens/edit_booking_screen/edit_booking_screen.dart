@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/form_fields/currency_input_field.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
+import 'package:keeley/src/features/bookings/presentation/controllers/edit_booking_controller.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/form_fields/currency_input_field.dart';
 import 'package:keeley/src/common_widgets/loading_button.dart';
 import 'package:keeley/src/common_widgets/toggle_button_group.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/bookings/domain/booking_type.dart';
-import 'package:keeley/src/features/bookings/domain/booking_category.dart';
-import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/edit_booking_screen_controller.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/alert_dialogs.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -65,9 +65,9 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
     final amount = double.tryParse(amountController.text);
     final description = descriptionController.text.trim();
 
-    await ref.read(editBookingScreenControllerProvider.notifier).saveBooking(
+    await ref.read(editBookingControllerProvider.notifier).saveBooking(
           date: selectedDate,
-          amount: amount,
+          amount: amount!,
           type: selectedType,
           description: description,
           category: selectedCategory,
@@ -235,7 +235,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   }
 
   Widget buildBookingTypeSelector(BuildContext context) {
-    final bookingState = ref.watch(editBookingScreenControllerProvider);
+    final bookingState = ref.watch(editBookingControllerProvider);
 
     return ToggleRadioGroup<BookingType>(
       items: [
@@ -275,7 +275,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   }
 
   Widget buildDatePicker() {
-    final bookingState = ref.watch(editBookingScreenControllerProvider);
+    final bookingState = ref.watch(editBookingControllerProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,7 +304,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
 
   Widget buildCategorySelector(BuildContext context) {
     final theme = ShadTheme.of(context);
-    final bookingState = ref.watch(editBookingScreenControllerProvider);
+    final bookingState = ref.watch(editBookingControllerProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -347,7 +347,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   }
 
   Widget buildDescriptionField() {
-    final bookingState = ref.watch(editBookingScreenControllerProvider);
+    final bookingState = ref.watch(editBookingControllerProvider);
 
     return ShadInputFormField(
       controller: descriptionController,
@@ -376,10 +376,10 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   Widget buildSubmitButton() {
     return Consumer(
       builder: (context, ref, child) {
-        final bookingState = ref.watch(editBookingScreenControllerProvider);
+        final bookingState = ref.watch(editBookingControllerProvider);
 
         // Listen for state changes to handle errors and success
-        ref.listen(editBookingScreenControllerProvider, (previous, next) {
+        ref.listen(editBookingControllerProvider, (previous, next) {
           if (next.hasError) {
             handleSaveError(next.error!);
           }
@@ -407,7 +407,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   }
 
   Widget buildAmountField() {
-    final bookingState = ref.watch(editBookingScreenControllerProvider);
+    final bookingState = ref.watch(editBookingControllerProvider);
 
     return CurrencyInputFieldFactory.chf(
       controller: amountController,

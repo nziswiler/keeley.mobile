@@ -1,5 +1,5 @@
-import 'package:keeley/src/features/bookings/domain/booking_type.dart';
-import 'package:keeley/src/features/bookings/domain/booking_category.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/user_entity_base.dart';
 import 'package:keeley/src/utils/timestamp_converter.dart';
 
