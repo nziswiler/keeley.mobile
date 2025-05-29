@@ -1,4 +1,3 @@
-// widgets/booking_card.dart
 import 'package:flutter/material.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
@@ -21,19 +20,12 @@ class BookingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
     final isIncome = booking.type == BookingType.income;
-    final formattedDate = Format.dateLocalized(booking.date);
 
     return ShadCard(
       key: Key('${Keys.bookingCard}-${booking.id}'),
-      shadows: const [], // Entfernt den Schatten für flaches Design
-      padding: EdgeInsets.zero, // Entfernt das Standard-Padding der Card
-      border: Border.all(color: Colors.transparent), // Entfernt den Border
-      radius: BorderRadius.circular(12), // Rundet die Ecken ab
+      padding: EdgeInsets.zero,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: Sizes.p8,
-          vertical: Sizes.p12,
-        ),
+        padding: const EdgeInsets.all(Sizes.p16),
         child: Row(
           children: [
             BookingIcon(
@@ -42,51 +34,88 @@ class BookingCard extends StatelessWidget {
             ),
             gapW12,
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    booking.description ?? Strings.unnamedTransaction,
-                    style: theme.textTheme.small.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: theme.colorScheme.foreground,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    formattedDate,
-                    style: theme.textTheme.muted.copyWith(
-                      color: theme.colorScheme.mutedForeground,
-                    ),
-                  ),
-                ],
+              child: _BookingDetails(
+                booking: booking,
+                theme: theme,
               ),
             ),
-            _buildAmountDisplay(context, theme, isIncome),
+            _AmountDisplay(
+              booking: booking,
+              theme: theme,
+              isIncome: isIncome,
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _buildAmountDisplay(
-      BuildContext context, ShadThemeData theme, bool isIncome) {
+class _BookingDetails extends StatelessWidget {
+  const _BookingDetails({
+    required this.booking,
+    required this.theme,
+  });
+
+  final Booking booking;
+  final ShadThemeData theme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          booking.description ?? Strings.unnamedTransaction,
+          style: theme.textTheme.small.copyWith(
+            fontWeight: FontWeight.w600,
+            color: theme.colorScheme.foreground,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        gapH2,
+        Text(
+          Format.dateLocalized(booking.date),
+          style: theme.textTheme.muted.copyWith(
+            color: theme.colorScheme.mutedForeground,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _AmountDisplay extends StatelessWidget {
+  const _AmountDisplay({
+    required this.booking,
+    required this.theme,
+    required this.isIncome,
+  });
+
+  final Booking booking;
+  final ShadThemeData theme;
+  final bool isIncome;
+
+  @override
+  Widget build(BuildContext context) {
     final keeleyTheme = theme.colorScheme as KeeleyColorScheme;
-    final amountColor = isIncome
-        ? keeleyTheme.income // Theme-Grün für Einnahmen
-        : theme.colorScheme.primary; // Primary-Farbe für Ausgaben
+    final amountColor =
+        isIncome ? keeleyTheme.income : theme.colorScheme.primary;
+    final prefix = isIncome ? '+' : '-';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          '${isIncome ? '+' : '-'} ${Format.chf(booking.amount)}',
+          '$prefix ${Format.chf(booking.amount)}',
           style: theme.textTheme.small.copyWith(
             fontWeight: FontWeight.w600,
             color: amountColor,
           ),
         ),
-        const SizedBox(height: 2),
+        gapH2,
       ],
     );
   }
