@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/constants/strings.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/utils/validation_utils.dart';
 
 class CurrencyInputField extends StatelessWidget {
   const CurrencyInputField({
@@ -122,19 +123,27 @@ extension CurrencyInputFieldFactory on CurrencyInputField {
     double? maxValue,
     void Function(String)? onChanged,
     AutovalidateMode? autovalidateMode,
-  }) =>
-      CurrencyInputField(
-        key: key,
-        controller: controller,
-        id: id,
-        label: label,
-        placeholder: placeholder,
-        currency: Strings.chf,
-        validator: validator,
-        enabled: enabled,
-        minValue: minValue,
-        maxValue: maxValue,
-        onChanged: onChanged,
-        autovalidateMode: autovalidateMode,
-      );
+  }) {
+    // Use default validator if none provided
+    final actualValidator = validator ?? _defaultAmountValidator;
+
+    return CurrencyInputField(
+      key: key,
+      controller: controller,
+      id: id,
+      label: label,
+      placeholder: placeholder,
+      currency: Strings.chf,
+      validator: actualValidator,
+      enabled: enabled,
+      minValue: minValue,
+      maxValue: maxValue,
+      onChanged: onChanged,
+      autovalidateMode: autovalidateMode,
+    );
+  }
+
+  static String? _defaultAmountValidator(String? value) {
+    return ValidationUtils.validateAmount(value ?? '');
+  }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/presentation/controllers/edit_booking_controller.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/utils/validation_utils.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class DatePickerField extends ConsumerWidget {
@@ -10,22 +11,13 @@ class DatePickerField extends ConsumerWidget {
     super.key,
     required this.selectedDate,
     required this.onChanged,
-    this.validator,
   });
 
   final DateTime selectedDate;
   final ValueChanged<DateTime?> onChanged;
-  final String? Function(Object?)? validator;
 
-  String? validateDate(Object? value) {
-    if (validator != null) {
-      return validator!(value);
-    }
-
-    if (value == null) {
-      return Strings.requiredField;
-    }
-    return null;
+  String? _validateDate(Object? value) {
+    return ValidationUtils.validateRequiredField(value);
   }
 
   @override
@@ -43,7 +35,7 @@ class DatePickerField extends ConsumerWidget {
           initialValue: selectedDate,
           enabled: !bookingState.isLoading,
           onChanged: onChanged,
-          validator: validateDate,
+          validator: _validateDate,
         ),
       ],
     );

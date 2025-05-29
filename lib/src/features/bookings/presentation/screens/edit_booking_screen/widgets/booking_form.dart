@@ -10,8 +10,7 @@ import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_s
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/widgets/form_fields/description_field.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/widgets/form_actions.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/widgets/form_header.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/models/booking_form_state.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/mixins/booking_validation_mixin.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/utils/validation_utils.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
@@ -25,13 +24,14 @@ class BookingForm extends ConsumerStatefulWidget {
   ConsumerState<BookingForm> createState() => _BookingFormState();
 }
 
-class _BookingFormState extends ConsumerState<BookingForm>
-    with BookingValidationMixin {
+class _BookingFormState extends ConsumerState<BookingForm> {
   late final TextEditingController amountController;
   late final TextEditingController descriptionController;
   late final GlobalKey<ShadFormState> formKey;
 
-  late BookingFormState formState;
+  BookingType selectedType = BookingType.income;
+  DateTime selectedDate = DateTime.now();
+  BookingCategory? selectedCategory;
 
   @override
   void initState() {
@@ -39,12 +39,6 @@ class _BookingFormState extends ConsumerState<BookingForm>
     amountController = TextEditingController();
     descriptionController = TextEditingController();
     formKey = GlobalKey<ShadFormState>();
-
-    formState = BookingFormState(
-      selectedType: BookingType.income,
-      selectedDate: DateTime.now(),
-      selectedCategory: BookingCategory.other,
-    );
   }
 
   @override
@@ -54,36 +48,46 @@ class _BookingFormState extends ConsumerState<BookingForm>
     super.dispose();
   }
 
-  void _updateFormState(BookingFormState newState) {
-    setState(() {
-      formState = newState;
-    });
+  List<BookingCategory> get availableCategories {
+    if (selectedType == BookingType.income) {
+      return [BookingCategory.salary, BookingCategory.other];
+    } else {
+      return BookingCategory.values
+          .where((category) => category != BookingCategory.salary)
+          .toList();
+    }
+  }
+
+  bool isCategoryValid(BookingCategory? category) {
+    return category != null && availableCategories.contains(category);
   }
 
   void _handleBookingTypeChange(BookingType? value) {
     if (value == null) return;
 
-    final newState = formState.copyWith(selectedType: value);
+    setState(() {
+      selectedType = value;
 
-    // Reset category if it's no longer valid for the new booking type
-    if (!newState.isCategoryValid(formState.selectedCategory)) {
-      final defaultCategory = value == BookingType.income
-          ? BookingCategory.salary
-          : BookingCategory.other;
-      _updateFormState(newState.copyWith(selectedCategory: defaultCategory));
-    } else {
-      _updateFormState(newState);
-    }
+      if (!isCategoryValid(selectedCategory)) {
+        selectedCategory = null;
+      }
+    });
   }
 
   void _handleDateChange(DateTime? date) {
     if (date != null) {
-      _updateFormState(formState.copyWith(selectedDate: date));
+      setState(() {
+        selectedDate = date;
+      });
     }
   }
 
   void _handleCategoryChange(BookingCategory? category) {
-    _updateFormState(formState.copyWith(selectedCategory: category));
+    if (category != null) {
+      setState(() {
+        selectedCategory = category;
+      });
+    }
   }
 
   Future<void> _handleSubmit() async {
@@ -92,7 +96,7 @@ class _BookingFormState extends ConsumerState<BookingForm>
     }
 
     final categoryError =
-        validateCategory(formState.selectedCategory, formState.selectedType);
+        ValidationUtils.validateCategory(selectedCategory, selectedType);
     if (categoryError != null) {
       setState(() {});
       return;
@@ -102,11 +106,11 @@ class _BookingFormState extends ConsumerState<BookingForm>
     final description = descriptionController.text.trim();
 
     await ref.read(editBookingControllerProvider.notifier).saveBooking(
-          date: formState.selectedDate,
+          date: selectedDate,
           amount: amount!,
-          type: formState.selectedType,
+          type: selectedType,
           description: description,
-          category: formState.selectedCategory,
+          category: selectedCategory,
         );
   }
 
@@ -154,14 +158,13 @@ class _BookingFormState extends ConsumerState<BookingForm>
             FormHeader(onClose: _handleClose),
             gapH24,
             BookingTypeSelectorField(
-              selectedType: formState.selectedType,
+              selectedType: selectedType,
               onChanged: _handleBookingTypeChange,
             ),
             gapH24,
             DatePickerField(
-              selectedDate: formState.selectedDate,
+              selectedDate: selectedDate,
               onChanged: _handleDateChange,
-              validator: validateRequiredField,
             ),
             gapH24,
             CurrencyInputFieldFactory.chf(
@@ -170,18 +173,17 @@ class _BookingFormState extends ConsumerState<BookingForm>
               label: Strings.amount,
               placeholder: Strings.amountPlaceholder,
               enabled: !ref.watch(editBookingControllerProvider).isLoading,
-              validator: (value) => validateAmount(value ?? ''),
             ),
             gapH24,
             DescriptionField(
               controller: descriptionController,
-              validator: validateRequiredTextField,
             ),
             gapH24,
             CategorySelectorField(
-              categories: formState.availableCategories,
-              selectedCategory: formState.selectedCategory,
+              categories: availableCategories,
+              selectedCategory: selectedCategory,
               onChanged: _handleCategoryChange,
+              bookingType: selectedType,
             ),
             gapH32,
             FormActions(
