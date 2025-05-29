@@ -1,6 +1,7 @@
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keeley/src/common_widgets/app_bar.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/booking.dart';
@@ -10,13 +11,30 @@ import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/ed
 import 'package:keeley/src/utils/async_value_ui.dart';
 import 'package:keeley/src/common_widgets/shad_floating_action_button.dart';
 
-class BookingsScreen extends StatelessWidget {
+class BookingsScreen extends StatefulWidget {
   const BookingsScreen({super.key});
+
+  @override
+  State<BookingsScreen> createState() => _BookingsScreenState();
+}
+
+class _BookingsScreenState extends State<BookingsScreen> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text(Strings.bookings)),
+      extendBodyBehindAppBar: true,
+      appBar: ScrollableAppBar(
+        title: 'Buchungen',
+        scrollController: _scrollController,
+      ),
       body: Consumer(
         builder: (context, ref, child) {
           ref.listen<AsyncValue>(
@@ -25,6 +43,7 @@ class BookingsScreen extends StatelessWidget {
           );
           final bookingsQuery = ref.watch(bookingsQueryProvider);
           return FirestoreListView<Booking>(
+            controller: _scrollController,
             query: bookingsQuery,
             emptyBuilder: (context) => const Center(child: Text('No data')),
             errorBuilder: (context, error, stackTrace) => Center(
