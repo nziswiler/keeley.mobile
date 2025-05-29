@@ -6,6 +6,7 @@ import 'package:keeley/src/features/bookings/presentation/screens/bookings_scree
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/utils/format.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class BookingCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class BookingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
     final isIncome = booking.type == BookingType.income;
-    final formattedDate = DateFormat('d MMMM, yyyy').format(booking.date);
+    final formattedDate = Format.dateLocalized(booking.date);
 
     return ShadCard(
       key: Key('${Keys.bookingCard}-${booking.id}'),
@@ -79,7 +80,7 @@ class BookingCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          '${isIncome ? '+' : '-'} \$${booking.amount.toStringAsFixed(0)}',
+          '${isIncome ? '+' : '-'} ${Format.chf(booking.amount)}',
           style: theme.textTheme.small.copyWith(
             fontWeight: FontWeight.w600,
             color: amountColor,

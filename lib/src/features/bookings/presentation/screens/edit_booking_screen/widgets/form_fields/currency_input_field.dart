@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/utils/validation_utils.dart';
+import 'package:keeley/src/utils/format.dart';
 
 class CurrencyInputField extends StatelessWidget {
   const CurrencyInputField({
@@ -106,7 +107,7 @@ class CurrencyInputField extends StatelessWidget {
   }
 
   String _formatCurrency(double value) {
-    return '$currency ${value.toStringAsFixed(decimalPlaces)}';
+    return Format.chf(value, decimalPlaces: decimalPlaces);
   }
 }
 
