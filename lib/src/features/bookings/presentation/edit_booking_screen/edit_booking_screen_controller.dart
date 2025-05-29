@@ -2,6 +2,8 @@ import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/booking.dart';
 import 'package:keeley/src/features/bookings/domain/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/booking_category.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/common_widgets/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -19,7 +21,7 @@ class EditBookingScreenController extends _$EditBookingScreenController {
     required double? amount,
     required BookingType type,
     required String description,
-    String? category,
+    BookingCategory? category,
     Booking? existingBooking,
   }) async {
     final currentUser = ref.read(authRepositoryProvider).currentUser;
@@ -29,6 +31,18 @@ class EditBookingScreenController extends _$EditBookingScreenController {
 
     if (amount == null || amount <= 0) {
       throw ArgumentError('Amount must be greater than zero');
+    }
+
+    // Validate category based on booking type
+    if (type == BookingType.income) {
+      if (category != BookingCategory.salary &&
+          category != BookingCategory.other) {
+        throw ArgumentError(Strings.invalidCategoryForIncome);
+      }
+    } else if (type == BookingType.expense) {
+      if (category == BookingCategory.salary) {
+        throw ArgumentError(Strings.invalidCategoryForExpense);
+      }
     }
 
     final repository = ref.read(bookingRepositoryProvider);
@@ -46,6 +60,7 @@ class EditBookingScreenController extends _$EditBookingScreenController {
           amount: amount,
           date: date,
           type: type,
+          category: category,
           description: description,
         );
         await repository.updateBooking(
@@ -58,6 +73,7 @@ class EditBookingScreenController extends _$EditBookingScreenController {
           date: date,
           amount: amount,
           type: type,
+          category: category,
           description: description,
         );
       }

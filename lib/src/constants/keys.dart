@@ -30,4 +30,24 @@ class Keys {
   static const String dateField = 'dateField';
   static const String bookingTypeField = 'bookingTypeField';
   static const String categoryField = 'categoryField';
+
+  // Booking screen
+  static const String bookingsScreen = 'bookingsScreen';
+  static const String bookingCard = 'bookingCard';
+  static const String bookingIcon = 'bookingIcon';
+  static const String bookingSummaryCard = 'bookingSummaryCard';
+  static const String dismissibleBooking = 'dismissibleBooking';
+  static const String deleteBackground = 'deleteBackground';
+  static const String floatingActionButton = 'floatingActionButton';
+  static const String bookingsListView = 'bookingsListView';
+
+  // Booking category selector
+  static const String categorySelector = 'categorySelector';
+  static const String categoryOption = 'categoryOption';
+
+  // Modal and dialogs
+  static const String modalBottomSheet = 'modalBottomSheet';
+  static const String formModal = 'formModal';
+  static const String headerSection = 'headerSection';
+  static const String closeButton = 'closeButton';
 }

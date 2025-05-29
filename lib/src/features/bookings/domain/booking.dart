@@ -1,4 +1,5 @@
 import 'package:keeley/src/features/bookings/domain/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/booking_category.dart';
 import 'package:keeley/src/features/user_entity_base.dart';
 import 'package:keeley/src/utils/timestamp_converter.dart';
 
@@ -6,6 +7,7 @@ class Booking extends UserEntityBase {
   final double amount;
   final DateTime date;
   final BookingType type;
+  final BookingCategory? category;
   final String? description;
 
   Booking({
@@ -18,6 +20,7 @@ class Booking extends UserEntityBase {
     required this.amount,
     required this.date,
     required this.type,
+    this.category,
     this.description,
   }) {
     this.id = id;
@@ -41,6 +44,9 @@ class Booking extends UserEntityBase {
       amount: (map['amount'] as num).toDouble(),
       date: TimestampConverter.toDateTime(map['date']),
       type: BookingType.fromValue(map['type']),
+      category: map['category'] != null
+          ? BookingCategory.fromString(map['category'] as String)
+          : null,
       description: map['description'] as String?,
     );
   }
@@ -50,6 +56,7 @@ class Booking extends UserEntityBase {
       'amount': amount,
       'date': date.toTimestamp(), // Clean conversion
       'type': BookingType.fromValue(type.value).displayName,
+      'category': category?.displayName,
       'description': description,
       if (modifiedOn != null) 'updatedOn': modifiedOn!.toTimestamp(),
       if (modifiedBy != null) 'updatedBy': modifiedBy,
@@ -66,6 +73,7 @@ class Booking extends UserEntityBase {
     double? amount,
     DateTime? date,
     BookingType? type,
+    BookingCategory? category,
     String? description,
   }) {
     return Booking(
@@ -78,6 +86,7 @@ class Booking extends UserEntityBase {
       amount: amount ?? this.amount,
       date: date ?? this.date,
       type: type ?? this.type,
+      category: category ?? this.category,
       description: description ?? this.description,
     );
   }

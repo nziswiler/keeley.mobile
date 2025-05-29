@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/common_widgets/currency_input_field.dart';
+import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/form_fields/currency_input_field.dart';
 import 'package:keeley/src/common_widgets/loading_button.dart';
 import 'package:keeley/src/common_widgets/toggle_button_group.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/domain/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/booking_category.dart';
 import 'package:keeley/src/features/bookings/presentation/edit_booking_screen/edit_booking_screen_controller.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/alert_dialogs.dart';
@@ -25,18 +26,19 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
 
   BookingType selectedType = BookingType.income;
   DateTime selectedDate = DateTime.now();
-  String? selectedCategory;
+  BookingCategory? selectedCategory = BookingCategory.other;
 
   double get modalHeight => MediaQuery.of(context).size.height * 0.8;
 
-  // Categories
-  List<String> get categories => [
-        Strings.categoryRent,
-        Strings.categoryFood,
-        Strings.categoryTransport,
-        Strings.categoryLeisure,
-        Strings.categoryOther,
-      ];
+  List<BookingCategory> get categories {
+    if (selectedType == BookingType.income) {
+      return [BookingCategory.salary, BookingCategory.other];
+    } else {
+      return BookingCategory.values
+          .where((category) => category != BookingCategory.salary)
+          .toList();
+    }
+  }
 
   @override
   void initState() {
@@ -54,15 +56,19 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   }
 
   Future<void> handleSubmit() async {
+    final categoryError = validateCategory(selectedCategory);
+    if (categoryError != null) {
+      setState(() {});
+      return;
+    }
+
     final amount = double.tryParse(amountController.text);
     final description = descriptionController.text.trim();
-    final bookingType = selectedType;
-    final selectedDateFromForm = selectedDate;
 
     await ref.read(editBookingScreenControllerProvider.notifier).saveBooking(
-          date: selectedDateFromForm,
+          date: selectedDate,
           amount: amount,
-          type: bookingType,
+          type: selectedType,
           description: description,
           category: selectedCategory,
         );
@@ -89,6 +95,25 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
     if (value == null) {
       return Strings.requiredField;
     }
+    return null;
+  }
+
+  String? validateCategory(BookingCategory? category) {
+    if (category == null) {
+      return Strings.requiredField;
+    }
+
+    if (selectedType == BookingType.income) {
+      if (category != BookingCategory.salary &&
+          category != BookingCategory.other) {
+        return Strings.invalidCategoryForIncome;
+      }
+    } else if (selectedType == BookingType.expense) {
+      if (category == BookingCategory.salary) {
+        return Strings.invalidCategoryForExpense;
+      }
+    }
+
     return null;
   }
 
@@ -131,26 +156,31 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ShadTheme.of(context);
+
     return Container(
       height: modalHeight,
       decoration: BoxDecoration(
-        color: ShadTheme.of(context).colorScheme.background,
-        borderRadius: ShadTheme.of(context).radius,
+        color: theme.colorScheme.background,
+        borderRadius: theme.radius,
       ),
       child: SingleChildScrollView(
-        child: buildModalContent(context),
+        child: _buildModalContent(context, theme),
       ),
     );
   }
 
-  Widget buildModalContent(BuildContext context) {
+  Widget _buildModalContent(BuildContext context, ShadThemeData theme) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
-      child: buildForm(),
+      padding: const EdgeInsets.symmetric(
+        horizontal: Sizes.p24,
+        vertical: Sizes.p24,
+      ),
+      child: _buildForm(theme),
     );
   }
 
-  Widget buildForm() {
+  Widget _buildForm(ShadThemeData theme) {
     return ShadForm(
       key: formKey,
       child: ConstrainedBox(
@@ -184,16 +214,21 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
   }
 
   Widget buildHeader(BuildContext context) {
+    final theme = ShadTheme.of(context);
+
     return Row(
+      key: const Key(Keys.headerSection),
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          Strings.newBooking,
-          style: ShadTheme.of(context).textTheme.h3,
-        ),
+        Text(Strings.newBooking, style: theme.textTheme.h4),
         IconButton(
-          icon: const Icon(Icons.close),
+          key: const Key(Keys.closeButton),
+          icon: Icon(
+            Icons.close,
+            color: theme.colorScheme.mutedForeground,
+          ),
           onPressed: () => Navigator.of(context).pop(),
+          tooltip: Strings.closeDialog,
         ),
       ],
     );
@@ -217,13 +252,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
       ],
       groupValue: selectedType,
       onChanged: !bookingState.isLoading
-          ? (value) {
-              if (value != null) {
-                setState(() {
-                  selectedType = value;
-                });
-              }
-            }
+          ? (value) => _handleBookingTypeChange(value)
           : null,
       label: Strings.bookingType,
       id: Keys.bookingTypeField,
@@ -231,35 +260,50 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
     );
   }
 
+  void _handleBookingTypeChange(BookingType? value) {
+    if (value != null) {
+      setState(() {
+        selectedType = value;
+        // Reset category if it's no longer valid for the new booking type
+        if (!categories.contains(selectedCategory)) {
+          selectedCategory = value == BookingType.income
+              ? BookingCategory.salary
+              : BookingCategory.other;
+        }
+      });
+    }
+  }
+
   Widget buildDatePicker() {
     final bookingState = ref.watch(editBookingScreenControllerProvider);
 
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ShadDatePickerFormField(
-            id: Keys.dateField,
-            label: Text(Strings.date),
-            width: double.infinity,
-            placeholder: Text(Strings.selectDate),
-            initialValue: selectedDate,
-            enabled: !bookingState.isLoading,
-            onChanged: (date) {
-              if (date != null) {
-                setState(() {
-                  selectedDate = date;
-                });
-              }
-            },
-            validator: validateRequiredField,
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ShadDatePickerFormField(
+          id: Keys.dateField,
+          label: Text(Strings.date),
+          width: double.infinity,
+          placeholder: Text(Strings.selectDate),
+          initialValue: selectedDate,
+          enabled: !bookingState.isLoading,
+          onChanged: (date) => _handleDateChange(date),
+          validator: validateRequiredField,
+        ),
+      ],
     );
   }
 
+  void _handleDateChange(DateTime? date) {
+    if (date != null) {
+      setState(() {
+        selectedDate = date;
+      });
+    }
+  }
+
   Widget buildCategorySelector(BuildContext context) {
+    final theme = ShadTheme.of(context);
     final bookingState = ref.watch(editBookingScreenControllerProvider);
 
     return Column(
@@ -267,42 +311,52 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
       children: [
         Text(
           Strings.category,
-          style: ShadTheme.of(context).textTheme.small.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+          style: theme.textTheme.small.copyWith(fontWeight: FontWeight.w500),
         ),
         gapH8,
-        ShadSelect<String>(
-          placeholder: Text(Strings.selectCategory),
-          minWidth: double.infinity,
-          enabled: !bookingState.isLoading,
-          options: categories
-              .map(
-                (category) => ShadOption(
-                  value: category,
-                  child: Text(category),
-                ),
-              )
-              .toList(),
-          selectedOptionBuilder: (_, value) => Text(value),
-          onChanged: (value) {
-            setState(() => selectedCategory = value);
-          },
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ShadSelect<BookingCategory>(
+              placeholder: Text(Strings.selectCategory),
+              minWidth: double.infinity,
+              enabled: !bookingState.isLoading,
+              initialValue: categories.contains(selectedCategory)
+                  ? selectedCategory
+                  : null,
+              options: categories
+                  .map(
+                    (category) => ShadOption(
+                      key: Key('${Keys.categoryOption}_${category.name}'),
+                      value: category,
+                      child: Text(category.displayName),
+                    ),
+                  )
+                  .toList(),
+              selectedOptionBuilder: (_, value) => Text(value.displayName),
+              onChanged: (value) => _handleCategoryChange(value),
+            ),
+          ],
         ),
       ],
     );
+  }
+
+  void _handleCategoryChange(BookingCategory? value) {
+    setState(() => selectedCategory = value);
   }
 
   Widget buildDescriptionField() {
     final bookingState = ref.watch(editBookingScreenControllerProvider);
 
     return ShadInputFormField(
-        controller: descriptionController,
-        id: Keys.descriptionField,
-        label: Text(Strings.description),
-        placeholder: Text(Strings.descriptionPlaceholder),
-        enabled: !bookingState.isLoading,
-        validator: validateRequiredTextField);
+      controller: descriptionController,
+      id: Keys.descriptionField,
+      label: Text(Strings.description),
+      placeholder: Text(Strings.descriptionPlaceholder),
+      enabled: !bookingState.isLoading,
+      validator: validateRequiredTextField,
+    );
   }
 
   Widget buildFormButtons() {
@@ -336,18 +390,20 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
         });
 
         return LoadingButton(
-          key: Key(Keys.saveBookingButton),
-          onPressed: () async {
-            if (!formKey.currentState!.saveAndValidate()) {
-              return;
-            }
-            await handleSubmit();
-          },
+          key: const Key(Keys.saveBookingButton),
+          onPressed: () => _handleSubmitButtonPressed(),
           isLoading: bookingState.isLoading,
           child: Text(Strings.saveBooking),
         );
       },
     );
+  }
+
+  Future<void> _handleSubmitButtonPressed() async {
+    if (!formKey.currentState!.saveAndValidate()) {
+      return;
+    }
+    await handleSubmit();
   }
 
   Widget buildAmountField() {

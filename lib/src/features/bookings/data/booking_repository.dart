@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/bookings/domain/booking.dart';
 import 'package:keeley/src/features/bookings/domain/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/booking_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'booking_repository.g.dart';
@@ -20,12 +21,14 @@ class BookingRepository {
     required DateTime date,
     required double amount,
     required BookingType type,
+    BookingCategory? category,
     String? description,
   }) =>
       _firestore.collection(bookingsPath(userId)).add({
         'date': Timestamp.fromDate(date), // Convert DateTime to Timestamp
         'amount': amount,
         'type': type.value,
+        'category': category?.displayName,
         'description': description,
         'createdOn': FieldValue.serverTimestamp(),
         'createdBy': userId,

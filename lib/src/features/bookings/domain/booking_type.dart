@@ -1,3 +1,5 @@
+import 'package:keeley/src/constants/strings.dart';
+
 enum BookingType {
   income(0),
   expense(1);
@@ -19,9 +21,9 @@ enum BookingType {
   String get displayName {
     switch (this) {
       case BookingType.income:
-        return 'Income';
+        return Strings.income;
       case BookingType.expense:
-        return 'Expense';
+        return Strings.expense;
     }
   }
 }

@@ -35,6 +35,7 @@ class Strings {
   static const String password = 'Passwort';
   static const String emailPlaceholder = 'neil@nasa.com';
   static const String passwordPlaceholder = 'Passwort eingeben';
+  static const String chf = 'CHF';
 
   // Validation errors
   static const String requiredField = 'Pflichtfeld';
@@ -70,10 +71,11 @@ class Strings {
       'Buchung wurde erfolgreich gespeichert.';
 
   // Categories
-  static const String categoryRent = 'Miete';
-  static const String categoryFood = 'Essen';
+  static const String categoryHousing = 'Wohnen';
+  static const String categoryGroceries = 'Lebensmittel';
   static const String categoryTransport = 'Transport';
   static const String categoryLeisure = 'Freizeit';
+  static const String categorySalary = 'Gehalt';
   static const String categoryOther = 'Sonstiges';
 
   // Loading states
@@ -85,6 +87,24 @@ class Strings {
       'Negative Werte sind nicht erlaubt';
   static const String amountMustBeAtLeast = 'Betrag muss mindestens';
   static const String amountMustBeAtMost = 'Betrag darf höchstens';
+  static const String invalidCategoryForIncome =
+      'Für Einnahmen sind nur Gehalt oder Sonstiges erlaubt';
+  static const String invalidCategoryForExpense =
+      'Gehalt ist für Ausgaben nicht erlaubt';
+
+  // Bookings screen
+  static const String noBookingsFound = 'Keine Buchungen gefunden';
+  static const String deleteBooking = 'Buchung löschen';
+  static const String unnamedTransaction = 'Unbenannte Transaktion';
+  static const String confirmDelete = 'Löschen bestätigen';
+  static const String deleteBookingMessage =
+      'Sind Sie sicher, dass Sie diese Buchung löschen möchten?';
+
+  // Icons and accessibility
+  static const String bookingIcon = 'Buchungssymbol';
+  static const String incomeIcon = 'Einnahmensymbol';
+  static const String expenseIcon = 'Ausgabensymbol';
+  static const String closeDialog = 'Dialog schliessen';
 
   // Empty placeholder
   static const String add = 'Hinzufügen';
