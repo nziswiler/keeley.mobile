@@ -132,12 +132,6 @@ class Strings {
   static const String closeDialog = 'Dialog schliessen';
   static const String timeTrackingLogo = 'Time tracking logo';
 
-  // ====================
-  // ONBOARDING
-  // ====================
-  static const String onboardingTitle =
-      'Track your time.\nBecause time counts.';
-  static const String startTracking = 'Primary';
   static const String retryAction = 'Erneut versuchen';
 
   // ====================
