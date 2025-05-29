@@ -57,4 +57,31 @@ class Keys {
   static const String updateDisplayNameButton = 'updateDisplayNameButton';
   static const String signOutButton = 'signOutButton';
   static const String deleteAccountButton = 'deleteAccountButton';
+
+  // Analytics event names
+  static const String bookingCreatedEvent = 'booking_created';
+  static const String bookingUpdatedEvent = 'booking_updated';
+  static const String bookingDeletedEvent = 'booking_deleted';
+
+  // Analytics parameter keys
+  static const String userIdParam = 'user_id';
+  static const String bookingIdParam = 'booking_id';
+  static const String bookingTypeParam = 'booking_type';
+  static const String categoryParam = 'category';
+  static const String amountParam = 'amount';
+  static const String timestampParam = 'timestamp';
+
+  // Firestore field names
+  static const String typeField = 'type';
+  static const String createdOnField = 'createdOn';
+  static const String createdByField = 'createdBy';
+  static const String updatedOnField = 'updatedOn';
+  static const String updatedByField = 'updatedBy';
+
+  // Firestore collection paths
+  static const String usersCollection = 'users';
+  static const String bookingsCollection = 'bookings';
+
+  // Error messages
+  static const String userNullAssertion = 'User can\'t be null';
 }

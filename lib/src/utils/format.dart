@@ -1,5 +1,4 @@
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:intl/intl.dart';
 
 class Format {
   static String hours(double hours) {

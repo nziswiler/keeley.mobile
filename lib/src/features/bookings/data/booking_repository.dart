@@ -5,6 +5,7 @@ import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/bookings/domain/repositories/i_booking_repository.dart';
+import 'package:keeley/src/constants/keys.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'booking_repository.g.dart';
@@ -14,11 +15,12 @@ class BookingRepository implements IBookingRepository {
   final FirebaseFirestore _firestore;
 
   static String bookingPath(String userId, String bookingId) =>
-      'users/$userId/bookings/$bookingId';
-  static String bookingsPath(String userId) => 'users/$userId/bookings';
+      '${Keys.usersCollection}/$userId/${Keys.bookingsCollection}/$bookingId';
+  static String bookingsPath(String userId) =>
+      '${Keys.usersCollection}/$userId/${Keys.bookingsCollection}';
 
   @override
-  Future<void> addBooking({
+  Future<DocumentReference> addBooking({
     required String userId,
     required DateTime date,
     required double amount,
@@ -27,13 +29,13 @@ class BookingRepository implements IBookingRepository {
     String? description,
   }) =>
       _firestore.collection(bookingsPath(userId)).add({
-        'date': Timestamp.fromDate(date), // Convert DateTime to Timestamp
-        'amount': amount,
-        'type': type.value,
-        'category': category?.displayName,
-        'description': description,
-        'createdOn': FieldValue.serverTimestamp(),
-        'createdBy': userId,
+        Keys.dateField: Timestamp.fromDate(date),
+        Keys.amountField: amount,
+        Keys.typeField: type.value,
+        Keys.categoryField: category?.displayName,
+        Keys.descriptionField: description,
+        Keys.createdOnField: FieldValue.serverTimestamp(),
+        Keys.createdByField: userId,
       });
 
   @override
@@ -43,8 +45,8 @@ class BookingRepository implements IBookingRepository {
   }) =>
       _firestore.doc(bookingPath(userId, booking.id)).update({
         ...booking.toMap(),
-        'updatedOn': FieldValue.serverTimestamp(),
-        'updatedBy': userId,
+        Keys.updatedOnField: FieldValue.serverTimestamp(),
+        Keys.updatedByField: userId,
       });
 
   @override
@@ -87,7 +89,7 @@ BookingRepository bookingRepository(Ref ref) {
 Query<Booking> bookingsQuery(Ref ref) {
   final user = ref.watch(firebaseAuthProvider).currentUser;
   if (user == null) {
-    throw AssertionError('User can\'t be null');
+    throw AssertionError(Keys.userNullAssertion);
   }
   final repository = ref.watch(bookingRepositoryProvider);
   return repository.queryBookings(userId: user.uid);

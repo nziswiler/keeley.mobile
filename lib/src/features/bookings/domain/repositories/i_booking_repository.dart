@@ -4,7 +4,7 @@ import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 
 abstract class IBookingRepository {
-  Future<void> addBooking({
+  Future<DocumentReference> addBooking({
     required String userId,
     required DateTime date,
     required double amount,
