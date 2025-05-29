@@ -29,8 +29,13 @@ class MyApp extends ConsumerWidget {
       ),
       themeMode: ThemeMode.light,
       appBuilder: (context) {
+        final shadTheme = ShadTheme.of(context);
         return MaterialApp.router(
           routerConfig: goRouter,
+          theme: ThemeData(
+            scaffoldBackgroundColor: shadTheme.colorScheme.muted,
+            canvasColor: shadTheme.colorScheme.muted,
+          ),
           builder: (context, child) {
             return ShadAppBuilder(
               child: AppStartupWidget(
