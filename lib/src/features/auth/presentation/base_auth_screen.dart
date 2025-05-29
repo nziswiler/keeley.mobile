@@ -45,7 +45,6 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
 
   Future<void> handleSubmit();
   String get submitButtonText;
-  String get submitLoadingText;
   String get authFailedTitle;
   List<Widget> buildFormFields();
 

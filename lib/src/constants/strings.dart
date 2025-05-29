@@ -15,7 +15,6 @@ class Strings {
   static const String signInWithEmailPassword =
       'Anmelden mit E-Mail und Passwort';
   static const String signInFailed = 'Anmelden fehlgeschlagen';
-  static const String signInLoading = 'Anmelden...';
   static const String validationFailedMessage = 'Validierung fehlgeschlagen';
 
   // Sign Up Page
@@ -23,7 +22,6 @@ class Strings {
   static const String signUpWithEmailPassword =
       'Registrieren mit E-Mail und Passwort';
   static const String signUpFailed = 'Registrierung fehlgeschlagen';
-  static const String signUpLoading = 'Registrieren...';
   static const String confirmPassword = 'Passwort bestätigen';
   static const String confirmPasswordPlaceholder = 'Passwort erneut eingeben';
   static const String passwordsDoNotMatch = 'Passwörter stimmen nicht überein';
@@ -35,7 +33,6 @@ class Strings {
   static const String password = 'Passwort';
   static const String emailPlaceholder = 'neil@nasa.com';
   static const String passwordPlaceholder = 'Passwort eingeben';
-  static const String chf = 'CHF';
 
   // Validation errors
   static const String requiredField = 'Pflichtfeld';
@@ -55,9 +52,9 @@ class Strings {
   static const String newBooking = 'Neue Buchung';
   static const String editBooking = 'Buchung bearbeiten';
   static const String saveBooking = 'Speichern';
-  static const String savingBooking = 'Speichern...';
   static const String amount = 'Betrag';
   static const String amountPlaceholder = '100.50';
+  static const String chf = 'CHF';
   static const String description = 'Beschreibung';
   static const String descriptionPlaceholder = 'Beschreibung der Buchung';
   static const String date = 'Datum';
@@ -86,8 +83,8 @@ class Strings {
   static const String invalidAmount = 'Ungültiger Betrag';
   static const String negativeValuesNotAllowed =
       'Negative Werte sind nicht erlaubt';
-  static const String amountMustBeAtLeast = 'Betrag muss mindestens';
-  static const String amountMustBeAtMost = 'Betrag darf höchstens';
+  static const String amountMustBeAtLeast = 'Betrag muss mindestens {0} sein';
+  static const String amountMustBeAtMost = 'Betrag darf höchstens {0} sein';
   static const String invalidCategoryForIncome =
       'Für Einnahmen sind nur Gehalt oder Sonstiges erlaubt';
   static const String invalidCategoryForExpense =
@@ -109,4 +106,19 @@ class Strings {
 
   // Empty placeholder
   static const String add = 'Hinzufügen';
+
+  // Profile screen
+  static const String profile = 'Profil';
+  static const String profileSettings = 'Mein Profil';
+  static const String displayName = 'Name';
+  static const String displayNamePlaceholder = 'Neil';
+  static const String updateDisplayName = 'Speichern';
+  static const String updateDisplayNameFailed = 'Aktualisierung fehlgeschlagen';
+  static const String updateDisplayNameSuccess =
+      'Anzeigename erfolgreich aktualisiert';
+  static const String deleteAccount = 'Konto löschen';
+  static const String deleteAccountConfirmation = 'Konto löschen bestätigen';
+  static const String deleteAccountMessage =
+      'Bist du sicher, dass du dein Konto löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.';
+  static const String actions = 'Aktionen';
 }

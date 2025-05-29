@@ -7,7 +7,7 @@ part of 'edit_booking_controller.dart';
 // **************************************************************************
 
 String _$editBookingControllerHash() =>
-    r'b08876e768be26e74706d7c5f4bad606df18c5bd';
+    r'3861e1696990ee494431069b1aaee1c9c002cbcd';
 
 /// See also [EditBookingController].
 @ProviderFor(EditBookingController)

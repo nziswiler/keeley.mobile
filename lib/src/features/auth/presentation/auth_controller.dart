@@ -48,4 +48,26 @@ class AuthController extends _$AuthController {
       state = LoadingState.error(e);
     }
   }
+
+  Future<void> updateDisplayName(String displayName) async {
+    state = LoadingState.loading();
+    try {
+      final authRepository = ref.watch(authRepositoryProvider);
+      await authRepository.updateDisplayName(displayName: displayName);
+      state = LoadingState.success(null);
+    } on Exception catch (e) {
+      state = LoadingState.error(e);
+    }
+  }
+
+  Future<void> deleteUser() async {
+    state = LoadingState.loading();
+    try {
+      final authRepository = ref.watch(authRepositoryProvider);
+      await authRepository.deleteUser();
+      state = LoadingState.success(null);
+    } on Exception catch (e) {
+      state = LoadingState.error(e);
+    }
+  }
 }

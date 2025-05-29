@@ -46,9 +46,6 @@ class _CustomSignUpScreenState extends BaseAuthScreenState<CustomSignUpScreen> {
   String get submitButtonText => Strings.signUp;
 
   @override
-  String get submitLoadingText => Strings.signUpLoading;
-
-  @override
   String get authFailedTitle => Strings.signUpFailed;
 
   @override

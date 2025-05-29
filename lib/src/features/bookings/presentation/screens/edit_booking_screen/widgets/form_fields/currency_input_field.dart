@@ -96,11 +96,13 @@ class CurrencyInputField extends StatelessWidget {
     }
 
     if (minValue != null && amount < minValue!) {
-      return '${Strings.amountMustBeAtLeast} ${_formatCurrency(minValue!)} sein';
+      return Strings.amountMustBeAtLeast
+          .replaceAll('{0}', _formatCurrency(minValue!));
     }
 
     if (maxValue != null && amount > maxValue!) {
-      return '${Strings.amountMustBeAtMost} ${_formatCurrency(maxValue!)} sein';
+      return Strings.amountMustBeAtMost
+          .replaceAll('{0}', _formatCurrency(maxValue!));
     }
 
     return null;

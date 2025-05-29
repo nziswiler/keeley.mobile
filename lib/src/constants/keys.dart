@@ -51,4 +51,10 @@ class Keys {
   static const String formModal = 'formModal';
   static const String headerSection = 'headerSection';
   static const String closeButton = 'closeButton';
+
+  // Profile screen
+  static const String displayNameField = 'displayNameField';
+  static const String updateDisplayNameButton = 'updateDisplayNameButton';
+  static const String signOutButton = 'signOutButton';
+  static const String deleteAccountButton = 'deleteAccountButton';
 }

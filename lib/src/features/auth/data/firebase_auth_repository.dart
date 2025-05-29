@@ -34,6 +34,23 @@ class AuthRepository {
   Future<void> signOut() {
     return _auth.signOut();
   }
+
+  Future<void> updateDisplayName({required String displayName}) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw Exception('Kein Benutzer angemeldet');
+    }
+    await user.updateDisplayName(displayName);
+    await user.reload();
+  }
+
+  Future<void> deleteUser() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw Exception('Kein Benutzer angemeldet');
+    }
+    await user.delete();
+  }
 }
 
 @Riverpod(keepAlive: true)
