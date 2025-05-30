@@ -7,12 +7,12 @@ part of 'dashboard_screen_controller.dart';
 // **************************************************************************
 
 String _$dashboardScreenControllerHash() =>
-    r'3cdf738be3b95b990f5a952c10f9addb99e01ea2';
+    r'670d484b0312260ac81d4efbb494694ff763eae9';
 
 /// See also [DashboardScreenController].
 @ProviderFor(DashboardScreenController)
-final dashboardScreenControllerProvider =
-    AutoDisposeAsyncNotifierProvider<DashboardScreenController, void>.internal(
+final dashboardScreenControllerProvider = AutoDisposeNotifierProvider<
+    DashboardScreenController, DashboardState>.internal(
   DashboardScreenController.new,
   name: r'dashboardScreenControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final dashboardScreenControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$DashboardScreenController = AutoDisposeAsyncNotifier<void>;
+typedef _$DashboardScreenController = AutoDisposeNotifier<DashboardState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

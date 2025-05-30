@@ -12,7 +12,7 @@ class Keys {
   // ===================================
   // PROFILE KEYS
   // ===================================
-  static const String displayNameField = 'displayNameField';
+  static const String displayName = 'displayName';
   static const String updateDisplayNameButton = 'updateDisplayNameButton';
   static const String deleteAccountButton = 'deleteAccountButton';
 

@@ -31,4 +31,10 @@ abstract class IBookingRepository {
     required String userId,
     required String bookingId,
   });
+
+  Future<List<Booking>> getBookingsInDateRange({
+    required String userId,
+    required DateTime startDate,
+    required DateTime endDate,
+  });
 }

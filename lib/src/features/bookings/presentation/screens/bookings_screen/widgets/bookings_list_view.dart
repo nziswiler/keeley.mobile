@@ -1,13 +1,13 @@
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keeley/src/common/widgets/empty_state_card.dart';
+import 'package:keeley/src/common/widgets/error_card.dart';
+import 'package:keeley/src/common/widgets/loading_card.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/dismissible_booking_item.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/empty_state_widget.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/error_state_widget.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/loading_state_widget.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
 class BookingsListView extends ConsumerWidget {
@@ -31,10 +31,18 @@ class BookingsListView extends ConsumerWidget {
         right: Sizes.p16,
       ),
       query: bookingsQuery,
-      emptyBuilder: (context) => const EmptyStateWidget(),
-      errorBuilder: (context, error, stackTrace) =>
-          ErrorStateWidget(error: error),
-      loadingBuilder: (context) => const LoadingStateWidget(),
+      emptyBuilder: (context) => const EmptyStateCard(
+        icon: Icons.account_balance_wallet_outlined,
+        emptyTitle: 'Keine Buchungen vorhanden',
+        emptyMessage: 'Erstellen Sie Ihre erste Buchung.',
+      ),
+      errorBuilder: (context, error, stackTrace) => ErrorCard(
+        error: error,
+        errorTitle: 'Fehler beim Laden der Buchungen',
+      ),
+      loadingBuilder: (context) => const LoadingCard(
+        loadingText: 'Lade Buchungen...',
+      ),
       itemBuilder: (context, snapshot) {
         final booking = snapshot.data();
         return Padding(

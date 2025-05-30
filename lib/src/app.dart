@@ -19,6 +19,7 @@ class MyApp extends ConsumerWidget {
         sonnerTheme: const ShadSonnerTheme(
           alignment: Alignment.topCenter,
         ),
+        cardTheme: const ShadCardTheme(padding: EdgeInsets.all(16)),
       ),
       darkTheme: ShadThemeData(
         brightness: Brightness.dark,
@@ -26,6 +27,7 @@ class MyApp extends ConsumerWidget {
         sonnerTheme: const ShadSonnerTheme(
           alignment: Alignment.topCenter,
         ),
+        cardTheme: const ShadCardTheme(padding: EdgeInsets.all(16)),
       ),
       themeMode: ThemeMode.light,
       appBuilder: (context) {

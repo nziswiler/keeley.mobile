@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/common/widgets/loading_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/auth/presentation/auth_controller.dart';
+import 'package:keeley/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/toasts.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';

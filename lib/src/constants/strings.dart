@@ -114,7 +114,7 @@ class Strings {
   // PROFILE
   // ====================
   static const String profileSettings = 'Mein Profil';
-  static const String displayName = 'Name';
+  static const String displayName = 'Wie darf Keeley dich nennen?';
   static const String displayNamePlaceholder = 'Neil';
   static const String updateDisplayName = 'Speichern';
   static const String updateDisplayNameFailed = 'Aktualisierung fehlgeschlagen';

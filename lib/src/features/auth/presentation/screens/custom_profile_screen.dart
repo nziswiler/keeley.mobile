@@ -5,7 +5,7 @@ import 'package:keeley/src/common/widgets/loading_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
-import 'package:keeley/src/features/auth/presentation/auth_controller.dart';
+import 'package:keeley/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/dialogs.dart';
 import 'package:keeley/src/utils/toasts.dart';
@@ -35,7 +35,6 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    // Initialize display name from current user
     final user = ref.read(authRepositoryProvider).currentUser;
     if (_displayNameController.text.isEmpty) {
       _displayNameController.text = user?.displayName ?? '';
@@ -183,9 +182,8 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
               ),
               gapH16,
               ShadInputFormField(
-                key: Key(Keys.displayNameField),
                 controller: _displayNameController,
-                id: 'displayName',
+                id: Keys.displayName,
                 label: Text(Strings.displayName),
                 placeholder: Text(Strings.displayNamePlaceholder),
                 enabled: !authState.isLoading,
