@@ -53,12 +53,14 @@ class BookingRepository implements IBookingRepository {
       _firestore.doc(bookingPath(userId, id)).delete();
 
   @override
-  Query<Booking> queryBookings({required String userId}) =>
-      _firestore.collection(bookingsPath(userId)).withConverter(
-            fromFirestore: (snapshot, _) =>
-                Booking.fromMap(snapshot.data()!, snapshot.id),
-            toFirestore: (booking, _) => booking.toMap(),
-          );
+  Query<Booking> queryBookings({required String userId}) => _firestore
+      .collection(bookingsPath(userId))
+      .orderBy('date', descending: true)
+      .withConverter(
+        fromFirestore: (snapshot, _) =>
+            Booking.fromMap(snapshot.data()!, snapshot.id),
+        toFirestore: (booking, _) => booking.toMap(),
+      );
 
   @override
   Future<List<Booking>> fetchBookings({required String userId}) async {
@@ -88,6 +90,7 @@ class BookingRepository implements IBookingRepository {
         .collection(bookingsPath(userId))
         .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
         .where('date', isLessThanOrEqualTo: Timestamp.fromDate(endDate))
+        .orderBy('date', descending: true)
         .get();
 
     return snapshot.docs
