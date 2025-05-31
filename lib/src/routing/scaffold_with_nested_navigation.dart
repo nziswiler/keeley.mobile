@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:keeley/src/constants/keys.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 // Stateful navigation based on:
@@ -9,7 +11,7 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   const ScaffoldWithNestedNavigation({
     Key? key,
     required this.navigationShell,
-  }) : super(key: key ?? const ValueKey('ScaffoldWithNestedNavigation'));
+  }) : super(key: key ?? const ValueKey(Keys.scaffoldWithNestedNavigation));
   final StatefulNavigationShell navigationShell;
 
   void _goBranch(int index) {
@@ -87,7 +89,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
                 Icons.house,
                 color: colorScheme.primary,
               ),
-              label: 'Dashboard',
+              label: Strings.dashboard,
             ),
             NavigationDestination(
               icon: Icon(
@@ -100,7 +102,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
                 Icons.list,
                 color: colorScheme.primary,
               ),
-              label: 'Buchungen',
+              label: Strings.bookings,
             ),
             NavigationDestination(
               icon: Icon(
@@ -113,7 +115,7 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
                 Icons.person,
                 color: colorScheme.primary,
               ),
-              label: 'Profil',
+              label: Strings.profile,
             ),
           ],
           onDestinationSelected: onDestinationSelected,
@@ -181,17 +183,17 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
                 NavigationRailDestination(
                   icon: const Icon(Icons.house_outlined),
                   selectedIcon: const Icon(Icons.house),
-                  label: const Text('Dashboard'),
+                  label: Text(Strings.dashboard),
                 ),
                 NavigationRailDestination(
                   icon: const Icon(Icons.list_outlined),
                   selectedIcon: const Icon(Icons.list),
-                  label: const Text('Buchungen'),
+                  label: Text(Strings.bookings),
                 ),
                 NavigationRailDestination(
                   icon: const Icon(Icons.person_outline),
                   selectedIcon: const Icon(Icons.person),
-                  label: const Text('Profil'),
+                  label: Text(Strings.profile),
                 ),
               ],
             ),

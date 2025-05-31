@@ -1,4 +1,6 @@
 import 'package:shadcn_ui/shadcn_ui.dart';
+import 'package:keeley/src/constants/strings.dart';
+
 
 class Format {
   static String hours(double hours) {
@@ -41,7 +43,7 @@ class Format {
         ? '$formattedInteger.$decimalPart'
         : formattedInteger;
 
-    return 'CHF $result';
+    return '${Strings.chf} $result';
   }
 
   static String dateLocalized(DateTime date) {

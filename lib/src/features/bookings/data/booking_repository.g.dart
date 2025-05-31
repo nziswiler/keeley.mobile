@@ -23,7 +23,7 @@ final bookingRepositoryProvider = Provider<BookingRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BookingRepositoryRef = ProviderRef<BookingRepository>;
-String _$bookingsQueryHash() => r'75e924509669432a2a911eb3c2a2725303591ccb';
+String _$bookingsQueryHash() => r'a10148ae3f198665cee5bd5a434a0a31d7a5be7b';
 
 /// See also [bookingsQuery].
 @ProviderFor(bookingsQuery)

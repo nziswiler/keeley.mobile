@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
@@ -54,12 +55,14 @@ class BookingRepository implements IBookingRepository {
       _firestore.doc(bookingPath(userId, id)).delete();
 
   @override
-  Query<Booking> queryBookings({required String userId}) =>
-      _firestore.collection(bookingsPath(userId)).withConverter(
-            fromFirestore: (snapshot, _) =>
-                Booking.fromMap(snapshot.data()!, snapshot.id),
-            toFirestore: (booking, _) => booking.toMap(),
-          );
+  Query<Booking> queryBookings({required String userId}) => _firestore
+      .collection(bookingsPath(userId))
+      .orderBy('date', descending: true)
+      .withConverter(
+        fromFirestore: (snapshot, _) =>
+            Booking.fromMap(snapshot.data()!, snapshot.id),
+        toFirestore: (booking, _) => booking.toMap(),
+      );
 
   @override
   Future<List<Booking>> fetchBookings({required String userId}) async {
@@ -78,6 +81,24 @@ class BookingRepository implements IBookingRepository {
     }
     return Booking.fromMap(doc.data()!, doc.id);
   }
+
+  @override
+  Future<List<Booking>> getBookingsInDateRange({
+    required String userId,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    final snapshot = await _firestore
+        .collection(bookingsPath(userId))
+        .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
+        .where('date', isLessThanOrEqualTo: Timestamp.fromDate(endDate))
+        .orderBy('date', descending: true)
+        .get();
+
+    return snapshot.docs
+        .map((doc) => Booking.fromMap(doc.data(), doc.id))
+        .toList();
+  }
 }
 
 @Riverpod(keepAlive: true)
@@ -89,7 +110,8 @@ BookingRepository bookingRepository(Ref ref) {
 Query<Booking> bookingsQuery(Ref ref) {
   final user = ref.watch(firebaseAuthProvider).currentUser;
   if (user == null) {
-    throw AssertionError(Keys.userNullAssertion);
+    throw UserNotAuthenticatedException();
+
   }
   final repository = ref.watch(bookingRepositoryProvider);
   return repository.queryBookings(userId: user.uid);

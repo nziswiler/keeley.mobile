@@ -41,7 +41,7 @@ class Booking extends UserEntityBase {
           ? TimestampConverter.toDateTime(map['updatedOn'])
           : null,
       modifiedBy: map['updatedBy'] as String?,
-      amount: (map['amount'] as num).toDouble(),
+      amount: (map['amount'] as num?)?.toDouble() ?? 0.0,
       date: TimestampConverter.toDateTime(map['date']),
       type: BookingType.fromValue(map['type']),
       category: map['category'] != null
