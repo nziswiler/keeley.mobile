@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/features/onboarding/data/onboarding_repository.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/routing/go_router_delegate_listener.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/utils/shared_preferences_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -10,12 +11,8 @@ part 'app_startup.g.dart';
 
 @Riverpod(keepAlive: true)
 Future<void> appStartup(Ref ref) async {
-  ref.onDispose(() {
-    ref.invalidate(onboardingRepositoryProvider);
-  });
-  Future.delayed(const Duration(milliseconds: 3000), () async {
-    await ref.watch(onboardingRepositoryProvider.future);
-  });
+  // Simplified startup - no onboarding needed
+  await ref.watch(sharedPreferencesProvider.future);
 }
 
 class AppStartupWidget extends ConsumerWidget {
@@ -71,7 +68,7 @@ class AppStartupErrorWidget extends StatelessWidget {
             gapH16,
             ShadButton(
               onPressed: onRetry,
-              child: const Text('Erneut versuchen'),
+              child: Text(Strings.retryAction),
             ),
           ],
         ),

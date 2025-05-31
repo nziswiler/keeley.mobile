@@ -1,4 +1,8 @@
-part of 'alert_dialogs.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 
 void showExceptionToast({
   required BuildContext context,
@@ -27,12 +31,31 @@ String _message(dynamic exception) {
 void showSuccessToast({
   required BuildContext context,
   String? description,
+  String? title,
+  Duration duration = const Duration(seconds: 3),
 }) {
+  final theme = ShadTheme.of(context);
   final sonner = ShadSonner.of(context);
+
   sonner.show(
     ShadToast(
-      title: Text("Yuuuhuu! Das hat funktioniert."),
+      title: Text(
+        title ?? "Yuuhuu! Das hat funktioniert.",
+      ),
       description: description != null ? Text(description) : null,
+      action: Container(
+        width: 32,
+        height: 32,
+        decoration: BoxDecoration(
+          color: (theme.colorScheme as KeeleyColorScheme).income,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(
+          Icons.check_rounded,
+          size: 18,
+          color: (theme.colorScheme as KeeleyColorScheme).incomeForeground,
+        ),
+      ),
     ),
   );
 }
