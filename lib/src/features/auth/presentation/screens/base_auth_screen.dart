@@ -148,7 +148,7 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
   }
 
   Widget buildLogo() {
-    return AuthLogoWidget(
+    return AuthLogo(
       size: logoSize,
       topMargin: logoTopMargin,
       bottomMargin: logoBottomMargin,

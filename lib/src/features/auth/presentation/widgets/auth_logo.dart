@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
-class AuthLogoWidget extends StatelessWidget {
-  const AuthLogoWidget({
+class AuthLogo extends StatelessWidget {
+  const AuthLogo({
     super.key,
     this.size = Sizes.p120,
     this.topMargin = Sizes.p180,

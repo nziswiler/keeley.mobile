@@ -4,8 +4,8 @@ import 'package:keeley/src/features/bookings/presentation/controllers/bookings_c
 import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/bookings_list_view.dart';
 import 'package:keeley/src/utils/async_value_ui.dart';
 
-class BookingsContentWidget extends ConsumerWidget {
-  const BookingsContentWidget({
+class BookingsContent extends ConsumerWidget {
+  const BookingsContent({
     super.key,
     required this.scrollController,
   });

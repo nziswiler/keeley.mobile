@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card/booking_amount.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card/booking_details.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_icon.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card/booking_details_widget.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/booking_card/booking_amount_widget.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -33,11 +33,11 @@ class BookingCard extends StatelessWidget {
             ),
             gapW12,
             Expanded(
-              child: BookingDetailsWidget(
+              child: BookingDetails(
                 booking: booking,
               ),
             ),
-            BookingAmountWidget(
+            BookingAmount(
               booking: booking,
             ),
           ],

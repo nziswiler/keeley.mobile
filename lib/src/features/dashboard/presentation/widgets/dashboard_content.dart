@@ -3,8 +3,8 @@ import 'package:keeley/src/features/dashboard/presentation/widgets/category_summ
 import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats_card.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
-class DashboardContentWidget extends StatelessWidget {
-  const DashboardContentWidget({super.key});
+class DashboardContent extends StatelessWidget {
+  const DashboardContent({super.key});
 
   @override
   Widget build(BuildContext context) {

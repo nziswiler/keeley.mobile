@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/greeting_widget.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/greeting.dart';
 
-class DashboardHeaderWidget extends StatelessWidget {
-  const DashboardHeaderWidget({
+class DashboardHeader extends StatelessWidget {
+  const DashboardHeader({
     super.key = const Key(Keys.dashboardHeader),
   });
 
@@ -24,7 +24,7 @@ class DashboardHeaderWidget extends StatelessWidget {
         Sizes.p16,
         Sizes.p32,
       ),
-      child: const GreetingWidget(),
+      child: const Greeting(),
     );
   }
 }

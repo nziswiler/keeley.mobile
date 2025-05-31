@@ -4,8 +4,8 @@ import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/format.dart';
 
-class NetBalanceCardWidget extends StatelessWidget {
-  const NetBalanceCardWidget({
+class NetBalanceCard extends StatelessWidget {
+  const NetBalanceCard({
     super.key,
     required this.netBalance,
   });

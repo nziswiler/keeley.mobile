@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
-class GreetingLoadingWidget extends StatelessWidget {
-  const GreetingLoadingWidget({super.key});
+class GreetingLoading extends StatelessWidget {
+  const GreetingLoading({super.key});
 
   @override
   Widget build(BuildContext context) {

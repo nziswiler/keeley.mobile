@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/features/dashboard/domain/objects/category_expense.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/category_summary/category_icon_widget.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/category_summary/category_icon.dart';
 import 'package:keeley/src/features/dashboard/presentation/widgets/category_summary/category_icon_utils.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/format.dart';
 
-class CategoryItemWidget extends StatelessWidget {
-  const CategoryItemWidget({
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({
     super.key,
     required this.categoryExpense,
     this.isLast = false,
@@ -32,7 +32,7 @@ class CategoryItemWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              CategoryIconWidget(icon: icon),
+              CategoryIcon(icon: icon),
               gapW12,
               Expanded(
                 child: Text(

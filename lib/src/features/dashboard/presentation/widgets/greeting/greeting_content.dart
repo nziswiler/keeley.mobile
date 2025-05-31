@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
-class GreetingContentWidget extends StatelessWidget {
-  const GreetingContentWidget({
+class GreetingContent extends StatelessWidget {
+  const GreetingContent({
     super.key,
     required this.greeting,
     required this.subtext,

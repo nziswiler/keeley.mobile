@@ -4,9 +4,9 @@ import 'package:keeley/src/common/widgets/empty_state_card.dart';
 import 'package:keeley/src/common/widgets/error_card.dart';
 import 'package:keeley/src/common/widgets/loading_card.dart';
 import 'package:keeley/src/constants/strings.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/category_summary/category_item.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/features/dashboard/application/dashboard_service.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/category_summary/category_item_widget.dart';
 
 class CategorySummaryCard extends ConsumerWidget {
   const CategorySummaryCard({super.key});
@@ -32,7 +32,7 @@ class CategorySummaryCard extends ConsumerWidget {
             children: categories
                 .asMap()
                 .entries
-                .map((entry) => CategoryItemWidget(
+                .map((entry) => CategoryItem(
                       categoryExpense: entry.value,
                       isLast: entry.key == categories.length - 1,
                     ))

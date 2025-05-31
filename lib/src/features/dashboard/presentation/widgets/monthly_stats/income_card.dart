@@ -4,8 +4,8 @@ import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/format.dart';
 
-class IncomeCardWidget extends StatelessWidget {
-  const IncomeCardWidget({
+class IncomeCard extends StatelessWidget {
+  const IncomeCard({
     super.key,
     required this.income,
   });

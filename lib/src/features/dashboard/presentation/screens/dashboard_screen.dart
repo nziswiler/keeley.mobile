@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/dashboard_content.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/constants/keys.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/dashboard_content_widget.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/dashboard_header_widget.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/dashboard_header.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key = const Key(Keys.dashboardScreen)});
@@ -27,8 +27,8 @@ class DashboardScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            DashboardHeaderWidget(),
-            DashboardContentWidget(),
+            DashboardHeader(),
+            DashboardContent(),
           ],
         ),
       ),

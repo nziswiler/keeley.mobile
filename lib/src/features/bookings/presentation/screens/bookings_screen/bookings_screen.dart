@@ -4,7 +4,7 @@ import 'package:keeley/src/common/widgets/app_bar.dart';
 import 'package:keeley/src/common/widgets/shad_floating_action_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/bookings_content_widget.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/bookings_content.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/edit_booking_screen.dart';
 
 class BookingsScreen extends ConsumerWidget {
@@ -21,7 +21,7 @@ class BookingsScreen extends ConsumerWidget {
         title: Strings.bookings,
         scrollController: scrollController,
       ),
-      body: BookingsContentWidget(scrollController: scrollController),
+      body: BookingsContent(scrollController: scrollController),
       floatingActionButton: ShadFloatingActionButton.add(
         key: const Key(Keys.floatingActionButton),
         onPressed: () => _showCreateBookingModal(context),

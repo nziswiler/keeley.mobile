@@ -5,9 +5,9 @@ import 'package:keeley/src/common/widgets/loading_card.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/dashboard/application/dashboard_service.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats/net_balance_card_widget.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats/income_card_widget.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats/expense_card_widget.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats/expense_card.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats/income_card.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats/net_balance_card.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
 class MonthlyStatsCard extends ConsumerWidget {
@@ -21,16 +21,16 @@ class MonthlyStatsCard extends ConsumerWidget {
       data: (stats) {
         return Column(
           children: [
-            NetBalanceCardWidget(netBalance: stats.netBalance),
+            NetBalanceCard(netBalance: stats.netBalance),
             gapH16,
             Row(
               children: [
                 Expanded(
-                  child: IncomeCardWidget(income: stats.income),
+                  child: IncomeCard(income: stats.income),
                 ),
                 gapW16,
                 Expanded(
-                  child: ExpenseCardWidget(expenses: stats.expenses),
+                  child: ExpenseCard(expenses: stats.expenses),
                 ),
               ],
             ),

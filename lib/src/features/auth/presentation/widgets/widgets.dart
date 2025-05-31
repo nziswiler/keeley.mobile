@@ -1,4 +1,4 @@
-export 'auth_logo_widget.dart';
+export 'auth_logo.dart';
 export 'form_fields/auth_email_field.dart';
 export 'form_fields/auth_password_field.dart';
 export 'form_fields/auth_confirm_password_field.dart';

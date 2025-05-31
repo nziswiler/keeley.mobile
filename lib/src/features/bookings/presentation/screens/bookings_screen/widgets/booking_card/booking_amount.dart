@@ -5,8 +5,8 @@ import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/format.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
-class BookingAmountWidget extends StatelessWidget {
-  const BookingAmountWidget({
+class BookingAmount extends StatelessWidget {
+  const BookingAmount({
     super.key,
     required this.booking,
   });
