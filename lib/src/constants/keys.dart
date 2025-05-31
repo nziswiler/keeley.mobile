@@ -66,4 +66,12 @@ class Keys {
 
   // Modal Keys
   static const String editBookingModal = 'edit_booking_modal';
+
+  // ===================================
+  // DASHBOARD KEYS
+  // ===================================
+  static const String dashboardScreen = 'dashboardScreen';
+  static const String dashboardHeader = 'dashboardHeader';
+  static const String monthlyStatsCard = 'monthlyStatsCard';
+  static const String categorySummaryCard = 'categorySummaryCard';
 }

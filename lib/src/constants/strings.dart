@@ -143,6 +143,42 @@ class Strings {
   static const String totalAmount = '1000 CHF';
   static const String recentBookingsTitle = 'Letzte Buchungen';
 
+  // Greetings by time
+  static const String morningGreeting = 'Guten Morgen, {0}! 😎';
+  static const String afternoonGreeting = 'Hey, {0}! 👋';
+  static const String eveningGreeting = 'Hi, {0}! ✨';
+  static const String nightGreeting = '{0}, noch wach? 🌜';
+
+  // Greeting subtexts by time
+  static const String morningSubtext = 'Zeit, die Welt zu erobern!';
+  static const String afternoonSubtext = 'Lass uns den Nachmittag rocken!';
+  static const String eveningSubtext =
+      'Noch Energie für ein paar kreative Ideen?';
+  static const String nightSubtext = 'Die besten Einfälle kommen oft spät!';
+
+  // Fallback greeting
+  static const String fallbackGreetingName = 'Fellow Hustler';
+  static const String fallbackGreeting = 'Hey Fellow Hustler! 👋';
+
+  // Monthly stats
+  static const String monthlyBalance = 'Monatssaldo';
+  static const String monthlyIncome = 'Einnahmen';
+  static const String monthlyExpenses = 'Ausgaben';
+
+  // Category summary
+  static const String categorySummaryTitle = 'Ausgaben nach Kategorien';
+  static const String noCategoriesTitle = 'Keine Ausgaben vorhanden';
+  static const String noCategoriesMessage =
+      'Bisher wurden keine Ausgaben in diesem Monat erfasst.';
+  static const String loadingCategories = 'Lade Kategorien...';
+  static const String loadingCategoriesError =
+      'Fehler beim Laden der Kategorien';
+
+  // Monthly stats additional strings
+  static const String loadingStats = 'Lade Statistiken...';
+  static const String statsLoadingError = 'Fehler beim Laden der Statistiken';
+  static const String monthlyOverview = 'Monatliche Übersicht';
+
   // ====================
   // AUTH NAVIGATION
   // ====================

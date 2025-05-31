@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/category_summary_card.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/monthly_stats_card.dart';
-import 'package:keeley/src/features/dashboard/presentation/widgets/greeting.dart';
-import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/constants/keys.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/dashboard_content_widget.dart';
+import 'package:keeley/src/features/dashboard/presentation/widgets/dashboard_header_widget.dart';
 
 class DashboardScreen extends ConsumerWidget {
-  const DashboardScreen({super.key});
+  const DashboardScreen({super.key = const Key(Keys.dashboardScreen)});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,20 +26,9 @@ class DashboardScreen extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Greeting(),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const MonthlyStatsCard(),
-                  gapH24,
-                  const CategorySummaryCard(),
-                  gapH16,
-                ],
-              ),
-            ),
+          children: const [
+            DashboardHeaderWidget(),
+            DashboardContentWidget(),
           ],
         ),
       ),
