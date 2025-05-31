@@ -26,7 +26,7 @@ final bookingValidationServiceProvider =
 // ignore: unused_element
 typedef BookingValidationServiceRef
     = AutoDisposeProviderRef<BookingValidationService>;
-String _$bookingServiceHash() => r'4d1c74bd63af00fa85ab2be2eb0fda0ba8f36389';
+String _$bookingServiceHash() => r'f8fe607d7104c69ac182764f13e016efffa3c515';
 
 /// See also [bookingService].
 @ProviderFor(bookingService)

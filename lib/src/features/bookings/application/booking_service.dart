@@ -1,3 +1,5 @@
+// booking_service.dart (updated)
+import 'package:keeley/src/features/logging/firebase_logging_service.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
@@ -7,6 +9,7 @@ import 'package:keeley/src/features/bookings/domain/services/i_booking_service.d
 import 'package:keeley/src/features/bookings/application/booking_validation_service.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'booking_service.g.dart';
@@ -16,11 +19,13 @@ class BookingService implements IBookingService {
     required this.bookingRepository,
     required this.validationService,
     required this.authRepository,
+    required this.loggingService,
   });
 
   final IBookingRepository bookingRepository;
   final BookingValidationService validationService;
   final AuthRepository authRepository;
+  final FirebaseLoggingService loggingService;
 
   @override
   Future<void> createBooking(CreateBookingDto createBookingDto) async {
@@ -28,7 +33,7 @@ class BookingService implements IBookingService {
     validationService.validateCreateCommand(createBookingDto);
 
     try {
-      await bookingRepository.addBooking(
+      final docRef = await bookingRepository.addBooking(
         userId: currentUser.uid,
         date: createBookingDto.date,
         amount: createBookingDto.amount,
@@ -36,9 +41,17 @@ class BookingService implements IBookingService {
         category: createBookingDto.category,
         description: createBookingDto.description,
       );
+
+      await loggingService.logBookingCreated(
+        userId: currentUser.uid,
+        bookingId: docRef.id,
+        bookingType: createBookingDto.type.value.toString(),
+        category: createBookingDto.category.displayName,
+        amount: createBookingDto.amount,
+      );
     } on Exception catch (e) {
       throw BookingOperationException(
-        'Failed to create booking',
+        Strings.failedToCreateBooking,
         e.toString(),
         e,
       );
@@ -58,8 +71,9 @@ class BookingService implements IBookingService {
 
       if (existingBooking == null) {
         throw BookingOperationException(
-          'Booking not found',
-          'Booking with ID ${updateBookingDto.bookingId} not found',
+          Strings.bookingNotFound,
+          Strings.bookingNotFoundMessage
+              .replaceAll('{0}', updateBookingDto.bookingId),
         );
       }
 
@@ -78,9 +92,17 @@ class BookingService implements IBookingService {
         userId: currentUser.uid,
         booking: updatedBooking,
       );
+
+      await loggingService.logBookingUpdated(
+        userId: currentUser.uid,
+        bookingId: updateBookingDto.bookingId,
+        bookingType: dto.type.value.toString(),
+        category: dto.category.displayName,
+        amount: dto.amount,
+      );
     } catch (e) {
       throw BookingOperationException(
-        'Failed to update booking',
+        Strings.failedToUpdateBooking,
         e.toString(),
       );
     }
@@ -95,9 +117,14 @@ class BookingService implements IBookingService {
         userId: currentUser.uid,
         id: bookingId,
       );
+
+      await loggingService.logBookingDeleted(
+        userId: currentUser.uid,
+        bookingId: bookingId,
+      );
     } on Exception catch (e) {
       throw BookingOperationException(
-        'Failed to delete booking',
+        Strings.failedToDeleteBooking,
         e.toString(),
         e,
       );
@@ -124,5 +151,6 @@ BookingService bookingService(ref) {
     bookingRepository: ref.read(bookingRepositoryProvider),
     validationService: ref.read(bookingValidationServiceProvider),
     authRepository: ref.read(authRepositoryProvider),
+    loggingService: ref.read(firebaseLoggingServiceProvider),
   );
 }

@@ -1,6 +1,7 @@
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/constants/strings.dart';
 
+
 class Format {
   static String hours(double hours) {
     final hoursNotNegative = hours < 0.0 ? 0.0 : hours;

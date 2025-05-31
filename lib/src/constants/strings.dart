@@ -130,6 +130,24 @@ class Strings {
       'Bist du sicher, dass du dein Konto löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.';
   static const String actions = 'Aktionen';
 
+  // Booking service errors and messages
+  static const String failedToCreateBooking =
+      'Buchung konnte nicht erstellt werden';
+  static const String failedToUpdateBooking =
+      'Buchung konnte nicht aktualisiert werden';
+  static const String failedToDeleteBooking =
+      'Buchung konnte nicht gelöscht werden';
+  static const String bookingNotFound = 'Buchung nicht gefunden';
+  static const String bookingNotFoundMessage =
+      'Buchung mit ID {0} wurde nicht gefunden';
+  static const String failedToLogBookingCreation =
+      'Buchungserstellung konnte nicht protokolliert werden: {0}';
+  static const String failedToLogBookingUpdate =
+      'Buchungsaktualisierung konnte nicht protokolliert werden: {0}';
+  static const String failedToLogBookingDeletion =
+      'Buchungslöschung konnte nicht protokolliert werden: {0}';
+  static const String defaultCategoryName = 'keine';
+
   // ====================
   // ACCESSIBILITY
   // ====================
