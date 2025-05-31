@@ -69,9 +69,6 @@ class Keys {
 
   // Profile screen
   static const String displayNameField = 'displayNameField';
-  static const String updateDisplayNameButton = 'updateDisplayNameButton';
-  static const String signOutButton = 'signOutButton';
-  static const String deleteAccountButton = 'deleteAccountButton';
 
   // Analytics event names
   static const String bookingCreatedEvent = 'booking_created';
