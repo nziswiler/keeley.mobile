@@ -86,14 +86,14 @@ class _EditBackground extends StatelessWidget {
           Icon(
             Icons.edit_outlined,
             color: theme.colorScheme.primaryForeground,
-            size: 24,
+            size: Sizes.p24,
           ),
           gapH4,
           Text(
             Strings.editBooking,
             style: theme.textTheme.muted.copyWith(
               color: theme.colorScheme.primaryForeground,
-              fontSize: 12,
+              fontSize: Sizes.p12,
             ),
           ),
         ],
@@ -112,7 +112,7 @@ class _DeleteBackground extends StatelessWidget {
     return Container(
       key: const Key(Keys.deleteBackground),
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary,
+        color: theme.colorScheme.destructive,
         borderRadius: BorderRadius.circular(Sizes.p12),
       ),
       alignment: Alignment.centerRight,
@@ -122,15 +122,15 @@ class _DeleteBackground extends StatelessWidget {
         children: [
           Icon(
             Icons.delete_outline,
-            color: theme.colorScheme.primaryForeground,
-            size: 24,
+            color: theme.colorScheme.destructiveForeground,
+            size: Sizes.p24,
           ),
           gapH4,
           Text(
             Strings.deleteBooking,
             style: theme.textTheme.muted.copyWith(
               color: theme.colorScheme.destructiveForeground,
-              fontSize: 12,
+              fontSize: Sizes.p12,
             ),
           ),
         ],

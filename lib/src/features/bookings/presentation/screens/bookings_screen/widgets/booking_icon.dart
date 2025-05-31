@@ -23,15 +23,15 @@ class BookingIcon extends StatelessWidget {
 
     return Container(
       key: Key('${Keys.bookingIcon}-${category?.name ?? 'default'}'),
-      width: 36,
-      height: 36,
+      width: Sizes.p32 + Sizes.p4, // 36
+      height: Sizes.p32 + Sizes.p4, // 36
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(Sizes.p8),
       ),
       child: Icon(
         icon,
-        size: 18,
+        size: Sizes.p16 + Sizes.p2, // 18
         color: theme.colorScheme.primaryForeground,
       ),
     );

@@ -82,6 +82,10 @@ class Strings {
   static const String saveBookingSuccess =
       'Buchung wurde erfolgreich gespeichert.';
   static const String noBookingsFound = 'Keine Buchungen gefunden';
+  static const String noBookingsTitle = 'Keine Buchungen vorhanden';
+  static const String noBookingsMessage = 'Erstellen Sie Ihre erste Buchung.';
+  static const String bookingsLoadingError = 'Fehler beim Laden der Buchungen';
+  static const String loadingBookings = 'Lade Buchungen...';
   static const String unnamedTransaction = 'Unbenannte Transaktion';
   static const String confirmDelete = 'Löschen bestätigen';
   static const String deleteBookingMessage =

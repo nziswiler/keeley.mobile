@@ -5,6 +5,7 @@ import 'package:keeley/src/common/widgets/empty_state_card.dart';
 import 'package:keeley/src/common/widgets/error_card.dart';
 import 'package:keeley/src/common/widgets/loading_card.dart';
 import 'package:keeley/src/constants/keys.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/dismissible_booking_item.dart';
@@ -33,15 +34,15 @@ class BookingsListView extends ConsumerWidget {
       query: bookingsQuery,
       emptyBuilder: (context) => const EmptyStateCard(
         icon: Icons.account_balance_wallet_outlined,
-        emptyTitle: 'Keine Buchungen vorhanden',
-        emptyMessage: 'Erstellen Sie Ihre erste Buchung.',
+        emptyTitle: Strings.noBookingsTitle,
+        emptyMessage: Strings.noBookingsMessage,
       ),
       errorBuilder: (context, error, stackTrace) => ErrorCard(
         error: error,
-        errorTitle: 'Fehler beim Laden der Buchungen',
+        errorTitle: Strings.bookingsLoadingError,
       ),
       loadingBuilder: (context) => const LoadingCard(
-        loadingText: 'Lade Buchungen...',
+        loadingText: Strings.loadingBookings,
       ),
       itemBuilder: (context, snapshot) {
         final booking = snapshot.data();

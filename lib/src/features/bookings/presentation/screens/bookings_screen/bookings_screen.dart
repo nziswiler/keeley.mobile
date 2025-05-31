@@ -4,55 +4,33 @@ import 'package:keeley/src/common/widgets/app_bar.dart';
 import 'package:keeley/src/common/widgets/shad_floating_action_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/bookings/presentation/controllers/bookings_controller.dart';
-import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/bookings_list_view.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/widgets/bookings_content_widget.dart';
 import 'package:keeley/src/features/bookings/presentation/screens/edit_booking_screen/edit_booking_screen.dart';
-import 'package:keeley/src/utils/async_value_ui.dart';
 
-class BookingsScreen extends StatefulWidget {
+class BookingsScreen extends ConsumerWidget {
   const BookingsScreen({super.key});
 
   @override
-  State<BookingsScreen> createState() => _BookingsScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final scrollController = ScrollController();
 
-class _BookingsScreenState extends State<BookingsScreen> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       key: const Key(Keys.bookingsScreen),
       extendBodyBehindAppBar: true,
       appBar: ScrollableAppBar(
         title: Strings.bookings,
-        scrollController: _scrollController,
+        scrollController: scrollController,
       ),
-      body: Consumer(
-        builder: (context, ref, child) {
-          ref.listen<AsyncValue>(
-            bookingsControllerProvider,
-            (_, state) => state.showExceptionToastOnError(context),
-          );
-
-          return BookingsListView(scrollController: _scrollController);
-        },
-      ),
+      body: BookingsContentWidget(scrollController: scrollController),
       floatingActionButton: ShadFloatingActionButton.add(
         key: const Key(Keys.floatingActionButton),
-        onPressed: _showCreateBookingModal,
+        onPressed: () => _showCreateBookingModal(context),
         tooltip: Strings.newBooking,
       ),
     );
   }
 
-  void _showCreateBookingModal() {
+  void _showCreateBookingModal(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,

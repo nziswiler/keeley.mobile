@@ -157,7 +157,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
         _handleSaveError(next.error!);
       }
 
-      if (next.isSuccess) {
+      if (next.hasValue && !next.isLoading) {
         _handleSaveSuccess();
       }
     });

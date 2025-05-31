@@ -2,7 +2,6 @@ import 'package:keeley/src/features/bookings/application/booking_service.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
-import 'package:keeley/src/common/widgets/loading_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'edit_booking_controller.g.dart';
@@ -10,31 +9,31 @@ part 'edit_booking_controller.g.dart';
 @riverpod
 class EditBookingController extends _$EditBookingController {
   @override
-  LoadingState<void> build() {
-    return LoadingState.initial();
+  FutureOr<void> build() {
+    // ok to leave this empty if the return type is FutureOr<void>
   }
 
   Future<void> createBooking(CreateBookingDto createBookingDto) async {
-    state = LoadingState.loading();
+    state = const AsyncLoading();
 
     try {
       final bookingService = ref.read(bookingServiceProvider);
       await bookingService.createBooking(createBookingDto);
-      state = LoadingState.success(null);
+      state = const AsyncData(null);
     } on Exception catch (e) {
-      state = LoadingState.error(e);
+      state = AsyncValue.error(e, StackTrace.current);
     }
   }
 
   Future<void> updateBooking(UpdateBookingDto updateBookingDto) async {
-    state = LoadingState.loading();
+    state = const AsyncLoading();
 
     try {
       final bookingService = ref.read(bookingServiceProvider);
       await bookingService.updateBooking(updateBookingDto);
-      state = LoadingState.success(null);
+      state = const AsyncData(null);
     } on Exception catch (e) {
-      state = LoadingState.error(e);
+      state = AsyncValue.error(e, StackTrace.current);
     }
   }
 
@@ -55,27 +54,13 @@ class EditBookingController extends _$EditBookingController {
     );
 
     if (existingBooking != null) {
-      final createDto = CreateBookingDto(
-        date: bookingDto.date,
-        amount: bookingDto.amount,
-        type: bookingDto.type,
-        description: bookingDto.description,
-        category: bookingDto.category,
-      );
       final updateDto = UpdateBookingDto(
         bookingId: existingBooking.id,
-        bookingDto: createDto,
+        bookingDto: bookingDto,
       );
       await updateBooking(updateDto);
     } else {
-      final createDto = CreateBookingDto(
-        date: bookingDto.date,
-        amount: bookingDto.amount,
-        type: bookingDto.type,
-        description: bookingDto.description,
-        category: bookingDto.category,
-      );
-      await createBooking(createDto);
+      await createBooking(bookingDto);
     }
   }
 }
