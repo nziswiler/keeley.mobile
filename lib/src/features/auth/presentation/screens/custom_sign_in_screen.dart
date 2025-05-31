@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:keeley/src/features/auth/presentation/screens/base_auth_screen.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/widgets.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
-import 'package:shadcn_ui/shadcn_ui.dart';
 
 class CustomSignInScreen extends BaseAuthScreen {
   const CustomSignInScreen({super.key});
@@ -48,12 +47,9 @@ class _CustomSignInScreenState extends BaseAuthScreenState<CustomSignInScreen> {
   }
 
   Widget buildNavigationLink() {
-    return Center(
-        child: ShadButton.link(
-      child: Text(Strings.noAccountYet),
-      onPressed: () {
-        context.go('/signUp');
-      },
-    ));
+    return AuthNavigationLink(
+      text: Strings.noAccountYet,
+      route: '/signUp',
+    );
   }
 }

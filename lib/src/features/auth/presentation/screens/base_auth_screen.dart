@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/common/widgets/loading_button.dart';
-import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/auth/presentation/controllers/auth_controller.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/widgets.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/toasts.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
@@ -18,12 +16,12 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
   late final TextEditingController passwordController;
   late final GlobalKey<ShadFormState> formKey;
 
-  double get logoSize => 120.0;
-  double get maxFormWidth => 400.0;
-  double get horizontalPadding => 24.0;
-  double get verticalOffset => -20.0;
-  double get logoTopMargin => 180.0;
-  double get logoBottomMargin => 48.0;
+  double get logoSize => Sizes.p120;
+  double get maxFormWidth => Sizes.p400;
+  double get horizontalPadding => Sizes.p24;
+  double get verticalOffset => -Sizes.p20;
+  double get logoTopMargin => Sizes.p180;
+  double get logoBottomMargin => Sizes.p48;
   String get logoAssetPath => 'assets/logo_min.svg';
 
   @override
@@ -126,9 +124,8 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
 
   Widget buildForm() {
     final formFields = buildFormFields();
-    final hasSubmitButton = formFields.any((widget) =>
-        widget is Consumer ||
-        (widget.key is Key && widget.key.toString().contains('Button')));
+    final hasSubmitButton =
+        formFields.any((widget) => widget is AuthSubmitButton);
 
     return ShadForm(
       key: formKey,
@@ -151,35 +148,17 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
   }
 
   Widget buildLogo() {
-    return Center(
-      child: Container(
-        width: logoSize,
-        height: logoSize,
-        margin: EdgeInsets.only(
-          top: logoTopMargin,
-          bottom: logoBottomMargin,
-        ),
-        child: SvgPicture.asset(
-          logoAssetPath,
-          width: logoSize,
-          height: logoSize,
-          fit: BoxFit.contain,
-        ),
-      ),
+    return AuthLogoWidget(
+      size: logoSize,
+      topMargin: logoTopMargin,
+      bottomMargin: logoBottomMargin,
+      assetPath: logoAssetPath,
     );
   }
 
   Widget buildEmailField() {
-    final authState = ref.watch(authControllerProvider);
-
-    return ShadInputFormField(
-      key: const Key(Keys.emailField),
+    return AuthEmailField(
       controller: emailController,
-      id: Keys.email,
-      label: const Text(Strings.email),
-      placeholder: const Text(Strings.emailPlaceholder),
-      keyboardType: TextInputType.emailAddress,
-      enabled: !authState.isLoading,
       validator: validateEmail,
     );
   }
@@ -189,17 +168,11 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
     String? id,
     Key? key,
   }) {
-    final authState = ref.watch(authControllerProvider);
-
-    return ShadInputFormField(
-      key: key ?? const Key(Keys.passwordField),
+    return AuthPasswordField(
       controller: passwordController,
-      id: id ?? Keys.password,
-      label: const Text(Strings.password),
-      placeholder: const Text(Strings.passwordPlaceholder),
-      obscureText: true,
-      enabled: !authState.isLoading,
       validator: validator ?? validatePassword,
+      id: id,
+      fieldKey: key,
     );
   }
 
@@ -207,44 +180,23 @@ abstract class BaseAuthScreenState<T extends BaseAuthScreen>
     required TextEditingController confirmPasswordController,
     required String? Function(String) validator,
   }) {
-    final authState = ref.watch(authControllerProvider);
-
-    return ShadInputFormField(
-      key: const Key(Keys.confirmPasswordField),
+    return AuthConfirmPasswordField(
       controller: confirmPasswordController,
-      id: Keys.confirmPassword,
-      label: const Text(Strings.confirmPassword),
-      placeholder: const Text(Strings.confirmPasswordPlaceholder),
-      obscureText: true,
-      enabled: !authState.isLoading,
       validator: validator,
     );
   }
 
   Widget buildSubmitButton() {
-    return Consumer(
-      builder: (context, ref, child) {
-        final authState = ref.watch(authControllerProvider);
-
-        // Listen for auth state changes
-        ref.listen(authControllerProvider, (previous, next) {
-          if (next.hasError) {
-            handleAuthError(next.error!);
-          }
-        });
-
-        return LoadingButton(
-          key: Key(getSubmitButtonKey()),
-          onPressed: () async {
-            if (!formKey.currentState!.saveAndValidate()) {
-              return;
-            }
-            await handleSubmit();
-          },
-          isLoading: authState.isLoading,
-          child: Text(submitButtonText),
-        );
+    return AuthSubmitButton(
+      buttonKey: getSubmitButtonKey(),
+      onPressed: () async {
+        if (!formKey.currentState!.saveAndValidate()) {
+          return;
+        }
+        await handleSubmit();
       },
+      onError: handleAuthError,
+      text: submitButtonText,
     );
   }
 

@@ -188,5 +188,5 @@ class Strings {
   // ====================
   static const String noAccountYet = 'Noch kein Konto? Jetzt registrieren';
   static const String alreadyHaveAccount =
-      'Hast du bereits ein Konto? Hier anmeldn';
+      'Hast du bereits ein Konto? Hier anmelden';
 }

@@ -56,13 +56,7 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
     final newDisplayName = _displayNameController.text.trim();
     final authController = ref.read(authControllerProvider.notifier);
 
-    try {
-      await authController.updateDisplayName(newDisplayName);
-
-      _handleUpdateSuccess();
-    } catch (e) {
-      _handleAuthError(e);
-    }
+    await authController.updateDisplayName(newDisplayName);
   }
 
   Future<void> _handleSignOut() async {
@@ -105,16 +99,24 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
     );
   }
 
-  void _handleUpdateSuccess() {
-    showSuccessToast(
-      context: context,
-      description: Strings.updateDisplayNameSuccess,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
+
+    // Listen for auth state changes to handle success/error
+    ref.listen(authControllerProvider, (previous, next) {
+      next.whenOrNull(
+        data: (_) {
+          showSuccessToast(
+            context: context,
+            description: Strings.updateDisplayNameSuccess,
+          );
+        },
+        error: (error, stackTrace) {
+          _handleAuthError(error);
+        },
+      );
+    });
 
     ref.listen(authStateChangesProvider, (previous, next) {
       final previousUser = previous?.value;
