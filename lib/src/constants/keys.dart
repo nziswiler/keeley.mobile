@@ -84,7 +84,11 @@ class Keys {
   static const String timestampParam = 'timestamp';
 
   // Firestore field names
-  static const String typeField = 'type';
+  static const String firestoreDateField = 'date';
+  static const String firestoreAmountField = 'amount';
+  static const String firestoreTypeField = 'type';
+  static const String firestoreCategoryField = 'category';
+  static const String firestoreDescriptionField = 'description';
   static const String createdOnField = 'createdOn';
   static const String createdByField = 'createdBy';
   static const String updatedOnField = 'updatedOn';

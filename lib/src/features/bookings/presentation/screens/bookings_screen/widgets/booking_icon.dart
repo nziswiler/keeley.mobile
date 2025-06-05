@@ -56,7 +56,6 @@ class BookingIcon extends StatelessWidget {
   }
 
   Color _getBackgroundColor(ShadThemeData theme) {
-    // Verwende Theme-Farben für konsistente Darstellung
     if (isIncome) {
       return (theme.colorScheme as KeeleyColorScheme).income;
     } else {

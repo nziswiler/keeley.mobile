@@ -2,6 +2,7 @@ import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/user_entity_base.dart';
 import 'package:keeley/src/utils/timestamp_converter.dart';
+import 'package:keeley/src/constants/keys.dart';
 
 class Booking extends UserEntityBase {
   final double amount;
@@ -34,32 +35,33 @@ class Booking extends UserEntityBase {
   factory Booking.fromMap(Map<String, dynamic> map, String documentId) {
     return Booking(
       id: documentId,
-      userId: map['createdBy'] as String,
-      createdOn: TimestampConverter.toDateTime(map['createdOn']),
-      createdBy: map['createdBy'] as String,
-      modifiedOn: map['updatedOn'] != null
-          ? TimestampConverter.toDateTime(map['updatedOn'])
+      userId: map[Keys.createdByField] as String,
+      createdOn: TimestampConverter.toDateTime(map[Keys.createdOnField]),
+      createdBy: map[Keys.createdByField] as String,
+      modifiedOn: map[Keys.updatedOnField] != null
+          ? TimestampConverter.toDateTime(map[Keys.updatedOnField])
           : null,
-      modifiedBy: map['updatedBy'] as String?,
-      amount: (map['amount'] as num?)?.toDouble() ?? 0.0,
-      date: TimestampConverter.toDateTime(map['date']),
-      type: BookingType.fromValue(map['type']),
-      category: map['category'] != null
-          ? BookingCategory.fromString(map['category'] as String)
+      modifiedBy: map[Keys.updatedByField] as String?,
+      amount: (map[Keys.firestoreAmountField] as num?)?.toDouble() ?? 0.0,
+      date: TimestampConverter.toDateTime(map[Keys.firestoreDateField]),
+      type: BookingType.fromValue(map[Keys.firestoreTypeField]),
+      category: map[Keys.firestoreCategoryField] != null
+          ? BookingCategory.fromString(
+              map[Keys.firestoreCategoryField] as String)
           : null,
-      description: map['description'] as String?,
+      description: map[Keys.firestoreDescriptionField] as String?,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'amount': amount,
-      'date': date.toTimestamp(),
-      'type': type.value,
-      'category': category?.displayName,
-      'description': description,
-      if (modifiedOn != null) 'updatedOn': modifiedOn!.toTimestamp(),
-      if (modifiedBy != null) 'updatedBy': modifiedBy,
+      Keys.firestoreAmountField: amount,
+      Keys.firestoreDateField: date.toTimestamp(),
+      Keys.firestoreTypeField: type.value,
+      Keys.firestoreCategoryField: category?.displayName,
+      Keys.firestoreDescriptionField: description,
+      if (modifiedOn != null) Keys.updatedOnField: modifiedOn!.toTimestamp(),
+      if (modifiedBy != null) Keys.updatedByField: modifiedBy,
     };
   }
 

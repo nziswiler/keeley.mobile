@@ -30,11 +30,11 @@ class BookingRepository implements IBookingRepository {
     String? description,
   }) =>
       _firestore.collection(bookingsPath(userId)).add({
-        Keys.dateField: Timestamp.fromDate(date),
-        Keys.amountField: amount,
-        Keys.typeField: type.value,
-        Keys.categoryField: category?.displayName,
-        Keys.descriptionField: description,
+        Keys.firestoreDateField: Timestamp.fromDate(date),
+        Keys.firestoreAmountField: amount,
+        Keys.firestoreTypeField: type.value,
+        Keys.firestoreCategoryField: category?.displayName,
+        Keys.firestoreDescriptionField: description,
         Keys.createdOnField: FieldValue.serverTimestamp(),
         Keys.createdByField: userId,
       });
@@ -57,7 +57,7 @@ class BookingRepository implements IBookingRepository {
   @override
   Query<Booking> queryBookings({required String userId}) => _firestore
       .collection(bookingsPath(userId))
-      .orderBy('date', descending: true)
+      .orderBy(Keys.firestoreDateField, descending: true)
       .withConverter(
         fromFirestore: (snapshot, _) =>
             Booking.fromMap(snapshot.data()!, snapshot.id),
@@ -90,9 +90,11 @@ class BookingRepository implements IBookingRepository {
   }) async {
     final snapshot = await _firestore
         .collection(bookingsPath(userId))
-        .where('date', isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
-        .where('date', isLessThanOrEqualTo: Timestamp.fromDate(endDate))
-        .orderBy('date', descending: true)
+        .where(Keys.firestoreDateField,
+            isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
+        .where(Keys.firestoreDateField,
+            isLessThanOrEqualTo: Timestamp.fromDate(endDate))
+        .orderBy(Keys.firestoreDateField, descending: true)
         .get();
 
     return snapshot.docs
@@ -111,7 +113,6 @@ Query<Booking> bookingsQuery(Ref ref) {
   final user = ref.watch(firebaseAuthProvider).currentUser;
   if (user == null) {
     throw UserNotAuthenticatedException();
-
   }
   final repository = ref.watch(bookingRepositoryProvider);
   return repository.queryBookings(userId: user.uid);
