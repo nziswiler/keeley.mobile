@@ -23,7 +23,12 @@ class KeeleyColorScheme extends ShadColorScheme {
     required super.input,
     required super.ring,
     required super.selection,
+    required this.income,
+    required this.incomeForeground,
   });
+
+  final Color income;
+  final Color incomeForeground;
 
   // Light Theme
   const KeeleyColorScheme.light()
@@ -48,6 +53,8 @@ class KeeleyColorScheme extends ShadColorScheme {
           input: const Color(0xFFE2E8F0), // 214.3 31.8% 91.4%
           ring: const Color(0xFFFF4265), // 349 100% 63%
           selection: const Color(0x33FF4265), // Primary mit Transparenz
+          income: const Color(0xFF16A34A), // Green-600 für Einnahmen
+          incomeForeground: const Color(0xFFFFFFFF), // Weiß auf Grün
         );
 
   // Dark Theme
@@ -73,6 +80,8 @@ class KeeleyColorScheme extends ShadColorScheme {
           input: const Color(0xFF718096), // 213.75 9.2% 34.12%
           ring: const Color(0xFFFF4265), // 349 100% 63%
           selection: const Color(0x33FF4265), // Primary mit Transparenz
+          income: const Color(0xFF22C55E), // Green-500 für Dark Mode
+          incomeForeground: const Color(0xFF000000), // Schwarz auf Grün
         );
 }
 
@@ -98,6 +107,10 @@ class Sizes {
   static const p32 = 32.0;
   static const p48 = 48.0;
   static const p64 = 64.0;
+  static const p96 = 96.0;
+  static const p120 = 120.0;
+  static const p180 = 180.0;
+  static const p400 = 400.0;
 }
 
 /// Constant gap widths
@@ -112,6 +125,7 @@ const gapW48 = SizedBox(width: Sizes.p48);
 const gapW64 = SizedBox(width: Sizes.p64);
 
 /// Constant gap heights
+const gapH2 = SizedBox(height: Sizes.p4);
 const gapH4 = SizedBox(height: Sizes.p4);
 const gapH8 = SizedBox(height: Sizes.p8);
 const gapH12 = SizedBox(height: Sizes.p12);
