@@ -32,6 +32,7 @@ class Keys {
   static const String editBackgroundText = 'edit_background_text';
   static const String deleteBackgroundIcon = 'delete_background_icon';
   static const String deleteBackgroundText = 'delete_background_text';
+  static const String receiptField = 'receipt_field';
 
   // ===================================
   // FORM KEYS

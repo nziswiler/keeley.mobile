@@ -67,12 +67,14 @@ class Strings {
   static const String bookingType = 'Buchungstyp';
   static const String income = 'Einnahme';
   static const String expense = 'Ausgabe';
+  static const String receipt = 'Beleg';
 
   // Placeholders
   static const String amountPlaceholder = '100.50';
   static const String descriptionPlaceholder = 'Beschreibung der Buchung';
   static const String selectDate = 'Datum auswählen';
   static const String selectCategory = 'Kategorie wählen';
+  static const String receiptPlaceholder = 'Beleg hochladen';
 
   // Currency
   static const String chf = 'CHF';

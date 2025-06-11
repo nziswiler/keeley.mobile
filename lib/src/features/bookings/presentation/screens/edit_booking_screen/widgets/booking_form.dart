@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
@@ -35,6 +36,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
   BookingType selectedType = BookingType.income;
   DateTime selectedDate = DateTime.now();
   BookingCategory? selectedCategory;
+  PlatformFile? selectedReceipt;
 
   @override
   void initState() {
@@ -43,7 +45,6 @@ class _BookingFormState extends ConsumerState<BookingForm> {
     descriptionController = TextEditingController();
     formKey = GlobalKey<ShadFormState>();
 
-    // Initialize with existing booking data if provided
     if (widget.booking != null) {
       final booking = widget.booking!;
       amountController.text = booking.amount.toString();
@@ -103,10 +104,17 @@ class _BookingFormState extends ConsumerState<BookingForm> {
     }
   }
 
-  Future<void> _handleSubmit() async {
-    if (!formKey.currentState!.saveAndValidate()) {
-      return;
+  Future<void> _pickReceipt() async {
+    final result = await FilePicker.platform.pickFiles(type: FileType.any);
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        selectedReceipt = result.files.first;
+      });
     }
+  }
+
+  Future<void> _handleSubmit() async {
+    if (!formKey.currentState!.saveAndValidate()) return;
 
     final categoryError =
         ValidationUtils.validateCategory(selectedCategory, selectedType);
@@ -151,15 +159,9 @@ class _BookingFormState extends ConsumerState<BookingForm> {
 
   @override
   Widget build(BuildContext context) {
-    // Listen for state changes to handle errors and success
     ref.listen(editBookingControllerProvider, (previous, next) {
-      if (next.hasError) {
-        _handleSaveError(next.error!);
-      }
-
-      if (next.hasValue && !next.isLoading) {
-        _handleSaveSuccess();
-      }
+      if (next.hasError) _handleSaveError(next.error!);
+      if (next.hasValue && !next.isLoading) _handleSaveSuccess();
     });
 
     return ShadForm(
@@ -201,6 +203,37 @@ class _BookingFormState extends ConsumerState<BookingForm> {
               selectedCategory: selectedCategory,
               onChanged: _handleCategoryChange,
               bookingType: selectedType,
+            ),
+            gapH24,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Text(
+                //   Strings.receipt,
+                //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                //         color: Theme.of(context).colorScheme.onSurface,
+                //         fontWeight: FontWeight.w500,
+                //         fontSize: 14,
+                //       ),
+                // ),
+                gapH8,
+                SizedBox(
+                  width: double.infinity,
+                  child: ShadButton.outline(
+                    onPressed: () async {
+                      final result = await FilePicker.platform
+                          .pickFiles(type: FileType.any);
+                      if (result != null && result.files.isNotEmpty) {
+                        setState(() {
+                          selectedReceipt = result.files.first;
+                        });
+                      }
+                    },
+                    child: Text(
+                        selectedReceipt?.name ?? Strings.receiptPlaceholder),
+                  ),
+                ),
+              ],
             ),
             gapH32,
             FormActions(

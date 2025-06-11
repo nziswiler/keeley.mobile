@@ -3,6 +3,7 @@ import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:keeley/src/features/dashboard/application/dashboard_service.dart';
 
 part 'edit_booking_controller.g.dart';
 
@@ -62,5 +63,7 @@ class EditBookingController extends _$EditBookingController {
     } else {
       await createBooking(bookingDto);
     }
+    ref.invalidate(monthlyStatsProvider);
+    ref.invalidate(categoryExpensesProvider);
   }
 }
