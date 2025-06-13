@@ -4,10 +4,12 @@ import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
+import 'package:keeley/src/features/bookings/domain/services/i_booking_validation_service.dart';
 
-class BookingValidationService {
+class BookingValidationService implements IBookingValidationService {
   const BookingValidationService();
 
+  @override
   void validateCreateCommand(CreateBookingDto createBookingDto) {
     final errors = <String>[];
 
@@ -23,6 +25,7 @@ class BookingValidationService {
     }
   }
 
+  @override
   void validateUpdateCommand(UpdateBookingDto updateBookingDto) {
     final errors = <String>[];
 

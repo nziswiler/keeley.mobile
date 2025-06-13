@@ -6,11 +6,11 @@ part of 'dashboard_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dashboardServiceHash() => r'fb83e69c7552911f94ea98b551155c0f3c4d32e2';
+String _$dashboardServiceHash() => r'571eebeaad34e9cb4f65968c63c5bb62b1de8b3d';
 
 /// See also [dashboardService].
 @ProviderFor(dashboardService)
-final dashboardServiceProvider = Provider<DashboardService>.internal(
+final dashboardServiceProvider = Provider<IDashboardService>.internal(
   dashboardService,
   name: r'dashboardServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,7 @@ final dashboardServiceProvider = Provider<DashboardService>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef DashboardServiceRef = ProviderRef<DashboardService>;
+typedef DashboardServiceRef = ProviderRef<IDashboardService>;
 String _$monthlyStatsHash() => r'5841bfdeab9d1ab85065f4086b76eff4f821e3df';
 
 /// Copied from Dart SDK

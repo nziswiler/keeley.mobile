@@ -1,12 +1,15 @@
 import 'package:keeley/src/common/logging/firebase_logging_service.dart';
+import 'package:keeley/src/common/logging/i_firebase_logging_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
+import 'package:keeley/src/features/auth/domain/repositories/i_auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
 import 'package:keeley/src/features/bookings/domain/exceptions/booking_operation_exception.dart';
 import 'package:keeley/src/features/bookings/domain/repositories/i_booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/services/i_booking_service.dart';
 import 'package:keeley/src/features/bookings/application/booking_validation_service.dart';
+import 'package:keeley/src/features/bookings/domain/services/i_booking_validation_service.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/constants/strings.dart';
@@ -23,9 +26,9 @@ class BookingService implements IBookingService {
   });
 
   final IBookingRepository bookingRepository;
-  final BookingValidationService validationService;
-  final AuthRepository authRepository;
-  final FirebaseLoggingService loggingService;
+  final IBookingValidationService validationService;
+  final IAuthRepository authRepository;
+  final IFirebaseLoggingService loggingService;
 
   @override
   Future<void> createBooking(CreateBookingDto createBookingDto) async {
@@ -141,12 +144,12 @@ class BookingService implements IBookingService {
 }
 
 @riverpod
-BookingValidationService bookingValidationService(ref) {
+IBookingValidationService bookingValidationService(ref) {
   return const BookingValidationService();
 }
 
 @riverpod
-BookingService bookingService(ref) {
+IBookingService bookingService(ref) {
   return BookingService(
     bookingRepository: ref.read(bookingRepositoryProvider),
     validationService: ref.read(bookingValidationServiceProvider),

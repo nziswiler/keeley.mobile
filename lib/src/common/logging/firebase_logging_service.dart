@@ -92,7 +92,7 @@ FirebaseAnalytics firebaseAnalytics(ref) {
 }
 
 @riverpod
-FirebaseLoggingService firebaseLoggingService(ref) {
+IFirebaseLoggingService firebaseLoggingService(ref) {
   return FirebaseLoggingService(
     analytics: ref.read(firebaseAnalyticsProvider),
   );

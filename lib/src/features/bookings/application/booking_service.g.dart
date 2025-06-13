@@ -7,12 +7,12 @@ part of 'booking_service.dart';
 // **************************************************************************
 
 String _$bookingValidationServiceHash() =>
-    r'932013161fccebaf097ec1e0f958d2819ac6c30a';
+    r'2491814fe5ed4f02a5fa1d110b9d9100027abdaf';
 
 /// See also [bookingValidationService].
 @ProviderFor(bookingValidationService)
 final bookingValidationServiceProvider =
-    AutoDisposeProvider<BookingValidationService>.internal(
+    AutoDisposeProvider<IBookingValidationService>.internal(
   bookingValidationService,
   name: r'bookingValidationServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -25,12 +25,12 @@ final bookingValidationServiceProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BookingValidationServiceRef
-    = AutoDisposeProviderRef<BookingValidationService>;
-String _$bookingServiceHash() => r'f8fe607d7104c69ac182764f13e016efffa3c515';
+    = AutoDisposeProviderRef<IBookingValidationService>;
+String _$bookingServiceHash() => r'1ce3d77756ae9a5d427eb6c93663aa5622ec6277';
 
 /// See also [bookingService].
 @ProviderFor(bookingService)
-final bookingServiceProvider = AutoDisposeProvider<BookingService>.internal(
+final bookingServiceProvider = AutoDisposeProvider<IBookingService>.internal(
   bookingService,
   name: r'bookingServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -42,6 +42,6 @@ final bookingServiceProvider = AutoDisposeProvider<BookingService>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef BookingServiceRef = AutoDisposeProviderRef<BookingService>;
+typedef BookingServiceRef = AutoDisposeProviderRef<IBookingService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

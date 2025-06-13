@@ -1,19 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/dashboard/domain/objects/category_expense.dart';
 import 'package:keeley/src/features/dashboard/domain/objects/monthly_stats.dart';
+import 'package:keeley/src/features/dashboard/domain/services/i_dashboard_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dashboard_service.g.dart';
 
-class DashboardService {
+class DashboardService implements IDashboardService {
   const DashboardService(this._bookingRepository);
   final BookingRepository _bookingRepository;
 
+  @override
   Future<MonthlyStats> getMonthlyStatsAsync({
     required String userId,
     required DateTime month,
@@ -45,6 +47,7 @@ class DashboardService {
     );
   }
 
+  @override
   Future<List<CategoryExpense>> getMonthlyExpensesByCategoryAsync(
     String userId,
     DateTime month,
@@ -89,7 +92,7 @@ class DashboardService {
 }
 
 @Riverpod(keepAlive: true)
-DashboardService dashboardService(Ref ref) {
+IDashboardService dashboardService(Ref ref) {
   return DashboardService(ref.watch(bookingRepositoryProvider));
 }
 
