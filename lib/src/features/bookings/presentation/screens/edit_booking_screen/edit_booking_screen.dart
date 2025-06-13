@@ -15,7 +15,7 @@ class EditBookingScreen extends ConsumerStatefulWidget {
 }
 
 class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
-  double get modalHeight => MediaQuery.of(context).size.height * 0.8;
+  double get modalHeight => MediaQuery.of(context).size.height * 0.95;
 
   @override
   Widget build(BuildContext context) {

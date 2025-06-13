@@ -4,10 +4,12 @@ import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
+import 'package:keeley/src/features/bookings/domain/services/i_booking_validation_service.dart';
 
-class BookingValidationService {
+class BookingValidationService implements IBookingValidationService {
   const BookingValidationService();
 
+  @override
   void validateCreateCommand(CreateBookingDto createBookingDto) {
     final errors = <String>[];
 
@@ -17,12 +19,13 @@ class BookingValidationService {
 
     if (errors.isNotEmpty) {
       throw BookingValidationException(
-        'Create booking validation failed',
+        Strings.bookingValidationFailed,
         errors,
       );
     }
   }
 
+  @override
   void validateUpdateCommand(UpdateBookingDto updateBookingDto) {
     final errors = <String>[];
 
@@ -34,7 +37,7 @@ class BookingValidationService {
 
     if (errors.isNotEmpty) {
       throw BookingValidationException(
-        'Update booking validation failed',
+        Strings.bookingValidationFailed,
         errors,
       );
     }
@@ -42,19 +45,19 @@ class BookingValidationService {
 
   void _validateAmount(double amount, List<String> errors) {
     if (amount <= 0) {
-      errors.add('Amount must be greater than zero');
+      errors.add(Strings.amountGreaterThanZero);
     }
   }
 
   void _validateDescription(String description, List<String> errors) {
     if (description.trim().isEmpty) {
-      errors.add('Description cannot be empty');
+      errors.add(Strings.descriptionCannotBeEmpty);
     }
   }
 
   void _validateBookingId(String bookingId, List<String> errors) {
     if (bookingId.trim().isEmpty) {
-      errors.add('Booking ID cannot be empty');
+      errors.add(Strings.bookingIdCannotBeEmpty);
     }
   }
 

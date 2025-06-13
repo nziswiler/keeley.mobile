@@ -20,7 +20,7 @@ class DashboardHeader extends StatelessWidget {
       ),
       padding: EdgeInsets.fromLTRB(
         Sizes.p16,
-        Sizes.p16,
+        Sizes.p32,
         Sizes.p16,
         Sizes.p32,
       ),

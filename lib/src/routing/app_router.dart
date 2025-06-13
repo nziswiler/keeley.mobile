@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/screens/custom_profile_screen.dart';
 import 'package:keeley/src/features/auth/presentation/screens/custom_sign_in_screen.dart';
 import 'package:keeley/src/features/auth/presentation/screens/custom_sign_up_screen.dart';

@@ -127,7 +127,6 @@ extension CurrencyInputFieldFactory on CurrencyInputField {
     void Function(String)? onChanged,
     AutovalidateMode? autovalidateMode,
   }) {
-    // Use default validator if none provided
     final actualValidator = validator ?? _defaultAmountValidator;
 
     return CurrencyInputField(

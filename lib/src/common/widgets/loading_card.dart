@@ -25,6 +25,7 @@ class LoadingCard extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
                 width: 32,
@@ -44,45 +45,6 @@ class LoadingCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({
-    super.key,
-    this.loadingText = 'Laden...',
-    this.size = 32,
-  });
-
-  final String loadingText;
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = ShadTheme.of(context);
-
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: size,
-            height: size,
-            child: CircularProgressIndicator(
-              color: theme.colorScheme.primary,
-              strokeWidth: 2,
-            ),
-          ),
-          gapH16,
-          Text(
-            loadingText,
-            style: theme.textTheme.muted.copyWith(
-              color: theme.colorScheme.mutedForeground,
-            ),
-          ),
-        ],
       ),
     );
   }

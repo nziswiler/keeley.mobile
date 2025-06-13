@@ -85,7 +85,6 @@ class KeeleyColorScheme extends ShadColorScheme {
         );
 }
 
-// Zusätzliche Chart-Farben basierend auf deinem CSS
 class KeeleyChartColors {
   static const Color chart1 = Color(0xFFFF4265); // --chart-1: #FF4265
   static const Color chart2 = Color(0xFFF76E87); // --chart-2: #F76E87

@@ -25,12 +25,12 @@ final firebaseAnalyticsProvider =
 // ignore: unused_element
 typedef FirebaseAnalyticsRef = AutoDisposeProviderRef<FirebaseAnalytics>;
 String _$firebaseLoggingServiceHash() =>
-    r'b3f5425356151bb2066d5d7679ce7181e920151d';
+    r'd7407f7a39bed04407d7ac26741a648ff7ac8975';
 
 /// See also [firebaseLoggingService].
 @ProviderFor(firebaseLoggingService)
 final firebaseLoggingServiceProvider =
-    AutoDisposeProvider<FirebaseLoggingService>.internal(
+    AutoDisposeProvider<IFirebaseLoggingService>.internal(
   firebaseLoggingService,
   name: r'firebaseLoggingServiceProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -43,6 +43,6 @@ final firebaseLoggingServiceProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirebaseLoggingServiceRef
-    = AutoDisposeProviderRef<FirebaseLoggingService>;
+    = AutoDisposeProviderRef<IFirebaseLoggingService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

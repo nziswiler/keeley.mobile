@@ -1,20 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/data/booking_repository.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:keeley/src/features/dashboard/domain/objects/category_expense.dart';
 import 'package:keeley/src/features/dashboard/domain/objects/monthly_stats.dart';
+import 'package:keeley/src/features/dashboard/domain/services/i_dashboard_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'dashboard_service.g.dart';
 
-class DashboardService {
+class DashboardService implements IDashboardService {
   const DashboardService(this._bookingRepository);
   final BookingRepository _bookingRepository;
 
-  Future<MonthlyStats> getMonthlyStats({
+  @override
+  Future<MonthlyStats> getMonthlyStatsAsync({
     required String userId,
     required DateTime month,
   }) async {
@@ -45,11 +47,11 @@ class DashboardService {
     );
   }
 
-  Future<List<CategoryExpense>> getCategoryExpenses({
-    required String userId,
-    required DateTime month,
-    int limit = 10,
-  }) async {
+  @override
+  Future<List<CategoryExpense>> getMonthlyExpensesByCategoryAsync(
+    String userId,
+    DateTime month,
+  ) async {
     final startOfMonth = DateTime(month.year, month.month, 1);
     final endOfMonth = DateTime(month.year, month.month + 1, 0, 23, 59, 59);
 
@@ -80,7 +82,7 @@ class DashboardService {
     final categoryExpenses = categoryMap.entries
         .map((entry) => CategoryExpense(
               category: entry.key,
-              amount: entry.value, // Show actual expense amounts
+              amount: entry.value,
             ))
         .toList()
       ..sort((a, b) => b.amount.compareTo(a.amount));
@@ -90,7 +92,7 @@ class DashboardService {
 }
 
 @Riverpod(keepAlive: true)
-DashboardService dashboardService(Ref ref) {
+IDashboardService dashboardService(Ref ref) {
   return DashboardService(ref.watch(bookingRepositoryProvider));
 }
 
@@ -103,19 +105,17 @@ Future<MonthlyStats> monthlyStats(Ref ref, {DateTime? month}) async {
 
   final service = ref.watch(dashboardServiceProvider);
   final targetMonth = month ?? DateTime.now();
-  return service.getMonthlyStats(userId: user.uid, month: targetMonth);
+  return service.getMonthlyStatsAsync(userId: user.uid, month: targetMonth);
 }
 
 @riverpod
-Future<List<CategoryExpense>> categoryExpenses(Ref ref,
-    {DateTime? month, int limit = 10}) async {
+Future<List<CategoryExpense>> categoryExpenses(Ref ref) async {
   final user = ref.watch(firebaseAuthProvider).currentUser;
   if (user == null) {
     throw UserNotAuthenticatedException();
   }
 
   final service = ref.watch(dashboardServiceProvider);
-  final targetMonth = month ?? DateTime.now();
-  return service.getCategoryExpenses(
-      userId: user.uid, month: targetMonth, limit: limit);
+  final currentMonth = DateTime.now();
+  return service.getMonthlyExpensesByCategoryAsync(user.uid, currentMonth);
 }

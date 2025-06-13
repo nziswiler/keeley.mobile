@@ -15,9 +15,11 @@ class BookingsListView extends ConsumerWidget {
   const BookingsListView({
     super.key,
     required this.scrollController,
+    required this.padding,
   });
 
   final ScrollController scrollController;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,23 +28,28 @@ class BookingsListView extends ConsumerWidget {
     return FirestoreListView<Booking>(
       key: const Key(Keys.bookingsListView),
       controller: scrollController,
-      padding: const EdgeInsets.only(
-        top: kToolbarHeight + Sizes.p16,
-        left: Sizes.p16,
-        right: Sizes.p16,
-      ),
+      padding: padding,
       query: bookingsQuery,
-      emptyBuilder: (context) => const EmptyStateCard(
-        icon: Icons.account_balance_wallet_outlined,
-        emptyTitle: Strings.noBookingsTitle,
-        emptyMessage: Strings.noBookingsMessage,
+      emptyBuilder: (context) => Padding(
+        padding: padding,
+        child: const EmptyStateCard(
+          icon: Icons.account_balance_wallet_outlined,
+          emptyTitle: Strings.noBookingsTitle,
+          emptyMessage: Strings.noBookingsMessage,
+        ),
       ),
-      errorBuilder: (context, error, stackTrace) => ErrorCard(
-        error: error,
-        errorTitle: Strings.bookingsLoadingError,
+      errorBuilder: (context, error, stackTrace) => Padding(
+        padding: padding,
+        child: ErrorCard(
+          error: error,
+          errorTitle: Strings.bookingsLoadingError,
+        ),
       ),
-      loadingBuilder: (context) => const LoadingCard(
-        loadingText: Strings.loadingBookings,
+      loadingBuilder: (context) => Padding(
+        padding: padding,
+        child: const LoadingCard(
+          loadingText: Strings.loadingBookings,
+        ),
       ),
       itemBuilder: (context, snapshot) {
         final booking = snapshot.data();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/common/widgets/app_bar.dart';
+import 'package:keeley/src/common/widgets/scrollable_scaffold.dart';
 import 'package:keeley/src/common/widgets/shad_floating_action_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
@@ -12,16 +12,15 @@ class BookingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final scrollController = ScrollController();
-
-    return Scaffold(
+    return ScrollableScaffold(
       key: const Key(Keys.bookingsScreen),
-      extendBodyBehindAppBar: true,
-      appBar: ScrollableAppBar(
-        title: Strings.bookings,
-        scrollController: scrollController,
-      ),
-      body: BookingsContent(scrollController: scrollController),
+      title: Strings.bookings,
+      builder: (scrollController, padding) {
+        return BookingsContent(
+          scrollController: scrollController,
+          padding: padding,
+        );
+      },
       floatingActionButton: ShadFloatingActionButton.add(
         key: const Key(Keys.floatingActionButton),
         onPressed: () => _showCreateBookingModal(context),

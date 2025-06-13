@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/features/dashboard/presentation/widgets/greeting/greeting_content.dart';
 import 'package:keeley/src/features/dashboard/presentation/widgets/greeting/greeting_loading.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:keeley/src/features/dashboard/presentation/widgets/greeting/greeting_utils.dart';
 import 'package:keeley/src/features/dashboard/presentation/widgets/greeting/greeting_error.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
