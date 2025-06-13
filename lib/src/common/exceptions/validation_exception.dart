@@ -1,7 +1,7 @@
 import 'package:keeley/src/common/exceptions/app_exception.dart';
 
 abstract class ValidationException extends AppException {
-  const ValidationException(super.message, [this.errors]);
+  const ValidationException(String? message, [this.errors]) : super(message);
 
   /// List of validation error messages
   final List<String>? errors;
