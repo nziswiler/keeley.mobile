@@ -39,7 +39,7 @@ class KeeleyColorScheme extends ShadColorScheme {
           cardForeground: const Color(0xFF0F172A), // 222.2 84% 4.9%
           popover: const Color(0xFFFFFFFF), // 0 0% 100%
           popoverForeground: const Color(0xFF0F172A), // 222.2 84% 4.9%
-          primary: const Color(0xFFFF4265), // 349 100% 63% - Dein Pink-Rot
+          primary: const Color(0xFFFF4265), // 349 100% 63%
           primaryForeground: const Color(0xFFFFFFFF), // 0 0% 100%
           secondary: const Color(0xFFF1F5F9), // 210 40% 96.1%
           secondaryForeground: const Color(0xFF1E293B), // 222.2 47.4% 11.2%
@@ -52,9 +52,9 @@ class KeeleyColorScheme extends ShadColorScheme {
           border: const Color(0xFFE2E8F0), // 214.3 31.8% 91.4%
           input: const Color(0xFFE2E8F0), // 214.3 31.8% 91.4%
           ring: const Color(0xFFFF4265), // 349 100% 63%
-          selection: const Color(0x33FF4265), // Primary mit Transparenz
-          income: const Color(0xFF16A34A), // Green-600 für Einnahmen
-          incomeForeground: const Color(0xFFFFFFFF), // Weiß auf Grün
+          selection: const Color(0x33FF4265),
+          income: const Color(0xFF16A34A),
+          incomeForeground: const Color(0xFFFFFFFF),
         );
 
   // Dark Theme
@@ -66,7 +66,7 @@ class KeeleyColorScheme extends ShadColorScheme {
           cardForeground: const Color(0xFFFBFCFD), // 90 40% 98.04%
           popover: const Color(0xFF2D3748), // 213.91 26.44% 17.06%
           popoverForeground: const Color(0xFFFBFCFD), // 90 40% 98.04%
-          primary: const Color(0xFFFF4265), // 349 100% 63% - Gleiches Pink-Rot
+          primary: const Color(0xFFFF4265), // 349 100% 63%
           primaryForeground: const Color(0xFFFFFFFF), // 0 0% 100%
           secondary: const Color(0xFF2D3748), // 213.91 26.44% 17.06%
           secondaryForeground: const Color(0xFFFBFCFD), // 90 40% 98.04%
@@ -79,9 +79,9 @@ class KeeleyColorScheme extends ShadColorScheme {
           border: const Color(0xFF4A5568), // 213.75 13.15% 25.83%
           input: const Color(0xFF718096), // 213.75 9.2% 34.12%
           ring: const Color(0xFFFF4265), // 349 100% 63%
-          selection: const Color(0x33FF4265), // Primary mit Transparenz
-          income: const Color(0xFF22C55E), // Green-500 für Dark Mode
-          incomeForeground: const Color(0xFF000000), // Schwarz auf Grün
+          selection: const Color(0x33FF4265),
+          income: const Color(0xFF22C55E),
+          incomeForeground: const Color(0xFF000000),
         );
 }
 
