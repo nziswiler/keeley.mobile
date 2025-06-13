@@ -1,5 +1,5 @@
-// booking_service.dart (updated)
 import 'package:keeley/src/features/logging/firebase_logging_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
@@ -131,7 +131,7 @@ class BookingService implements IBookingService {
     }
   }
 
-  _getCurrentUser() {
+  User _getCurrentUser() {
     final currentUser = authRepository.currentUser;
     if (currentUser == null) {
       throw const UserNotAuthenticatedException();

@@ -8,7 +8,7 @@ class AuthController extends _$AuthController {
   @override
   FutureOr<void> build() {}
 
-  Future<void> sigInInUserWithEmailAndPassword(
+  Future<void> signInUserWithEmailAndPassword(
       String email, String password) async {
     state = const AsyncLoading();
     try {

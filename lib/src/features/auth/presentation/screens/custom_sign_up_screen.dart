@@ -76,11 +76,11 @@ class _CustomSignUpScreenState extends BaseAuthScreenState<CustomSignUpScreen> {
       gapH24,
       buildSubmitButton(),
       gapH16,
-      buildNavigationLink(),
+      _buildNavigationLink(),
     ];
   }
 
-  Widget buildNavigationLink() {
+  Widget _buildNavigationLink() {
     return AuthNavigationLink(
       text: Strings.alreadyHaveAccount,
       route: '/signIn',

@@ -18,7 +18,7 @@ class _CustomSignInScreenState extends BaseAuthScreenState<CustomSignInScreen> {
   @override
   Future<void> handleSubmit() async {
     final authController = ref.read(authControllerProvider.notifier);
-    await authController.sigInInUserWithEmailAndPassword(
+    await authController.signInUserWithEmailAndPassword(
       emailController.text.trim(),
       passwordController.text.trim(),
     );
@@ -42,11 +42,11 @@ class _CustomSignInScreenState extends BaseAuthScreenState<CustomSignInScreen> {
       gapH24,
       buildSubmitButton(),
       gapH16,
-      buildNavigationLink(),
+      _buildNavigationLink(),
     ];
   }
 
-  Widget buildNavigationLink() {
+  Widget _buildNavigationLink() {
     return AuthNavigationLink(
       text: Strings.noAccountYet,
       route: '/signUp',
