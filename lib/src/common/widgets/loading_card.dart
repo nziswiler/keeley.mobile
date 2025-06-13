@@ -25,6 +25,7 @@ class LoadingCard extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
                 width: 32,
@@ -48,4 +49,3 @@ class LoadingCard extends StatelessWidget {
     );
   }
 }
-
