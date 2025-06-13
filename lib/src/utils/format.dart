@@ -4,7 +4,7 @@ import 'package:keeley/src/constants/strings.dart';
 class Format {
   static String chf(double amount, {int decimalPlaces = 0}) {
     final formatter = NumberFormat.currency(
-      locale: 'de_CH',
+      locale: Strings.localeDeCh,
       symbol: Strings.chf,
       decimalDigits: decimalPlaces,
     );
@@ -13,7 +13,7 @@ class Format {
   }
 
   static String dateLocalized(DateTime date) {
-    final formatter = DateFormat('d. MMMM y');
+    final formatter = DateFormat('d. MMMM y', Strings.localeDe);
 
     return formatter.format(date);
   }

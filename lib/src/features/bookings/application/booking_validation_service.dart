@@ -17,7 +17,7 @@ class BookingValidationService {
 
     if (errors.isNotEmpty) {
       throw BookingValidationException(
-        'Create booking validation failed',
+        Strings.bookingValidationFailed,
         errors,
       );
     }
@@ -34,7 +34,7 @@ class BookingValidationService {
 
     if (errors.isNotEmpty) {
       throw BookingValidationException(
-        'Update booking validation failed',
+        Strings.bookingValidationFailed,
         errors,
       );
     }
@@ -42,19 +42,19 @@ class BookingValidationService {
 
   void _validateAmount(double amount, List<String> errors) {
     if (amount <= 0) {
-      errors.add('Amount must be greater than zero');
+      errors.add(Strings.amountGreaterThanZero);
     }
   }
 
   void _validateDescription(String description, List<String> errors) {
     if (description.trim().isEmpty) {
-      errors.add('Description cannot be empty');
+      errors.add(Strings.descriptionCannotBeEmpty);
     }
   }
 
   void _validateBookingId(String bookingId, List<String> errors) {
     if (bookingId.trim().isEmpty) {
-      errors.add('Booking ID cannot be empty');
+      errors.add(Strings.bookingIdCannotBeEmpty);
     }
   }
 

@@ -13,6 +13,9 @@ class Strings {
   static const String confirmDelete = 'Löschen bestätigen';
   static const String actions = 'Aktionen';
   static const String chf = 'CHF';
+  static const String error = 'Fehler';
+  static const String localeDe = 'de';
+  static const String localeDeCh = 'de_CH';
 
   // ====================
   // ERROR MESSAGES
@@ -20,6 +23,12 @@ class Strings {
   static const String saveFaield = 'Speichern fehlgeschlagen';
   static const String pageNotFound =
       'Uuuups, diese Seite existiert nicht (mehr).';
+  static const String errorLoadingData = 'Fehler beim Laden der Daten';
+  static const String networkError =
+      'Netzwerkfehler. Bitte überprüfen Sie Ihre Internetverbindung.';
+  static const String authError =
+      'Authentifizierungsfehler. Bitte loggen Sie sich erneut ein.';
+  static const String permissionError = 'Keine Berechtigung für diese Aktion.';
 
   // ====================
   // AUTHENTICATION
@@ -100,6 +109,12 @@ class Strings {
       'Negative Werte sind nicht erlaubt';
   static const String amountMustBeAtLeast = 'Betrag muss mindestens {0} sein';
   static const String amountMustBeAtMost = 'Betrag darf höchstens {0} sein';
+  static const String amountGreaterThanZero =
+      'Betrag muss grösser als Null sein';
+  static const String descriptionCannotBeEmpty =
+      'Die Beschreibung darf nicht leer sein';
+  static const String bookingIdCannotBeEmpty =
+      'Die Buchungs-ID darf nicht leer sein';
 
   // Category validation
   static const String invalidCategoryForIncome =
@@ -148,6 +163,8 @@ class Strings {
   static const String failedToLogBookingDeletion =
       'Buchungslöschung konnte nicht protokolliert werden: {0}';
   static const String defaultCategoryName = 'keine';
+  static const String bookingValidationFailed =
+      'Die Buchung ist ungültig. Bitte überprüfen Sie die Eingaben.';
 
   // ====================
   // ACCESSIBILITY
@@ -156,6 +173,7 @@ class Strings {
   static const String timeTrackingLogo = 'Time tracking logo';
 
   static const String retryAction = 'Erneut versuchen';
+  static const String successToastTitle = 'Yuuhuu! Das hat funktioniert.';
 
   // ====================
   // DASHBOARD

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/utils/toasts.dart';
+import 'package:keeley/src/constants/strings.dart';
 
 extension AsyncValueUI on AsyncValue {
   void showExceptionToastOnError(BuildContext context) {
@@ -8,7 +9,7 @@ extension AsyncValueUI on AsyncValue {
       final message = error.toString();
       showExceptionToast(
         context: context,
-        title: 'Fehler',
+        title: Strings.errorLoadingData,
         exception: message,
       );
     }

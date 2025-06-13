@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/routing/app_router.dart';
 import 'package:keeley/src/routing/go_router_delegate_listener.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class MyApp extends ConsumerWidget {
@@ -41,7 +42,7 @@ class MyApp extends ConsumerWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: [
-            Locale('de'),
+            Locale(Strings.localeDe),
           ],
           routerConfig: goRouter,
           theme: ThemeData(

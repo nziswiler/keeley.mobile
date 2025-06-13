@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 void showExceptionToast({
@@ -34,7 +35,7 @@ void showSuccessToast({
 
   ShadSonner.of(context).show(
     ShadToast(
-      title: Text(title ?? "Yuuhuu! Das hat funktioniert."),
+      title: Text(title ?? Strings.successToastTitle),
       description: description != null ? Text(description) : null,
       action: _buildSuccessIcon(colorScheme),
     ),

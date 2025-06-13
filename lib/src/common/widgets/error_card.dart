@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/constants/strings.dart';
 
 class ErrorCard extends StatelessWidget {
   const ErrorCard({
     super.key,
     required this.error,
     this.title,
-    this.errorTitle = 'Fehler beim Laden der Daten',
+    this.errorTitle = Strings.errorLoadingData,
     this.onRetry,
   });
 
@@ -57,7 +58,7 @@ class ErrorCard extends StatelessWidget {
               gapH16,
               ShadButton.outline(
                 onPressed: onRetry,
-                child: const Text('Erneut versuchen'),
+                child: const Text(Strings.retryAction),
               ),
             ],
           ],
@@ -70,13 +71,13 @@ class ErrorCard extends StatelessWidget {
     // Verbesserung der Fehlermeldungen für bessere Benutzererfahrung
     final message = error.toString();
     if (message.contains('network') || message.contains('Network')) {
-      return 'Netzwerkfehler. Bitte überprüfen Sie Ihre Internetverbindung.';
+      return Strings.networkError;
     }
     if (message.contains('auth') || message.contains('Auth')) {
-      return 'Authentifizierungsfehler. Bitte loggen Sie sich erneut ein.';
+      return Strings.authError;
     }
     if (message.contains('permission') || message.contains('Permission')) {
-      return 'Keine Berechtigung für diese Aktion.';
+      return Strings.permissionError;
     }
     return message.length > 100 ? '${message.substring(0, 100)}...' : message;
   }
