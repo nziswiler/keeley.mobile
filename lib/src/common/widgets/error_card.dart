@@ -68,7 +68,6 @@ class ErrorCard extends StatelessWidget {
   }
 
   String _getErrorMessage(Object error) {
-    // Verbesserung der Fehlermeldungen für bessere Benutzererfahrung
     final message = error.toString();
     if (message.contains('network') || message.contains('Network')) {
       return Strings.networkError;

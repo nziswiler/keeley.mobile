@@ -10,7 +10,7 @@ class GreetingLoading extends StatelessWidget {
     final theme = ShadTheme.of(context);
 
     return SizedBox(
-      height: Sizes.p64 + Sizes.p16, // Passende Höhe für den Content
+      height: Sizes.p64 + Sizes.p16,
       child: Center(
         child: CircularProgressIndicator(
           color: theme.colorScheme.primaryForeground,

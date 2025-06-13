@@ -101,7 +101,6 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
 
-    // Listen for auth state changes to handle success/error
     ref.listen(authControllerProvider, (previous, next) {
       next.whenOrNull(
         data: (_) {

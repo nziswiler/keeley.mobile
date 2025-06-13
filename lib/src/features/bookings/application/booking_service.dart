@@ -1,4 +1,4 @@
-import 'package:keeley/src/features/logging/firebase_logging_service.dart';
+import 'package:keeley/src/common/logging/firebase_logging_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';

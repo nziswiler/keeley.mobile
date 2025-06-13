@@ -1,6 +1,5 @@
-// firebase_logging_service.dart
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:keeley/src/features/logging/i_firebase_logging_service.dart';
+import 'package:keeley/src/common/logging/i_firebase_logging_service.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

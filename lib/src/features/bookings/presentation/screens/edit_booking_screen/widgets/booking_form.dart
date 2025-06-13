@@ -122,7 +122,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
           amount: amount!,
           type: selectedType,
           description: description,
-          category: selectedCategory,
+          category: selectedCategory!,
           existingBooking: widget.booking,
         );
   }
@@ -198,14 +198,6 @@ class _BookingFormState extends ConsumerState<BookingForm> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   Strings.receipt,
-                //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                //         color: Theme.of(context).colorScheme.onSurface,
-                //         fontWeight: FontWeight.w500,
-                //         fontSize: 14,
-                //       ),
-                // ),
                 gapH8,
                 SizedBox(
                   width: double.infinity,
