@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
-import 'package:keeley/src/features/auth/presentation/custom_profile_screen.dart';
-import 'package:keeley/src/features/auth/presentation/custom_sign_in_screen.dart';
-import 'package:keeley/src/features/auth/presentation/custom_sign_up_screen.dart';
-import 'package:keeley/src/features/bookings/presentation/bookings_screen/bookings_screen.dart';
-import 'package:keeley/src/features/dashboard/presentation/dashboard_screen.dart';
-import 'package:keeley/src/features/onboarding/presentation/onboarding_screen.dart';
+import 'package:keeley/src/features/auth/presentation/screens/custom_profile_screen.dart';
+import 'package:keeley/src/features/auth/presentation/screens/custom_sign_in_screen.dart';
+import 'package:keeley/src/features/auth/presentation/screens/custom_sign_up_screen.dart';
+import 'package:keeley/src/features/bookings/presentation/screens/bookings_screen/bookings_screen.dart';
+import 'package:keeley/src/features/dashboard/presentation/screens/dashboard_screen.dart';
 import 'package:keeley/src/routing/go_router_refresh_stream.dart';
 import 'package:keeley/src/routing/not_fount_screen.dart';
 import 'package:keeley/src/routing/scaffold_with_nested_navigation.dart';
@@ -15,7 +14,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
 
-// private navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _dashboardNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'dashboard',
@@ -23,7 +21,7 @@ final _dashboardNavigatorKey = GlobalKey<NavigatorState>(
 final _bookingsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'bookings');
 final _profileNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
-enum AppRoute { onboarding, signIn, signUp, dashboard, bookings, profile }
+enum AppRoute { signIn, signUp, dashboard, bookings, profile }
 
 @riverpod
 GoRouter goRouter(Ref ref) {
@@ -48,12 +46,6 @@ GoRouter goRouter(Ref ref) {
     },
     refreshListenable: GoRouterRefreshStream(authRepository.authStateChanges()),
     routes: [
-      GoRoute(
-        path: '/onboarding',
-        name: AppRoute.onboarding.name,
-        pageBuilder: (context, state) =>
-            const NoTransitionPage(child: OnboardingScreen()),
-      ),
       GoRoute(
         path: '/signIn',
         name: AppRoute.signIn.name,

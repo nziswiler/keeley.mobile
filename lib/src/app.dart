@@ -19,6 +19,7 @@ class MyApp extends ConsumerWidget {
         sonnerTheme: const ShadSonnerTheme(
           alignment: Alignment.topCenter,
         ),
+        cardTheme: const ShadCardTheme(padding: EdgeInsets.all(16)),
       ),
       darkTheme: ShadThemeData(
         brightness: Brightness.dark,
@@ -26,11 +27,17 @@ class MyApp extends ConsumerWidget {
         sonnerTheme: const ShadSonnerTheme(
           alignment: Alignment.topCenter,
         ),
+        cardTheme: const ShadCardTheme(padding: EdgeInsets.all(16)),
       ),
       themeMode: ThemeMode.light,
       appBuilder: (context) {
+        final shadTheme = ShadTheme.of(context);
         return MaterialApp.router(
           routerConfig: goRouter,
+          theme: ThemeData(
+            scaffoldBackgroundColor: shadTheme.colorScheme.muted,
+            canvasColor: shadTheme.colorScheme.muted,
+          ),
           builder: (context, child) {
             return ShadAppBuilder(
               child: AppStartupWidget(

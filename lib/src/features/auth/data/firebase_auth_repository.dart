@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'firebase_auth_repository.g.dart';
@@ -33,6 +34,23 @@ class AuthRepository {
 
   Future<void> signOut() {
     return _auth.signOut();
+  }
+
+  Future<void> updateDisplayName({required String displayName}) async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw UserNotAuthenticatedException();
+    }
+    await user.updateDisplayName(displayName);
+    await user.reload();
+  }
+
+  Future<void> deleteUser() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw UserNotAuthenticatedException();
+    }
+    await user.delete();
   }
 }
 
