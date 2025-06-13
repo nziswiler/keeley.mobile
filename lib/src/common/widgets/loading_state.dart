@@ -73,7 +73,6 @@ enum LoadingStateEnum {
   error,
 }
 
-/// Extension for AsyncValue to convert to LoadingState
 extension AsyncValueToLoadingState<T> on AsyncValue<T> {
   LoadingState<T> toLoadingState() {
     return when(

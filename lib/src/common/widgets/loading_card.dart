@@ -49,7 +49,6 @@ class LoadingCard extends StatelessWidget {
   }
 }
 
-/// Einfache Loading-Komponente ohne Card
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({
     super.key,

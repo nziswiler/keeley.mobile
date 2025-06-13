@@ -104,15 +104,6 @@ class _BookingFormState extends ConsumerState<BookingForm> {
     }
   }
 
-  Future<void> _pickReceipt() async {
-    final result = await FilePicker.platform.pickFiles(type: FileType.any);
-    if (result != null && result.files.isNotEmpty) {
-      setState(() {
-        selectedReceipt = result.files.first;
-      });
-    }
-  }
-
   Future<void> _handleSubmit() async {
     if (!formKey.currentState!.saveAndValidate()) return;
 

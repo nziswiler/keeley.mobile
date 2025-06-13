@@ -22,7 +22,6 @@ class ShadFloatingActionButton extends StatelessWidget {
   final Object? heroTag;
   final double? elevation;
 
-  /// Factory constructor for a primary FAB with add icon
   factory ShadFloatingActionButton.add({
     Key? key,
     required VoidCallback? onPressed,
