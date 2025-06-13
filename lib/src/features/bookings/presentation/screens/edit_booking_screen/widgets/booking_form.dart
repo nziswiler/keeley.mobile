@@ -130,7 +130,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
   void _handleSaveError(Object error) {
     showExceptionToast(
       context: context,
-      title: Strings.saveBookingFailed,
+      title: Strings.saveFaield,
       exception: error,
     );
   }

@@ -3,17 +3,21 @@ class Strings {
   // GENERAL STRINGS
   // ====================
   static const String cancel = 'Abbrechen';
-  static const String close = 'Schließen';
+  static const String close = 'Schliessen';
   static const String save = 'Speichern';
   static const String edit = 'Bearbeiten';
   static const String delete = 'Löschen';
   static const String add = 'Hinzufügen';
   static const String loading = 'Laden...';
   static const String requiredField = 'Pflichtfeld';
+  static const String confirmDelete = 'Löschen bestätigen';
+  static const String actions = 'Aktionen';
+  static const String chf = 'CHF';
 
   // ====================
   // ERROR MESSAGES
   // ====================
+  static const String saveFaield = 'Speichern fehlgeschlagen';
   static const String pageNotFound =
       'Uuuups, diese Seite existiert nicht (mehr).';
 
@@ -26,6 +30,9 @@ class Strings {
   static const String email = 'E-Mail';
   static const String password = 'Passwort';
   static const String confirmPassword = 'Passwort bestätigen';
+  static const String noAccountYet = 'Noch kein Konto? Jetzt registrieren';
+  static const String alreadyHaveAccount =
+      'Hast du bereits ein Konto? Hier anmelden';
 
   // Placeholders
   static const String emailPlaceholder = 'neil@nasa.com';
@@ -59,7 +66,6 @@ class Strings {
   static const String newBooking = 'Neue Buchung';
   static const String editBooking = 'Buchung bearbeiten';
   static const String deleteBooking = 'Buchung löschen';
-  static const String saveBooking = 'Speichern';
   static const String amount = 'Betrag';
   static const String description = 'Beschreibung';
   static const String date = 'Datum';
@@ -76,11 +82,7 @@ class Strings {
   static const String selectCategory = 'Kategorie wählen';
   static const String receiptPlaceholder = 'Beleg hochladen';
 
-  // Currency
-  static const String chf = 'CHF';
-
   // Booking messages
-  static const String saveBookingFailed = 'Speichern fehlgeschlagen';
   static const String saveBookingSuccess =
       'Buchung wurde erfolgreich gespeichert.';
   static const String noBookingsFound = 'Keine Buchungen gefunden';
@@ -89,7 +91,6 @@ class Strings {
   static const String bookingsLoadingError = 'Fehler beim Laden der Buchungen';
   static const String loadingBookings = 'Lade Buchungen...';
   static const String unnamedTransaction = 'Unbenannte Transaktion';
-  static const String confirmDelete = 'Löschen bestätigen';
   static const String deleteBookingMessage =
       'Sind Sie sicher, dass Sie diese Buchung löschen möchten?';
 
@@ -122,7 +123,6 @@ class Strings {
   static const String profileSettings = 'Mein Profil';
   static const String displayName = 'Wie darf Keeley dich nennen?';
   static const String displayNamePlaceholder = 'Neil';
-  static const String updateDisplayName = 'Speichern';
   static const String updateDisplayNameFailed = 'Aktualisierung fehlgeschlagen';
   static const String updateDisplayNameSuccess =
       'Anzeigename erfolgreich aktualisiert';
@@ -130,7 +130,6 @@ class Strings {
   static const String deleteAccountConfirmation = 'Konto löschen bestätigen';
   static const String deleteAccountMessage =
       'Bist du sicher, dass du dein Konto löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.';
-  static const String actions = 'Aktionen';
 
   // Booking service errors and messages
   static const String failedToCreateBooking =
@@ -202,11 +201,4 @@ class Strings {
   static const String loadingStats = 'Lade Statistiken...';
   static const String statsLoadingError = 'Fehler beim Laden der Statistiken';
   static const String monthlyOverview = 'Monatliche Übersicht';
-
-  // ====================
-  // AUTH NAVIGATION
-  // ====================
-  static const String noAccountYet = 'Noch kein Konto? Jetzt registrieren';
-  static const String alreadyHaveAccount =
-      'Hast du bereits ein Konto? Hier anmelden';
 }

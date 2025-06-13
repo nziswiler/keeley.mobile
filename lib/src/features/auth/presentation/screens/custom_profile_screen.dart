@@ -202,7 +202,7 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
                 onPressed: _handleUpdateDisplayName,
                 isLoading: authState.isLoading,
                 variant: LoadingButtonVariant.primary,
-                child: Text(Strings.updateDisplayName),
+                child: Text(Strings.save),
               ),
             ],
           ),

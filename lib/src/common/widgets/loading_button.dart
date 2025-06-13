@@ -8,14 +8,12 @@ class LoadingButton extends StatelessWidget {
     required this.child,
     this.isLoading = false,
     this.variant = LoadingButtonVariant.primary,
-    this.loadingText,
   });
 
   final VoidCallback? onPressed;
   final Widget child;
   final bool isLoading;
   final LoadingButtonVariant variant;
-  final String? loadingText;
 
   @override
   Widget build(BuildContext context) {
@@ -51,19 +49,7 @@ class LoadingButton extends StatelessWidget {
       ),
     );
 
-    if (loadingText == null) {
-      return spinner;
-    }
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        spinner,
-        const SizedBox(width: 12),
-        Text(loadingText!),
-      ],
-    );
+    return spinner;
   }
 }
 
