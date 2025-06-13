@@ -182,7 +182,6 @@ class _BookingFormState extends ConsumerState<BookingForm> {
               id: Keys.amountField,
               label: Strings.amount,
               placeholder: Strings.amountPlaceholder,
-              enabled: !ref.watch(editBookingControllerProvider).isLoading,
             ),
             gapH24,
             DescriptionField(

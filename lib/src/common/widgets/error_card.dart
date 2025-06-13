@@ -7,14 +7,12 @@ class ErrorCard extends StatelessWidget {
     super.key,
     required this.error,
     this.title,
-    this.height,
     this.errorTitle = 'Fehler beim Laden der Daten',
     this.onRetry,
   });
 
   final Object error;
   final Widget? title;
-  final double? height;
   final String errorTitle;
   final VoidCallback? onRetry;
 
@@ -25,7 +23,7 @@ class ErrorCard extends StatelessWidget {
     return ShadCard(
       title: title,
       child: Container(
-        height: height,
+        height: 200,
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,4 +81,3 @@ class ErrorCard extends StatelessWidget {
     return message.length > 100 ? '${message.substring(0, 100)}...' : message;
   }
 }
-

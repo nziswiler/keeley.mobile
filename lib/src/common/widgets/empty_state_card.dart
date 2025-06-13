@@ -16,6 +16,7 @@ class EmptyStateCard extends StatelessWidget {
   final String emptyTitle;
   final String emptyMessage;
 
+  @override
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
 
@@ -56,4 +57,3 @@ class EmptyStateCard extends StatelessWidget {
     );
   }
 }
-

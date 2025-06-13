@@ -23,7 +23,7 @@ final dashboardServiceProvider = Provider<DashboardService>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef DashboardServiceRef = ProviderRef<DashboardService>;
-String _$monthlyStatsHash() => r'a85f8b4bc0e90caea793136a2f7a3e87c3a97058';
+String _$monthlyStatsHash() => r'5841bfdeab9d1ab85065f4086b76eff4f821e3df';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -175,155 +175,24 @@ class _MonthlyStatsProviderElement
   DateTime? get month => (origin as MonthlyStatsProvider).month;
 }
 
-String _$categoryExpensesHash() => r'25a9f4b952baf64f852e00092143b3a3ebbc0574';
+String _$categoryExpensesHash() => r'bab53f67804e999a4e2dbd7d476a410e599d7744';
 
 /// See also [categoryExpenses].
 @ProviderFor(categoryExpenses)
-const categoryExpensesProvider = CategoryExpensesFamily();
-
-/// See also [categoryExpenses].
-class CategoryExpensesFamily extends Family<AsyncValue<List<CategoryExpense>>> {
-  /// See also [categoryExpenses].
-  const CategoryExpensesFamily();
-
-  /// See also [categoryExpenses].
-  CategoryExpensesProvider call({
-    DateTime? month,
-    int limit = 10,
-  }) {
-    return CategoryExpensesProvider(
-      month: month,
-      limit: limit,
-    );
-  }
-
-  @override
-  CategoryExpensesProvider getProviderOverride(
-    covariant CategoryExpensesProvider provider,
-  ) {
-    return call(
-      month: provider.month,
-      limit: provider.limit,
-    );
-  }
-
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'categoryExpensesProvider';
-}
-
-/// See also [categoryExpenses].
-class CategoryExpensesProvider
-    extends AutoDisposeFutureProvider<List<CategoryExpense>> {
-  /// See also [categoryExpenses].
-  CategoryExpensesProvider({
-    DateTime? month,
-    int limit = 10,
-  }) : this._internal(
-          (ref) => categoryExpenses(
-            ref as CategoryExpensesRef,
-            month: month,
-            limit: limit,
-          ),
-          from: categoryExpensesProvider,
-          name: r'categoryExpensesProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$categoryExpensesHash,
-          dependencies: CategoryExpensesFamily._dependencies,
-          allTransitiveDependencies:
-              CategoryExpensesFamily._allTransitiveDependencies,
-          month: month,
-          limit: limit,
-        );
-
-  CategoryExpensesProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.month,
-    required this.limit,
-  }) : super.internal();
-
-  final DateTime? month;
-  final int limit;
-
-  @override
-  Override overrideWith(
-    FutureOr<List<CategoryExpense>> Function(CategoryExpensesRef provider)
-        create,
-  ) {
-    return ProviderOverride(
-      origin: this,
-      override: CategoryExpensesProvider._internal(
-        (ref) => create(ref as CategoryExpensesRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        month: month,
-        limit: limit,
-      ),
-    );
-  }
-
-  @override
-  AutoDisposeFutureProviderElement<List<CategoryExpense>> createElement() {
-    return _CategoryExpensesProviderElement(this);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is CategoryExpensesProvider &&
-        other.month == month &&
-        other.limit == limit;
-  }
-
-  @override
-  int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, month.hashCode);
-    hash = _SystemHash.combine(hash, limit.hashCode);
-
-    return _SystemHash.finish(hash);
-  }
-}
+final categoryExpensesProvider =
+    AutoDisposeFutureProvider<List<CategoryExpense>>.internal(
+  categoryExpenses,
+  name: r'categoryExpensesProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$categoryExpensesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin CategoryExpensesRef
-    on AutoDisposeFutureProviderRef<List<CategoryExpense>> {
-  /// The parameter `month` of this provider.
-  DateTime? get month;
-
-  /// The parameter `limit` of this provider.
-  int get limit;
-}
-
-class _CategoryExpensesProviderElement
-    extends AutoDisposeFutureProviderElement<List<CategoryExpense>>
-    with CategoryExpensesRef {
-  _CategoryExpensesProviderElement(super.provider);
-
-  @override
-  DateTime? get month => (origin as CategoryExpensesProvider).month;
-  @override
-  int get limit => (origin as CategoryExpensesProvider).limit;
-}
+typedef CategoryExpensesRef
+    = AutoDisposeFutureProviderRef<List<CategoryExpense>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

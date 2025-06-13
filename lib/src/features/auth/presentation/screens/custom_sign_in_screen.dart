@@ -4,7 +4,7 @@ import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
 import 'package:keeley/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:keeley/src/features/auth/presentation/screens/base_auth_screen.dart';
-import 'package:keeley/src/features/auth/presentation/widgets/widgets.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/auth_navigation_link.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 
 class CustomSignInScreen extends BaseAuthScreen {

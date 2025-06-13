@@ -39,7 +39,7 @@ class NetBalanceCard extends StatelessWidget {
           ),
           gapH8,
           Text(
-            '${isPositive ? '+ ' : '- '}${Format.chf(netBalance)}',
+            Format.chf(netBalance),
             style: theme.textTheme.h2.copyWith(
                 color: isPositive
                     ? (theme.colorScheme as KeeleyColorScheme).income

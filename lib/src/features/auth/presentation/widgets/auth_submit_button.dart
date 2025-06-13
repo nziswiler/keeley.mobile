@@ -21,7 +21,6 @@ class AuthSubmitButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authControllerProvider);
 
-    // Listen for auth state changes
     ref.listen(authControllerProvider, (previous, next) {
       if (next.hasError) {
         onError(next.error!);

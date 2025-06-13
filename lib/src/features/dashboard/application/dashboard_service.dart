@@ -14,7 +14,7 @@ class DashboardService {
   const DashboardService(this._bookingRepository);
   final BookingRepository _bookingRepository;
 
-  Future<MonthlyStats> getMonthlyStats({
+  Future<MonthlyStats> getMonthlyStatsAsync({
     required String userId,
     required DateTime month,
   }) async {
@@ -45,11 +45,10 @@ class DashboardService {
     );
   }
 
-  Future<List<CategoryExpense>> getCategoryExpenses({
-    required String userId,
-    required DateTime month,
-    int limit = 10,
-  }) async {
+  Future<List<CategoryExpense>> getMonthlyExpensesByCategoryAsync(
+    String userId,
+    DateTime month,
+  ) async {
     final startOfMonth = DateTime(month.year, month.month, 1);
     final endOfMonth = DateTime(month.year, month.month + 1, 0, 23, 59, 59);
 
@@ -80,7 +79,7 @@ class DashboardService {
     final categoryExpenses = categoryMap.entries
         .map((entry) => CategoryExpense(
               category: entry.key,
-              amount: entry.value, // Show actual expense amounts
+              amount: entry.value,
             ))
         .toList()
       ..sort((a, b) => b.amount.compareTo(a.amount));
@@ -103,19 +102,17 @@ Future<MonthlyStats> monthlyStats(Ref ref, {DateTime? month}) async {
 
   final service = ref.watch(dashboardServiceProvider);
   final targetMonth = month ?? DateTime.now();
-  return service.getMonthlyStats(userId: user.uid, month: targetMonth);
+  return service.getMonthlyStatsAsync(userId: user.uid, month: targetMonth);
 }
 
 @riverpod
-Future<List<CategoryExpense>> categoryExpenses(Ref ref,
-    {DateTime? month, int limit = 10}) async {
+Future<List<CategoryExpense>> categoryExpenses(Ref ref) async {
   final user = ref.watch(firebaseAuthProvider).currentUser;
   if (user == null) {
     throw UserNotAuthenticatedException();
   }
 
   final service = ref.watch(dashboardServiceProvider);
-  final targetMonth = month ?? DateTime.now();
-  return service.getCategoryExpenses(
-      userId: user.uid, month: targetMonth, limit: limit);
+  final currentMonth = DateTime.now();
+  return service.getMonthlyExpensesByCategoryAsync(user.uid, currentMonth);
 }

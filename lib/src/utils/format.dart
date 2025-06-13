@@ -1,69 +1,20 @@
 import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:keeley/src/constants/strings.dart';
 
-
 class Format {
-  static String hours(double hours) {
-    final formatter = NumberFormat.decimalPattern();
-    return '${formatter.format(hours < 0 ? 0 : hours)}h';
-  }
-
-  static String date(DateTime date) {
-    return DateFormat.yMMMd().format(date);
-  }
-
-  static String dayOfWeek(DateTime date) {
-    return DateFormat.E().format(date);
-  }
-
-  static String currency(double pay) {
-    if (pay != 0.0) {
-      final formatter = NumberFormat.simpleCurrency(decimalDigits: 0);
-      return formatter.format(pay);
-    }
-    return '';
-  }
-
   static String chf(double amount, {int decimalPlaces = 0}) {
-    final parts = amount.toStringAsFixed(decimalPlaces).split('.');
-    final integerPart = parts[0];
-    final decimalPart = parts.length > 1 ? parts[1] : '';
+    final formatter = NumberFormat.currency(
+      locale: 'de_CH',
+      symbol: Strings.chf,
+      decimalDigits: decimalPlaces,
+    );
 
-    String formattedInteger = '';
-    for (int i = 0; i < integerPart.length; i++) {
-      if (i > 0 && (integerPart.length - i) % 3 == 0) {
-        formattedInteger += "'";
-      }
-      formattedInteger += integerPart[i];
-    }
-
-    final result = decimalPlaces > 0 && decimalPart.isNotEmpty
-        ? '$formattedInteger.$decimalPart'
-        : formattedInteger;
-
-    return '${Strings.chf} $result';
+    return formatter.format(amount);
   }
 
   static String dateLocalized(DateTime date) {
-    const monthNames = [
-      'Januar',
-      'Februar',
-      'März',
-      'April',
-      'Mai',
-      'Juni',
-      'Juli',
-      'August',
-      'September',
-      'Oktober',
-      'November',
-      'Dezember'
-    ];
+    final formatter = DateFormat('d. MMMM y');
 
-    final day = date.day;
-    final month = monthNames[date.month - 1];
-    final year = date.year;
-
-    return '$day. $month $year';
+    return formatter.format(date);
   }
 }
