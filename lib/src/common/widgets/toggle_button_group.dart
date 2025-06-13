@@ -9,8 +9,6 @@ class ToggleRadioGroup<T> extends StatelessWidget {
     required this.groupValue,
     required this.onChanged,
     this.label,
-    this.validator,
-    this.id,
     this.enabled = true,
     this.direction = Axis.horizontal,
   });
@@ -19,8 +17,6 @@ class ToggleRadioGroup<T> extends StatelessWidget {
   final T? groupValue;
   final void Function(T?)? onChanged;
   final String? label;
-  final String? Function(T?)? validator;
-  final String? id;
   final bool enabled;
   final Axis direction;
 
@@ -122,44 +118,6 @@ class ToggleRadioGroup<T> extends StatelessWidget {
   }
 }
 
-class ToggleRadioGroupFormField<T> extends FormField<T> {
-  ToggleRadioGroupFormField({
-    super.key,
-    required List<ToggleRadioItem<T>> items,
-    required BuildContext context,
-    required String id,
-    required String label,
-    super.initialValue,
-    super.validator,
-    super.enabled = true,
-    Axis direction = Axis.horizontal,
-  }) : super(
-          builder: (FormFieldState<T> state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ToggleRadioGroup<T>(
-                  items: items,
-                  groupValue: state.value,
-                  onChanged: enabled ? state.didChange : null,
-                  label: label,
-                  id: id,
-                  enabled: enabled,
-                  direction: direction,
-                ),
-                if (state.hasError) ...[
-                  gapH4,
-                  Text(state.errorText!,
-                      style: ShadTheme.of(context).textTheme.p.copyWith(
-                            color:
-                                ShadTheme.of(context).colorScheme.destructive,
-                          )),
-                ],
-              ],
-            );
-          },
-        );
-}
 
 class ToggleRadioItem<T> {
   const ToggleRadioItem({

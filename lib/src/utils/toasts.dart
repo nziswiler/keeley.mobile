@@ -32,7 +32,6 @@ void showSuccessToast({
   required BuildContext context,
   String? description,
   String? title,
-  Duration duration = const Duration(seconds: 3),
 }) {
   final theme = ShadTheme.of(context);
   final sonner = ShadSonner.of(context);

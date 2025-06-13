@@ -36,7 +36,6 @@ class BookingTypeSelectorField extends ConsumerWidget {
       groupValue: selectedType,
       onChanged: !bookingState.isLoading ? onChanged : null,
       label: Strings.bookingType,
-      id: Keys.bookingTypeField,
       enabled: !bookingState.isLoading,
     );
   }
