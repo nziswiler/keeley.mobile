@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/auth/presentation/widgets/widgets.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/auth_logo.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/auth_submit_button.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/form_fields/auth_confirm_password_field.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/form_fields/auth_email_field.dart';
+import 'package:keeley/src/features/auth/presentation/widgets/form_fields/auth_password_field.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/toasts.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:keeley/src/features/auth/domain/exceptions/user_not_authenticated_exception.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
 import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
@@ -15,9 +15,9 @@ class BookingRepository implements IBookingRepository {
   const BookingRepository(this._firestore);
   final FirebaseFirestore _firestore;
 
-  static String bookingPath(String userId, String bookingId) =>
+  static String _bookingPath(String userId, String bookingId) =>
       '${Keys.usersCollection}/$userId/${Keys.bookingsCollection}/$bookingId';
-  static String bookingsPath(String userId) =>
+  static String _bookingsPath(String userId) =>
       '${Keys.usersCollection}/$userId/${Keys.bookingsCollection}';
 
   @override
@@ -29,7 +29,7 @@ class BookingRepository implements IBookingRepository {
     BookingCategory? category,
     String? description,
   }) =>
-      _firestore.collection(bookingsPath(userId)).add({
+      _firestore.collection(_bookingsPath(userId)).add({
         Keys.firestoreDateField: Timestamp.fromDate(date),
         Keys.firestoreAmountField: amount,
         Keys.firestoreTypeField: type.value,
@@ -44,7 +44,7 @@ class BookingRepository implements IBookingRepository {
     required String userId,
     required Booking booking,
   }) =>
-      _firestore.doc(bookingPath(userId, booking.id)).update({
+      _firestore.doc(_bookingPath(userId, booking.id)).update({
         ...booking.toMap(),
         Keys.updatedOnField: FieldValue.serverTimestamp(),
         Keys.updatedByField: userId,
@@ -52,11 +52,11 @@ class BookingRepository implements IBookingRepository {
 
   @override
   Future<void> deleteBooking({required String userId, required String id}) =>
-      _firestore.doc(bookingPath(userId, id)).delete();
+      _firestore.doc(_bookingPath(userId, id)).delete();
 
   @override
   Query<Booking> queryBookings({required String userId}) => _firestore
-      .collection(bookingsPath(userId))
+      .collection(_bookingsPath(userId))
       .orderBy(Keys.firestoreDateField, descending: true)
       .withConverter(
         fromFirestore: (snapshot, _) =>
@@ -75,7 +75,7 @@ class BookingRepository implements IBookingRepository {
     required String userId,
     required String bookingId,
   }) async {
-    final doc = await _firestore.doc(bookingPath(userId, bookingId)).get();
+    final doc = await _firestore.doc(_bookingPath(userId, bookingId)).get();
     if (!doc.exists || doc.data() == null) {
       return null;
     }
@@ -89,7 +89,7 @@ class BookingRepository implements IBookingRepository {
     required DateTime endDate,
   }) async {
     final snapshot = await _firestore
-        .collection(bookingsPath(userId))
+        .collection(_bookingsPath(userId))
         .where(Keys.firestoreDateField,
             isGreaterThanOrEqualTo: Timestamp.fromDate(startDate))
         .where(Keys.firestoreDateField,

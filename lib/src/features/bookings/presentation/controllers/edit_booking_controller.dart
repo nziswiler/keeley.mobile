@@ -2,6 +2,8 @@ import 'package:keeley/src/features/bookings/application/booking_service.dart';
 import 'package:keeley/src/features/bookings/application/dtos/create_booking_dto.dart';
 import 'package:keeley/src/features/bookings/application/dtos/update_booking_dto.dart';
 import 'package:keeley/src/features/bookings/domain/model/booking.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_type.dart';
+import 'package:keeley/src/features/bookings/domain/objects/booking_category.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:keeley/src/features/dashboard/application/dashboard_service.dart';
 
@@ -41,9 +43,9 @@ class EditBookingController extends _$EditBookingController {
   Future<void> saveBooking({
     required DateTime date,
     required double amount,
-    required type,
+    required BookingType type,
     required String description,
-    required category,
+    required BookingCategory category,
     Booking? existingBooking,
   }) async {
     final bookingDto = CreateBookingDto(

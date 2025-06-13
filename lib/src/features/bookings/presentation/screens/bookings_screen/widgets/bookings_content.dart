@@ -8,9 +8,11 @@ class BookingsContent extends ConsumerWidget {
   const BookingsContent({
     super.key,
     required this.scrollController,
+    required this.padding,
   });
 
   final ScrollController scrollController;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,6 +21,9 @@ class BookingsContent extends ConsumerWidget {
       (_, state) => state.showExceptionToastOnError(context),
     );
 
-    return BookingsListView(scrollController: scrollController);
+    return BookingsListView(
+      scrollController: scrollController,
+      padding: padding,
+    );
   }
 }

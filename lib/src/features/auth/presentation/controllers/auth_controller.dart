@@ -1,4 +1,4 @@
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_controller.g.dart';
@@ -8,7 +8,7 @@ class AuthController extends _$AuthController {
   @override
   FutureOr<void> build() {}
 
-  Future<void> sigInInUserWithEmailAndPassword(
+  Future<void> signInUserWithEmailAndPassword(
       String email, String password) async {
     state = const AsyncLoading();
     try {

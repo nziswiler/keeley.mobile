@@ -28,7 +28,7 @@ class FormActions extends ConsumerWidget {
           key: const Key(Keys.saveBookingButton),
           onPressed: onSubmit,
           isLoading: bookingState.isLoading,
-          child: Text(Strings.saveBooking),
+          child: Text(Strings.save),
         ),
         gapH12,
         ShadButton.secondary(

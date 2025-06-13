@@ -13,7 +13,7 @@ class CategorySummaryCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categoryExpensesAsync = ref.watch(categoryExpensesProvider());
+    final categoryExpensesAsync = ref.watch(categoryExpensesProvider);
 
     return categoryExpensesAsync.when(
       data: (categories) {
@@ -48,9 +48,8 @@ class CategorySummaryCard extends ConsumerWidget {
       error: (error, stackTrace) => ErrorCard(
         title: const Text(Strings.categorySummaryTitle),
         error: error,
-        height: 200,
         errorTitle: Strings.loadingCategoriesError,
-        onRetry: () => ref.refresh(categoryExpensesProvider()),
+        onRetry: () => ref.refresh(categoryExpensesProvider),
       ),
     );
   }

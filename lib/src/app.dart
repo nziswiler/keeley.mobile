@@ -1,9 +1,11 @@
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/routing/app_router.dart';
-import 'package:keeley/src/routing/app_startup.dart';
 import 'package:keeley/src/routing/go_router_delegate_listener.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 class MyApp extends ConsumerWidget {
@@ -33,6 +35,15 @@ class MyApp extends ConsumerWidget {
       appBuilder: (context) {
         final shadTheme = ShadTheme.of(context);
         return MaterialApp.router(
+          localizationsDelegates: [
+            FirebaseUILocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale(Strings.localeDe),
+          ],
           routerConfig: goRouter,
           theme: ThemeData(
             scaffoldBackgroundColor: shadTheme.colorScheme.muted,
@@ -40,11 +51,7 @@ class MyApp extends ConsumerWidget {
           ),
           builder: (context, child) {
             return ShadAppBuilder(
-              child: AppStartupWidget(
-                onLoaded: (_) => child,
-                child: GoRouterDelegateListener(child: child!),
-              ),
-            );
+                child: GoRouterDelegateListener(child: child!));
           },
         );
       },

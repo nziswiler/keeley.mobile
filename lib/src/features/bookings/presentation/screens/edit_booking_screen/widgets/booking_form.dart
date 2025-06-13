@@ -122,7 +122,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
           amount: amount!,
           type: selectedType,
           description: description,
-          category: selectedCategory,
+          category: selectedCategory!,
           existingBooking: widget.booking,
         );
   }
@@ -130,7 +130,7 @@ class _BookingFormState extends ConsumerState<BookingForm> {
   void _handleSaveError(Object error) {
     showExceptionToast(
       context: context,
-      title: Strings.saveBookingFailed,
+      title: Strings.saveFaield,
       exception: error,
     );
   }
@@ -182,7 +182,6 @@ class _BookingFormState extends ConsumerState<BookingForm> {
               id: Keys.amountField,
               label: Strings.amount,
               placeholder: Strings.amountPlaceholder,
-              enabled: !ref.watch(editBookingControllerProvider).isLoading,
             ),
             gapH24,
             DescriptionField(
@@ -199,14 +198,6 @@ class _BookingFormState extends ConsumerState<BookingForm> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   Strings.receipt,
-                //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                //         color: Theme.of(context).colorScheme.onSurface,
-                //         fontWeight: FontWeight.w500,
-                //         fontSize: 14,
-                //       ),
-                // ),
                 gapH8,
                 SizedBox(
                   width: double.infinity,

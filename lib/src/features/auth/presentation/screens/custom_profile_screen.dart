@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:keeley/src/common/widgets/app_bar.dart';
+import 'package:keeley/src/common/widgets/scrollable_scaffold.dart';
 import 'package:keeley/src/common/widgets/loading_button.dart';
 import 'package:keeley/src/constants/keys.dart';
 import 'package:keeley/src/constants/strings.dart';
-import 'package:keeley/src/features/auth/data/firebase_auth_repository.dart';
+import 'package:keeley/src/features/auth/data/auth_repository.dart';
 import 'package:keeley/src/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
 import 'package:keeley/src/utils/dialogs.dart';
@@ -22,7 +22,6 @@ class CustomProfileScreen extends ConsumerStatefulWidget {
 class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
   late final TextEditingController _displayNameController;
   late final GlobalKey<ShadFormState> _formKey;
-  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -44,7 +43,6 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
   @override
   void dispose() {
     _displayNameController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -103,7 +101,6 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
   Widget build(BuildContext context) {
     final theme = ShadTheme.of(context);
 
-    // Listen for auth state changes to handle success/error
     ref.listen(authControllerProvider, (previous, next) {
       next.whenOrNull(
         data: (_) {
@@ -138,30 +135,22 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
       }
     });
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: ScrollableAppBar(
-        title: Strings.profile,
-        scrollController: _scrollController,
-      ),
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        padding: const EdgeInsets.only(
-          top: kToolbarHeight +
-              Sizes.p16, // Platz für App Bar + zusätzlicher Abstand
-          left: Sizes.p24,
-          right: Sizes.p24,
-          bottom: Sizes.p24,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildProfileSettingsCard(theme),
-            gapH24,
-            _buildActionsCard(theme),
-          ],
-        ),
-      ),
+    return ScrollableScaffold(
+      title: Strings.profile,
+      builder: (controller, padding) {
+        return SingleChildScrollView(
+          controller: controller,
+          padding: padding,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildProfileSettingsCard(theme),
+              gapH24,
+              _buildActionsCard(theme),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -202,7 +191,7 @@ class _CustomProfileScreenState extends ConsumerState<CustomProfileScreen> {
                 onPressed: _handleUpdateDisplayName,
                 isLoading: authState.isLoading,
                 variant: LoadingButtonVariant.primary,
-                child: Text(Strings.updateDisplayName),
+                child: Text(Strings.save),
               ),
             ],
           ),

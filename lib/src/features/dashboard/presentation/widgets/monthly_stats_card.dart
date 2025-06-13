@@ -39,13 +39,11 @@ class MonthlyStatsCard extends ConsumerWidget {
       },
       loading: () => const LoadingCard(
         title: Text(Strings.monthlyBalance),
-        height: 200,
         loadingText: Strings.loadingStats,
       ),
       error: (error, stackTrace) => ErrorCard(
         title: const Text(Strings.monthlyBalance),
         error: error,
-        height: 200,
         errorTitle: Strings.statsLoadingError,
         onRetry: () => ref.refresh(monthlyStatsProvider()),
       ),

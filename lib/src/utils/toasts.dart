@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:keeley/src/theme/keeley_theme.dart';
+import 'package:keeley/src/constants/strings.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
 void showExceptionToast({
@@ -9,53 +10,50 @@ void showExceptionToast({
   required String title,
   required dynamic exception,
 }) {
-  final sonner = ShadSonner.of(context);
-  sonner.show(
+  ShadSonner.of(context).show(
     ShadToast.destructive(
       title: Text(title),
-      description: Text(_message(exception)),
+      description: Text(_getExceptionMessage(exception)),
     ),
   );
 }
 
-String _message(dynamic exception) {
-  if (exception is FirebaseException) {
-    return exception.message ?? exception.toString();
-  }
-  if (exception is PlatformException) {
-    return exception.message ?? exception.toString();
-  }
-  return exception.toString();
+String _getExceptionMessage(dynamic exception) {
+  return switch (exception) {
+    FirebaseException e => e.message ?? e.toString(),
+    PlatformException e => e.message ?? e.toString(),
+    _ => exception.toString(),
+  };
 }
 
 void showSuccessToast({
   required BuildContext context,
   String? description,
   String? title,
-  Duration duration = const Duration(seconds: 3),
 }) {
-  final theme = ShadTheme.of(context);
-  final sonner = ShadSonner.of(context);
+  final colorScheme = ShadTheme.of(context).colorScheme as KeeleyColorScheme;
 
-  sonner.show(
+  ShadSonner.of(context).show(
     ShadToast(
-      title: Text(
-        title ?? "Yuuhuu! Das hat funktioniert.",
-      ),
+      title: Text(title ?? Strings.successToastTitle),
       description: description != null ? Text(description) : null,
-      action: Container(
-        width: 32,
-        height: 32,
-        decoration: BoxDecoration(
-          color: (theme.colorScheme as KeeleyColorScheme).income,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          Icons.check_rounded,
-          size: 18,
-          color: (theme.colorScheme as KeeleyColorScheme).incomeForeground,
-        ),
-      ),
+      action: _buildSuccessIcon(colorScheme),
+    ),
+  );
+}
+
+Widget _buildSuccessIcon(KeeleyColorScheme colorScheme) {
+  return Container(
+    width: 32,
+    height: 32,
+    decoration: BoxDecoration(
+      color: colorScheme.income,
+      shape: BoxShape.circle,
+    ),
+    child: Icon(
+      Icons.check_rounded,
+      size: 18,
+      color: colorScheme.incomeForeground,
     ),
   );
 }
